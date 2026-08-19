@@ -9,7 +9,8 @@
     :root { --parchment: #F4F1ED; --black: #000; --font: 'Josefin Sans', sans-serif; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; overflow: hidden; }
-    body { font-family: var(--font); background: var(--parchment); color: var(--black); }
+    html { height: 100dvh; }
+    body { font-family: var(--font); background: var(--parchment); color: var(--black); height: 100dvh; }
     a { color: inherit; text-decoration: none; }
     button { font-family: inherit; cursor: pointer; border: none; background: none; }
 
@@ -41,14 +42,16 @@
       .nav__logo { padding-top: 2px; }
     }
 
-    /* STAGE — the viewport area below nav, background stays fixed */
+    /* STAGE — full viewport background, nav overlays on top */
     .stage {
       position: fixed;
-      top: 48px; left: 0; right: 0; bottom: 0;
+      top: 0; left: 0; right: 0; bottom: 0;
+      /* Use dynamic viewport height to fill under Safari's bottom bar */
+      height: 100vh;
+      height: 100dvh;
       overflow: hidden;
       background: var(--parchment);
     }
-    @media (min-width: 769px) { .stage { top: 56px; } }
 
     /* LOOK — each look is a set of absolutely positioned elements */
     .look {
@@ -65,16 +68,26 @@
        All positions calculated as % of viewport */
 
     /* ============================================
+       PROPORTIONAL SCALING SYSTEM
+       All positions/sizes are calculated as % of a
+       393×852 Figma frame. The design will scale
+       identically on any device (iPhone 13, 15 Pro, etc.)
+
+       To convert Figma px → vw:  (figma_x / 393) * 100 = ?vw
+       To convert Figma px → vh:  (figma_y / 852) * 100 = ?vh
+       ============================================ */
+
+    /* ============================================
        ⚙️ MANUAL ADJUST — Image A (top right, full body)
-       Change these values to resize/reposition:
+       Figma: X=190, Y=115, W=212, H=551 (of 393×852)
        ============================================ */
     .look__img-a {
-      /* SIZE — height in pixels, width auto-scales to keep proportions */
-      height: 551px;
+      /* Height scales with viewport height (551/852 = 64.67%) */
+      height: 64.67vh; height: 64.67dvh;
       width: auto;
-      /* POSITION — X (left) and Y (top) in pixels from top-left corner */
-      left: 190px;
-      top: 115px;
+      /* Position (190/393 = 48.35% from left, 115/852 = 13.5% from top) */
+      left: 48.35vw;
+      top: 13.5vh; top: 13.5dvh;
       z-index: 1;
       transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s;
     }
@@ -82,15 +95,15 @@
 
     /* ============================================
        ⚙️ MANUAL ADJUST — Image B (bottom left, close-up)
-       Change these values to resize/reposition:
+       Figma: X=-55, Y=280, H=594 (of 393×852)
        ============================================ */
     .look__img-b {
-      /* SIZE — height in pixels, width auto-scales */
-      height: 594px;
+      /* Height scales with viewport (594/852 = 69.72%) */
+      height: 69.72vh; height: 69.72dvh;
       width: auto;
-      /* POSITION — X (left) can be negative to overflow off-screen */
-      left: -55px;
-      top: 280px;
+      /* Position (-55/393 = -14% overflow, 280/852 = 32.87% from top) */
+      left: -14vw;
+      top: 32.87vh; top: 32.87dvh;
       z-index: 2;
       transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s;
     }
@@ -98,23 +111,25 @@
 
     /* ============================================
        ⚙️ MANUAL ADJUST — Heading (01 + Look Name, top left)
+       Figma: X=52, Y=126, font-size=40 (of 393×852)
        ============================================ */
     .look__heading {
-      /* POSITION in pixels from top-left */
-      left: 52px;
-      top: 126px;
+      /* Position (52/393 = 13.23%, 126/852 = 14.79%) */
+      left: 13.23vw;
+      top: 14.79vh; top: 14.79dvh;
       z-index: 5;
       transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s;
     }
     .look__number {
-      font-size: 40px;
+      /* Font 40px on 393vw = 10.18vw */
+      font-size: 10.18vw;
       font-weight: 300;
       color: rgba(0,0,0,0.12);
       line-height: 1;
       margin-bottom: 2px;
     }
     .look__name {
-      font-size: 40px;
+      font-size: 10.18vw;
       font-weight: 400;
       color: rgba(0,0,0,0.25);
       line-height: 1.15;
@@ -122,28 +137,30 @@
 
     /* ============================================
        ⚙️ MANUAL ADJUST — Description (bottom right text)
-       z-index: 10 = above image B (z-index: 2)
+       Figma: X=194, Y=687, W=187, font-size=16 (of 393×852)
+       z-index: 10 = above image B
        ============================================ */
     .look__desc {
-      /* POSITION and WIDTH in pixels */
-      left: 194px;
-      top: 687px;
-      width: 187px;
+      /* Position (194/393 = 49.36%, 687/852 = 80.63%, 187/393 = 47.58%) */
+      left: 49.36vw;
+      top: 80.63vh; top: 80.63dvh;
+      width: 47.58vw;
       z-index: 10;
       text-align: right;
       transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s;
     }
     .look__desc-label {
-      font-size: 16px;
+      /* Font 16px on 393vw = 4.07vw */
+      font-size: 4.07vw;
       font-weight: 300;
-      color: rgba(0,0,0,0.20);
+      color: rgba(0,0,0,0.35);
       margin-bottom: 6px;
     }
     .look__desc-text {
-      font-size: 16px;
+      font-size: 4.07vw;
       font-weight: 300;
       line-height: 1.55;
-      color: rgba(0,0,0,0.20);
+      color: rgba(0,0,0,0.35);
       text-align: right;
     }
 
@@ -151,11 +168,11 @@
        ⚙️ MANUAL ADJUST — Accessory image (middle area)
        ============================================ */
     .look__acc {
-      /* SIZE — width in pixels, height auto */
-      width: 70px;
-      /* POSITION */
-      left: 150px;
-      top: 380px;
+      /* Width scales with viewport (70/393 = 17.81%) */
+      width: 17.81vw;
+      /* Position (150/393 = 38.17%, 380/852 = 44.6%) */
+      left: 38.17vw;
+      top: 44.6vh; top: 44.6dvh;
       z-index: 6;
       transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s;
     }
