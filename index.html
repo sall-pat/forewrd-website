@@ -23,7 +23,7 @@
       background: var(--parchment);
     }
     .nav__logo { display: flex; align-items: center; padding-top: 4px; }
-    .nav__logo img { height: 22px; }
+    .nav__logo img { height: 150px; }
     .nav__links { display: none; list-style: none; gap: 28px; }
     .nav__links a { font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; }
     .nav__ham { display: flex; flex-direction: column; gap: 5px; padding: 8px; z-index: 101; }
@@ -68,9 +68,9 @@
     /* Figma: X:190/393=48.3%, Y:115 (below nav ~7%), W:212/393=53.9%, H:551/792=69.6% */
     .look__img-a {
       right: 0;
-      top: 7%;
+      top: 8.3%;
       width: 54%;
-      height: 70%;
+      bottom: 18%;
       z-index: 1;
       transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.55s;
     }
@@ -82,7 +82,7 @@
       left: -14%;
       top: 28%;
       width: 68%;
-      height: 75%;
+      bottom: 0;
       z-index: 2;
       transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.55s;
     }
@@ -148,15 +148,14 @@
     /* SWIPE HINT — bottom center, always visible */
     .swipe-hint {
       position: fixed;
-      bottom: 12px;
+      bottom: 4px;
       left: 50%; transform: translateX(-50%);
       display: flex; align-items: center; gap: 7px;
-      font-size: 11px;
+      font-size: 10px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: rgba(0,0,0,0.25);
       z-index: 50;
-      transition: opacity 0.4s;
     }
     .swipe-hint svg { width: 16px; height: 16px; stroke: rgba(0,0,0,0.25); fill: none; stroke-width: 1.5; animation: nudge 1.5s ease-in-out infinite; }
     @keyframes nudge { 0%,100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
