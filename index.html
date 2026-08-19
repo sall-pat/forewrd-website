@@ -17,17 +17,38 @@
     /* NAV — fixed at top */
     .nav {
       position: fixed; top: 0; left: 0; right: 0;
-      height: 48px;
+      height: 100px;
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 16px;
       z-index: 100;
-      background: var(--parchment);
+      background: transparent;
+      pointer-events: none;
     }
-    .nav__logo { display: flex; align-items: center; padding-top: 4px; }
-    .nav__logo img { height: 30px; }
+    .nav > * { pointer-events: all; }
+    /* ============================================
+       ⚙️ MANUAL ADJUST — Logo
+       Figma: X=23, Y=46, W=96.5, H=12 (of 393×852)
+       ============================================ */
+    .nav__logo {
+      position: absolute;
+      /* X=23/393 = 5.85vw, Y=46/852 = 5.4vh */
+      left: 5.85vw;
+      top: 5.4vh; top: 5.4dvh;
+      display: flex; align-items: center;
+    }
+    .nav__logo img {
+      /* W=96.5/393 = 24.55vw, H=12/852 = 1.41vh */
+      width: 24.55vw;
+      height: auto;
+    }
     .nav__links { display: none; list-style: none; gap: 28px; }
     .nav__links a { font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; }
-    .nav__ham { display: flex; flex-direction: column; gap: 5px; padding: 8px; z-index: 101; }
+    .nav__ham {
+      position: absolute;
+      right: 20px;
+      top: 5.4vh; top: 5.4dvh;
+      display: flex; flex-direction: column; gap: 5px; padding: 6px; z-index: 101;
+    }
     .nav__ham span { width: 22px; height: 1.5px; background: var(--black); transition: all 0.3s; }
     .nav__ham.open span:nth-child(1) { transform: rotate(45deg) translate(4.5px, 4.5px); }
     .nav__ham.open span:nth-child(2) { opacity: 0; }
@@ -36,10 +57,8 @@
     .nav__menu.open { opacity: 1; pointer-events: all; }
     .nav__menu a { font-size: 1rem; letter-spacing: 0.2em; text-transform: uppercase; }
     @media (min-width: 769px) {
-      .nav__links { display: flex; }
+      .nav__links { display: flex; position: absolute; right: 48px; top: 5.4vh; top: 5.4dvh; }
       .nav__ham { display: none; }
-      .nav { height: 56px; padding: 0 clamp(20px, 4vw, 48px); }
-      .nav__logo { padding-top: 2px; }
     }
 
     /* STAGE — full viewport background, nav overlays on top */
@@ -79,15 +98,15 @@
 
     /* ============================================
        ⚙️ MANUAL ADJUST — Image A (top right, full body)
-       Figma: X=90, Y=115, W=212, H=551 (of 393×852)
+       Figma: X=230, Y=211, H=551 (of 393×852)
        ============================================ */
     .look__img-a {
-      /* Height scales with viewport height (551/852 = 64.67%) */
+      /* Height scales with viewport (551/852 = 64.67%) */
       height: 64.67vh; height: 64.67dvh;
       width: auto;
-      /* Position (90/393 = 22.9% from left, 115/852 = 13.5% from top) */
-      left: 22.9vw;
-      top: 13.5vh; top: 13.5dvh;
+      /* Position (230/393 = 58.52%, 211/852 = 24.77%) */
+      left: 58.52vw;
+      top: 24.77vh; top: 24.77dvh;
       z-index: 1;
       transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s;
     }
@@ -111,13 +130,12 @@
 
     /* ============================================
        ⚙️ MANUAL ADJUST — Heading (01 + Look Name, top left)
-       Figma: X=52, Y=126 (of 393×852)
-       Sits in top-left, above where Image B starts (Y=280)
+       Figma: X=20, Y=97 (of 393×852)
        ============================================ */
     .look__heading {
-      /* Position (52/393 = 13.23%, 126/852 = 14.79%) */
-      left: 13.23vw;
-      top: 14.79vh; top: 14.79dvh;
+      /* Position (20/393 = 5.09%, 97/852 = 11.38%) */
+      left: 5.09vw;
+      top: 11.38vh; top: 11.38dvh;
       z-index: 5;
       transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s;
     }
