@@ -23,7 +23,7 @@
       background: var(--parchment);
     }
     .nav__logo { display: flex; align-items: center; padding-top: 4px; }
-    .nav__logo img { height: 150px; }
+    .nav__logo img { height: 30px; }
     .nav__links { display: none; list-style: none; gap: 28px; }
     .nav__links a { font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; }
     .nav__ham { display: flex; flex-direction: column; gap: 5px; padding: 8px; z-index: 101; }
@@ -64,37 +64,47 @@
        Content area: 393 × ~792
        All positions calculated as % of viewport */
 
-    /* IMAGE A — full body, right side */
-    /* Figma: X:190/393=48.3%, Y:115 (below nav ~7%), W:212/393=53.9%, H:551/792=69.6% */
+    /* ============================================
+       ⚙️ MANUAL ADJUST — Image A (top right, full body)
+       Change these values to resize/reposition:
+       ============================================ */
     .look__img-a {
-      right: 0;
-      top: 8.3%;
-      width: 500%;
-      bottom: 30%;
+      /* SIZE — height in pixels, width auto-scales to keep proportions */
+      height: 551px;
+      width: auto;
+      /* POSITION — X (left) and Y (top) in pixels from top-left corner */
+      left: 190px;
+      top: 115px;
       z-index: 1;
-      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.55s;
+      transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s;
     }
-    .look__img-a img { width: 100%; height: 100%; object-fit: contain; object-position: top right; }
+    .look__img-a img { height: 100%; width: auto; display: block; }
 
-    /* IMAGE B — close-up, bottom-left, overflows left edge */
-    /* Figma: X:-55/393=-14%, Y:280 (below nav ~28%), W:269/393=68.4%, H:594/792=75% */
+    /* ============================================
+       ⚙️ MANUAL ADJUST — Image B (bottom left, close-up)
+       Change these values to resize/reposition:
+       ============================================ */
     .look__img-b {
-      left: -14%;
-      top: 50%;
-      width: 90%;
-      bottom: 0;
+      /* SIZE — height in pixels, width auto-scales */
+      height: 594px;
+      width: auto;
+      /* POSITION — X (left) can be negative to overflow off-screen */
+      left: -55px;
+      top: 280px;
       z-index: 2;
-      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.55s;
+      transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s;
     }
-    .look__img-b img { width: 100%; height: 100%; object-fit: contain; object-position: bottom left; }
+    .look__img-b img { height: 100%; width: auto; display: block; }
 
-    /* TEXT GROUP — "01" + name, top-left */
-    /* Figma: X:52/393=13.2%, Y:126 (below nav ~8.3%) */
+    /* ============================================
+       ⚙️ MANUAL ADJUST — Heading (01 + Look Name, top left)
+       ============================================ */
     .look__heading {
-      left: 13.2%;
-      top: 8.3%;
+      /* POSITION in pixels from top-left */
+      left: 52px;
+      top: 126px;
       z-index: 5;
-      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.55s;
+      transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s;
     }
     .look__number {
       font-size: 40px;
@@ -110,15 +120,18 @@
       line-height: 1.15;
     }
 
-    /* DESCRIPTION — bottom-right */
-    /* Figma: X:194/393=49.4%, Y:687 (below nav ~79.2%), W:187/393=47.6%, opacity 20% */
+    /* ============================================
+       ⚙️ MANUAL ADJUST — Description (bottom right text)
+       z-index: 10 = above image B (z-index: 2)
+       ============================================ */
     .look__desc {
-      left: 49.4%;
-      top: 79.2%;
-      width: 47.6%;
-      z-index: 5;
+      /* POSITION and WIDTH in pixels */
+      left: 194px;
+      top: 687px;
+      width: 187px;
+      z-index: 10;
       text-align: right;
-      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.55s;
+      transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s;
     }
     .look__desc-label {
       font-size: 16px;
@@ -134,14 +147,17 @@
       text-align: right;
     }
 
-    /* ACCESSORY — middle area */
+    /* ============================================
+       ⚙️ MANUAL ADJUST — Accessory image (middle area)
+       ============================================ */
     .look__acc {
-      top: 42%;
-      left: 38%;
-      width: 16%;
-      max-width: 70px;
+      /* SIZE — width in pixels, height auto */
+      width: 70px;
+      /* POSITION */
+      left: 150px;
+      top: 380px;
       z-index: 6;
-      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.55s;
+      transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s;
     }
     .look__acc img { width: 100%; height: auto; }
 
@@ -160,7 +176,11 @@
     .swipe-hint svg { width: 16px; height: 16px; stroke: rgba(0,0,0,0.25); fill: none; stroke-width: 1.5; animation: nudge 1.5s ease-in-out infinite; }
     @keyframes nudge { 0%,100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
 
-    /* ANIMATION STATES — left group slides left, right group slides right */
+    /* ANIMATION STATES
+       - Image A, Heading, Description → exit LEFT, enter from RIGHT
+       - Image B → exit RIGHT, enter from LEFT
+       - Accessory follows Image A (exits LEFT, enters from RIGHT) */
+
     /* Active state: everything at natural position */
     .look.active .look__img-a,
     .look.active .look__img-b,
@@ -168,33 +188,33 @@
     .look.active .look__desc,
     .look.active .look__acc { transform: translateX(0); opacity: 1; }
 
-    /* Exiting left (swiped forward): left-group goes left, right-group goes right */
+    /* Exiting left (swiped forward): heading, image A, desc, acc go LEFT; image B goes RIGHT */
     .look.exit-left .look__heading,
-    .look.exit-left .look__img-b { transform: translateX(-110vw); opacity: 0; }
     .look.exit-left .look__img-a,
-    .look.exit-left .look__desc { transform: translateX(110vw); opacity: 0; }
-    .look.exit-left .look__acc { transform: translateX(110vw); opacity: 0; }
+    .look.exit-left .look__desc,
+    .look.exit-left .look__acc { transform: translateX(-110vw); opacity: 0; }
+    .look.exit-left .look__img-b { transform: translateX(110vw); opacity: 0; }
 
-    /* Entering from right (next look coming in) */
+    /* Entering from right (next look coming in): heading/img-a/desc/acc from RIGHT; image B from LEFT */
     .look.enter-right .look__heading,
-    .look.enter-right .look__img-b { transform: translateX(-110vw); opacity: 0; }
     .look.enter-right .look__img-a,
-    .look.enter-right .look__desc { transform: translateX(110vw); opacity: 0; }
+    .look.enter-right .look__desc,
     .look.enter-right .look__acc { transform: translateX(110vw); opacity: 0; }
+    .look.enter-right .look__img-b { transform: translateX(-110vw); opacity: 0; }
 
-    /* Exiting right (swiped backward) */
+    /* Exiting right (swiped backward): reverse */
     .look.exit-right .look__heading,
-    .look.exit-right .look__img-b { transform: translateX(110vw); opacity: 0; }
     .look.exit-right .look__img-a,
-    .look.exit-right .look__desc { transform: translateX(-110vw); opacity: 0; }
-    .look.exit-right .look__acc { transform: translateX(-110vw); opacity: 0; }
+    .look.exit-right .look__desc,
+    .look.exit-right .look__acc { transform: translateX(110vw); opacity: 0; }
+    .look.exit-right .look__img-b { transform: translateX(-110vw); opacity: 0; }
 
     /* Entering from left (prev look coming in) */
     .look.enter-left .look__heading,
-    .look.enter-left .look__img-b { transform: translateX(110vw); opacity: 0; }
     .look.enter-left .look__img-a,
-    .look.enter-left .look__desc { transform: translateX(-110vw); opacity: 0; }
+    .look.enter-left .look__desc,
     .look.enter-left .look__acc { transform: translateX(-110vw); opacity: 0; }
+    .look.enter-left .look__img-b { transform: translateX(110vw); opacity: 0; }
 
     /* No transition for initial offscreen state */
     .look.no-transition * { transition: none !important; }
@@ -204,14 +224,7 @@
     .wa:hover { transform: scale(1.08); }
     .wa svg { width: 21px; height: 21px; fill: #fff; }
 
-    /* DESKTOP ADJUSTMENTS */
-    @media (min-width: 769px) {
-      .look__img-a { right: 5%; width: 38%; height: 75%; top: 3%; }
-      .look__img-b { left: -5%; width: 48%; height: 70%; top: 25%; }
-      .look__heading { left: 8%; top: 10%; }
-      .look__desc { left: 55%; top: 78%; width: 38%; }
-      .look__acc { left: 35%; top: 40%; width: 8%; max-width: 90px; }
-    }
+    /* DESKTOP: keeps same pixel positions — the design stays consistent */
   </style>
 </head>
 <body>
@@ -319,7 +332,7 @@
         // Clean up old slide
         cur.classList.remove('exit-left', 'exit-right');
         animating = false;
-      }, 600);
+      }, 950);
     }
 
     /* TOUCH SWIPE */
