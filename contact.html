@@ -38,16 +38,19 @@
     .nav__mobile-menu { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--parchment); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 999; }
     .nav__mobile-menu.open { opacity: 1; pointer-events: all; }
     .nav__mobile-menu a { font-size: 1rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; }
+    .nav__mobile-menu-f { margin-top: 40px; }
+    .nav__mobile-menu-f img { width: 80px; height: auto; }
     @media (max-width: 768px) { .nav__links { display: none; } .nav__hamburger { display: flex; } }
 
     /* CONTACT */
-    .contact { min-height: calc(100vh - var(--nav-height) - 140px); display: flex; align-items: center; justify-content: center; padding: calc(var(--nav-height) + 40px) clamp(20px, 4vw, 48px) 40px; }
+    .contact { min-height: calc(100vh - var(--nav-height) - 140px); display: flex; align-items: center; justify-content: center; padding: calc(var(--nav-height) + 20px) clamp(20px, 4vw, 48px) 40px; }
     .contact__inner { max-width: 700px; text-align: center; width: 100%; }
+    .contact__animated-f { display: flex; justify-content: center; margin-bottom: 24px; }
+    .contact__animated-f img { width: 100px; height: auto; }
     .contact__label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--maroon); margin-bottom: 12px; }
     .contact__title { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 20px; }
     .contact__body { font-size: 0.95rem; font-weight: 300; line-height: 1.8; color: rgba(0,0,0,0.6); margin-bottom: 48px; max-width: 500px; margin-left: auto; margin-right: auto; }
 
-    /* Horizontal contact links */
     .contact__links { display: flex; align-items: center; justify-content: center; gap: 0; margin-bottom: 48px; flex-wrap: wrap; }
     .contact__link { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; font-weight: 400; letter-spacing: 0.04em; padding: 12px 32px; transition: opacity 0.3s; }
     .contact__link:hover { opacity: 0.6; }
@@ -58,21 +61,19 @@
       .contact__divider { width: 40px; height: 1px; }
     }
 
-    /* CTA */
     .cta { display: inline-flex; align-items: center; justify-content: center; padding: 13px 32px; font-size: 0.7rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--black); border: 1px solid rgba(0,0,0,0.2); transition: all 0.3s; }
     .cta:hover { background: var(--black); color: var(--parchment); }
 
-    /* FOOTER */
+    /* FOOTER — logo replaced with animated F */
     .footer { background: var(--black); color: var(--parchment); padding: 36px clamp(20px, 4vw, 40px) 24px; }
     .footer__inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
     .footer__brand { display: flex; align-items: center; }
-    .footer__brand img { height: 18px; }
+    .footer__brand img { height: 40px; width: auto; /* removed - use natural F colors */ }
     .footer__links { display: flex; gap: 24px; flex-wrap: wrap; }
     .footer__links a { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(244,241,237,0.5); transition: color 0.3s; }
     .footer__links a:hover { color: var(--parchment); }
     .footer__bottom { max-width: 1200px; margin: 28px auto 0; padding-top: 16px; border-top: 1px solid rgba(244,241,237,0.1); display: flex; justify-content: space-between; align-items: center; font-size: 0.65rem; letter-spacing: 0.1em; color: rgba(244,241,237,0.3); }
 
-    /* WA FLOAT */
     .wa-float { position: fixed; bottom: 20px; right: 20px; width: 48px; height: 48px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 900; box-shadow: 0 3px 16px rgba(0,0,0,0.15); transition: transform 0.3s; }
     .wa-float:hover { transform: scale(1.08); }
     .wa-float svg { width: 24px; height: 24px; fill: #fff; }
@@ -97,10 +98,12 @@
     <a href="size-guide.html">Size Guide</a>
     <a href="story.html">Story</a>
     <a href="contact.html">Contact</a>
+    <div class="nav__mobile-menu-f"><img src="assets/logo/f_animated.webp" alt="F"></div>
   </div>
 
   <section class="contact">
     <div class="contact__inner">
+      <div class="contact__animated-f"><img src="assets/logo/f_animated.webp" alt="F"></div>
       <p class="contact__label">Get in Touch</p>
       <h1 class="contact__title">LET'S TALK</h1>
       <p class="contact__body">Every FOREWRD piece is made-to-order. To place an order, discuss sizing, or just say hello — reach out on WhatsApp or Instagram. We'd love to hear from you.</p>
@@ -132,7 +135,7 @@
 
   <footer class="footer">
     <div class="footer__inner">
-      <span class="footer__brand"><img src="assets/logo/Forewrd_Studio_white.svg" alt="FOREWRD"></span>
+      <span class="footer__brand"><img src="assets/logo/f_animated.webp" alt="FOREWRD"></span>
       <div class="footer__links"><a href="index.html">Home</a><a href="collection.html">Collection</a><a href="size-guide.html">Size Guide</a><a href="story.html">Story</a><a href="contact.html">Contact</a></div>
     </div>
     <div class="footer__bottom"><span>© 2026 FOREWRD Studio. All rights reserved.</span><a href="https://www.instagram.com/forewrd.studio/" target="_blank" style="color:rgba(244,241,237,0.5);">@forewrd.studio</a></div>
