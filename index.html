@@ -31,11 +31,13 @@
        ============================================ */
     .nav__logo {
       position: absolute;
-      left: 1vw;
-      top: 1vh; top: 1dvh;
+      /* X=23/393 = 5.85vw, Y=46/852 = 5.4vh */
+      left: 5.85vw;
+      top: 5.4vh; top: 5.4dvh;
       display: flex; align-items: center;
     }
     .nav__logo img {
+      /* W=96.5/393 = 24.55vw, H=12/852 = 1.41vh */
       width: 24.55vw;
       height: auto;
     }
@@ -54,6 +56,8 @@
     .nav__menu { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--parchment); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 32px; opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 99; }
     .nav__menu.open { opacity: 1; pointer-events: all; }
     .nav__menu a { font-size: 1rem; letter-spacing: 0.2em; text-transform: uppercase; }
+    .nav__menu-f { margin-top: 40px; display: flex; justify-content: center; }
+    .nav__menu-f img { width: 80px; height: auto; }
     @media (min-width: 769px) {
       .nav__links { display: flex; position: absolute; right: 48px; top: 5.4vh; top: 5.4dvh; }
       .nav__ham { display: none; }
@@ -63,6 +67,7 @@
     .stage {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
+      /* Use dynamic viewport height to fill under Safari's bottom bar */
       height: 100vh;
       height: 100dvh;
       overflow: hidden;
@@ -79,6 +84,10 @@
     .look.active { pointer-events: all; opacity: 1; }
     .look > * { position: absolute; }
 
+    /* Positions based on Figma: 393×852 frame, nav ~60px
+       Content area: 393 × ~792
+       All positions calculated as % of viewport */
+
     /* ============================================
        PROPORTIONAL SCALING SYSTEM
        All positions/sizes are calculated as % of a
@@ -90,24 +99,30 @@
        ============================================ */
 
     /* ============================================
-       ⚙️ MANUAL ADJUST — Image A (top right, full body) — LOOK 1
+       ⚙️ MANUAL ADJUST — Image A (top right, full body)
+       Figma: X=230, Y=211, H=551 (of 393×852)
        ============================================ */
     .look__img-a {
+      /* Height scales with viewport (551/852 = 64.67%) */
       height: 64.67vh; height: 64.67dvh;
       width: auto;
-      left: 50vw;
-      top: 11.38vh; top: 11.38dvh;
+      /* Position (230/393 = 58.52%, 211/852 = 24.77%) */
+      left: 58.52vw;
+      top: 24.77vh; top: 24.77dvh;
       z-index: 1;
       transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s;
     }
     .look__img-a img { height: 100%; width: auto; display: block; }
 
     /* ============================================
-       ⚙️ MANUAL ADJUST — Image B (bottom left, close-up) — LOOK 1
+       ⚙️ MANUAL ADJUST — Image B (bottom left, close-up)
+       Figma: X=-55, Y=280, H=594 (of 393×852)
        ============================================ */
     .look__img-b {
+      /* Height scales with viewport (594/852 = 69.72%) */
       height: 69.72vh; height: 69.72dvh;
       width: auto;
+      /* Position (-55/393 = -14% overflow, 280/852 = 32.87% from top) */
       left: -14vw;
       top: 32.87vh; top: 32.87dvh;
       z-index: 2;
@@ -116,32 +131,38 @@
     .look__img-b img { height: 100%; width: auto; display: block; }
 
     /* ============================================
-       ⚙️ MANUAL ADJUST — Heading (01 + Look Name, top left) — LOOK 1
+       ⚙️ MANUAL ADJUST — Heading (01 + Look Name, top left)
+       Figma: X=20, Y=97 (of 393×852)
        ============================================ */
     .look__heading {
+      /* Position (20/393 = 5.09%, 97/852 = 11.38%) */
       left: 5.09vw;
-      top: 12vh; top: 12dvh;
+      top: 11.38vh; top: 11.38dvh;
       z-index: 5;
       transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s;
     }
     .look__number {
-      font-size: 8.5vw;
+      /* Font 40px on 393vw = 10.18vw */
+      font-size: 10.18vw;
       font-weight: 300;
       color: rgba(0,0,0,0.12);
       line-height: 1;
       margin-bottom: 2px;
     }
     .look__name {
-      font-size: 7.63vw;
+      font-size: 10.18vw;
       font-weight: 400;
       color: rgba(0,0,0,0.25);
       line-height: 1.15;
     }
 
     /* ============================================
-       ⚙️ MANUAL ADJUST — Description (bottom right text) — LOOK 1
+       ⚙️ MANUAL ADJUST — Description (bottom right text)
+       Figma: X=191, Y=657, W=187, font-size=16 (of 393×852)
+       z-index: 10 = above image B
        ============================================ */
     .look__desc {
+      /* Position (191/393 = 48.6%, 657/852 = 77.11%, 187/393 = 47.58%) */
       left: 48.6vw;
       top: 77.11vh; top: 77.11dvh;
       width: 47.58vw;
@@ -150,6 +171,7 @@
       transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s;
     }
     .look__desc-label {
+      /* Font 16px on 393vw = 4.07vw */
       font-size: 4.07vw;
       font-weight: 300;
       color: rgba(0,0,0,0.35);
@@ -164,57 +186,18 @@
     }
 
     /* ============================================
-       ⚙️ MANUAL ADJUST — Accessory image (middle area) — LOOK 1
+       ⚙️ MANUAL ADJUST — Accessory image (middle area)
        ============================================ */
     .look__acc {
+      /* Width scales with viewport (70/393 = 17.81%) */
       width: 17.81vw;
+      /* Position (150/393 = 38.17%, 380/852 = 44.6%) */
       left: 38.17vw;
       top: 44.6vh; top: 44.6dvh;
       z-index: 6;
       transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s;
     }
     .look__acc img { width: 100%; height: auto; }
-
-    /* ============================================
-       ⚙️⚙️⚙️ LOOK 2 OVERRIDES — only affects Look 2 ⚙️⚙️⚙️
-       Change these numbers to reposition Look 2 elements independently
-       Formula: figma_X ÷ 3.93 = vw  |  figma_Y ÷ 8.52 = vh
-       Delete any block you don't want to override
-       ============================================ */
-
-    /* Look 2 — Image A */
-    .look[data-look="1"] .look__img-a {
-      left: 60vw;
-      top: 11.38vh; top: 11.38dvh;
-      height: 64.67vh; height: 64.67dvh;
-    }
-
-    /* Look 2 — Image B */
-    .look[data-look="1"] .look__img-b {
-      left: -1vw;
-      top: 32.87vh; top: 32.87dvh;
-      height: 69.72vh; height: 69.72dvh;
-    }
-
-    /* Look 2 — Heading (02 + Name) */
-    .look[data-look="1"] .look__heading {
-      left: 5.09vw;
-      top: 12vh; top: 12dvh;
-    }
-
-    /* Look 2 — Description */
-    .look[data-look="1"] .look__desc {
-      left: 48.6vw;
-      top: 77.11vh; top: 77.11dvh;
-      width: 47.58vw;
-    }
-
-    /* Look 2 — Accessory (earrings) */
-    .look[data-look="1"] .look__acc {
-      left: 44vw;
-      top: 44.6vh; top: 44.6dvh;
-      width: 17.81vw;
-    }
 
     /* SWIPE HINT — bottom center, always visible */
     .swipe-hint {
@@ -231,43 +214,55 @@
     .swipe-hint svg { width: 16px; height: 16px; stroke: rgba(0,0,0,0.25); fill: none; stroke-width: 1.5; animation: nudge 1.5s ease-in-out infinite; }
     @keyframes nudge { 0%,100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
 
-    /* ANIMATION STATES */
+    /* ANIMATION STATES
+       - Image A, Heading, Description → exit LEFT, enter from RIGHT
+       - Image B → exit RIGHT, enter from LEFT
+       - Accessory follows Image A (exits LEFT, enters from RIGHT) */
+
+    /* Active state: everything at natural position */
     .look.active .look__img-a,
     .look.active .look__img-b,
     .look.active .look__heading,
     .look.active .look__desc,
     .look.active .look__acc { transform: translateX(0); opacity: 1; }
 
+    /* Exiting left (swiped forward): heading, image A, desc, acc go LEFT; image B goes RIGHT */
     .look.exit-left .look__heading,
     .look.exit-left .look__img-a,
     .look.exit-left .look__desc,
     .look.exit-left .look__acc { transform: translateX(-110vw); opacity: 0; }
     .look.exit-left .look__img-b { transform: translateX(110vw); opacity: 0; }
 
+    /* Entering from right (next look coming in): heading/img-a/desc/acc from RIGHT; image B from LEFT */
     .look.enter-right .look__heading,
     .look.enter-right .look__img-a,
     .look.enter-right .look__desc,
     .look.enter-right .look__acc { transform: translateX(110vw); opacity: 0; }
     .look.enter-right .look__img-b { transform: translateX(-110vw); opacity: 0; }
 
+    /* Exiting right (swiped backward): reverse */
     .look.exit-right .look__heading,
     .look.exit-right .look__img-a,
     .look.exit-right .look__desc,
     .look.exit-right .look__acc { transform: translateX(110vw); opacity: 0; }
     .look.exit-right .look__img-b { transform: translateX(-110vw); opacity: 0; }
 
+    /* Entering from left (prev look coming in) */
     .look.enter-left .look__heading,
     .look.enter-left .look__img-a,
     .look.enter-left .look__desc,
     .look.enter-left .look__acc { transform: translateX(-110vw); opacity: 0; }
     .look.enter-left .look__img-b { transform: translateX(110vw); opacity: 0; }
 
+    /* No transition for initial offscreen state */
     .look.no-transition * { transition: none !important; }
 
     /* WA FLOAT */
     .wa { position: fixed; bottom: 18px; right: 18px; width: 42px; height: 42px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 90; box-shadow: 0 2px 10px rgba(0,0,0,0.14); transition: transform 0.3s; }
     .wa:hover { transform: scale(1.08); }
     .wa svg { width: 21px; height: 21px; fill: #fff; }
+
+    /* DESKTOP: keeps same pixel positions — the design stays consistent */
   </style>
 </head>
 <body>
@@ -288,9 +283,10 @@
     <a href="size-guide.html">Size Guide</a>
     <a href="story.html">Story</a>
     <a href="contact.html">Contact</a>
+    <div class="nav__menu-f"><img src="assets/logo/f_animated.webp" alt="F"></div>
   </div>
 
-  <!-- STAGE -->
+  <!-- STAGE — parchment background stays fixed, only elements animate -->
   <div class="stage" id="stage">
 
     <!-- LOOK 1 -->
@@ -339,7 +335,7 @@
     ham.addEventListener('click', function() { ham.classList.toggle('open'); mob.classList.toggle('open'); });
     mob.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { ham.classList.remove('open'); mob.classList.remove('open'); }); });
 
-    /* SWIPER */
+    /* SWIPER — only elements move, background stays */
     var looks = document.querySelectorAll('.look');
     var current = 0;
     var total = looks.length;
@@ -352,15 +348,19 @@
       var cur = looks[current];
       var nxt = looks[next];
 
+      // Set exit direction on current
       cur.classList.remove('active');
       cur.classList.add(goingForward ? 'exit-left' : 'exit-right');
 
+      // Prepare next: position offscreen instantly (no transition)
       nxt.classList.add('no-transition');
       nxt.classList.remove('enter-right', 'enter-left', 'exit-left', 'exit-right', 'active');
       nxt.classList.add(goingForward ? 'enter-right' : 'enter-left');
 
+      // Force reflow so no-transition applies
       nxt.offsetHeight;
 
+      // Remove no-transition and activate — elements animate in
       nxt.classList.remove('no-transition');
       nxt.classList.remove('enter-right', 'enter-left');
       nxt.classList.add('active');
@@ -368,6 +368,7 @@
       current = next;
 
       setTimeout(function() {
+        // Clean up old slide
         cur.classList.remove('exit-left', 'exit-right');
         animating = false;
       }, 950);
