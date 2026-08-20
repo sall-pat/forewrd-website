@@ -14,35 +14,32 @@
     a { color: inherit; text-decoration: none; }
     button { font-family: inherit; cursor: pointer; border: none; background: none; }
 
-    /* NAV — fixed at top */
+    /* NAV */
     .nav {
       position: fixed; top: 0; left: 0; right: 0;
       height: 100px;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 16px;
       z-index: 100;
       background: transparent;
       pointer-events: none;
     }
     .nav > * { pointer-events: all; }
-    /* ============================================
-       ⚙️ MANUAL ADJUST — Logo
-       Figma: X=23, Y=46, W=96.5, H=12 (of 393×852)
-       ============================================ */
+
+    /* ⚙️ Logo */
     .nav__logo {
       position: absolute;
-      /* X=23/393 = 5.85vw, Y=46/852 = 5.4vh */
-      left: 5.85vw;
-      top: 5.4vh; top: 5.4dvh;
+      left: 1vw;
+      top: 1vh; top: 1dvh;
       display: flex; align-items: center;
     }
     .nav__logo img {
-      /* W=96.5/393 = 24.55vw, H=12/852 = 1.41vh */
       width: 24.55vw;
+      max-width: 120px;
       height: auto;
     }
-    .nav__links { display: none; list-style: none; gap: 28px; }
-    .nav__links a { font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; }
+
+    .nav__links { display: none; }
+
+    /* Hamburger */
     .nav__ham {
       position: absolute;
       right: 20px;
@@ -53,28 +50,87 @@
     .nav__ham.open span:nth-child(1) { transform: rotate(45deg) translate(4.5px, 4.5px); }
     .nav__ham.open span:nth-child(2) { opacity: 0; }
     .nav__ham.open span:nth-child(3) { transform: rotate(-45deg) translate(4.5px, -4.5px); }
-    .nav__menu { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--parchment); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 32px; opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 99; }
+
+    /* Mobile menu */
+    .nav__menu {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--parchment);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 24px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s;
+      z-index: 99;
+      overflow-y: auto;
+      padding: 100px 20px;
+    }
     .nav__menu.open { opacity: 1; pointer-events: all; }
-    .nav__menu a { font-size: 1rem; letter-spacing: 0.2em; text-transform: uppercase; }
-    .nav__menu-f { margin-top: 40px; display: flex; justify-content: center; }
-    .nav__menu-f img { width: 80px; height: auto; }
-    @media (min-width: 769px) {
-      .nav__links { display: flex; position: absolute; right: 48px; top: 5.4vh; top: 5.4dvh; }
-      .nav__ham { display: none; }
+    .nav__menu > a, .nav__menu-item {
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--black);
     }
 
-    /* STAGE — full viewport background, nav overlays on top */
+    /* Dropdown */
+    .nav__dropdown { position: relative; text-align: center; }
+    .nav__dropdown-trigger {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 1rem; letter-spacing: 0.2em; text-transform: uppercase;
+      font-family: inherit; cursor: pointer; background: none; border: none;
+      color: var(--black);
+    }
+    .nav__dropdown-arrow { transition: transform 0.3s; font-size: 0.7rem; }
+    .nav__dropdown.open .nav__dropdown-arrow { transform: rotate(180deg); }
+    .nav__dropdown-menu {
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 20px;
+      padding: 16px 0;
+    }
+    .nav__dropdown.open .nav__dropdown-menu { display: flex; }
+    .nav__dropdown-menu a, .nav__submenu-trigger {
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.7);
+      font-family: inherit; background: none; border: none; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 8px;
+      justify-content: center;
+    }
+    .nav__submenu { position: relative; text-align: center; }
+    .nav__submenu-menu {
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 14px;
+      padding-left: 0;
+    }
+    .nav__submenu.open .nav__submenu-menu { display: flex; }
+    .nav__submenu-menu a {
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.55);
+    }
+    .nav__submenu.open .nav__dropdown-arrow { transform: rotate(180deg); }
+
+    /* F animation in mobile menu */
+    .nav__menu-f { margin-top: 30px; display: flex; justify-content: center; }
+    .nav__menu-f img { width: 80px; height: auto; }
+
+    /* STAGE */
     .stage {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      /* Use dynamic viewport height to fill under Safari's bottom bar */
-      height: 100vh;
-      height: 100dvh;
+      height: 100vh; height: 100dvh;
       overflow: hidden;
       background: var(--parchment);
     }
 
-    /* LOOK — each look is a set of absolutely positioned elements */
+    /* LOOK */
     .look {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -84,94 +140,62 @@
     .look.active { pointer-events: all; opacity: 1; }
     .look > * { position: absolute; }
 
-    /* Positions based on Figma: 393×852 frame, nav ~60px
-       Content area: 393 × ~792
-       All positions calculated as % of viewport */
-
     /* ============================================
-       PROPORTIONAL SCALING SYSTEM
-       All positions/sizes are calculated as % of a
-       393×852 Figma frame. The design will scale
-       identically on any device (iPhone 13, 15 Pro, etc.)
-
-       To convert Figma px → vw:  (figma_x / 393) * 100 = ?vw
-       To convert Figma px → vh:  (figma_y / 852) * 100 = ?vh
-       ============================================ */
-
-    /* ============================================
-       ⚙️ MANUAL ADJUST — Image A (top right, full body)
-       Figma: X=230, Y=211, H=551 (of 393×852)
+       ⚙️ MANUAL ADJUST — Image A (all looks default)
+       Formula: figma_X ÷ 3.93 = vw  |  figma_Y ÷ 8.52 = vh
        ============================================ */
     .look__img-a {
-      /* Height scales with viewport (551/852 = 64.67%) */
       height: 64.67vh; height: 64.67dvh;
       width: auto;
-      /* Position (230/393 = 58.52%, 211/852 = 24.77%) */
-      left: 58.52vw;
-      top: 24.77vh; top: 24.77dvh;
+      left: 50vw;
+      top: 11.38vh; top: 11.38dvh;
       z-index: 1;
-      transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s;
+      transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .look__img-a img { height: 100%; width: auto; display: block; }
 
-    /* ============================================
-       ⚙️ MANUAL ADJUST — Image B (bottom left, close-up)
-       Figma: X=-55, Y=280, H=594 (of 393×852)
-       ============================================ */
+    /* ⚙️ Image B (all looks default) */
     .look__img-b {
-      /* Height scales with viewport (594/852 = 69.72%) */
       height: 69.72vh; height: 69.72dvh;
       width: auto;
-      /* Position (-55/393 = -14% overflow, 280/852 = 32.87% from top) */
       left: -14vw;
       top: 32.87vh; top: 32.87dvh;
       z-index: 2;
-      transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s;
+      transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .look__img-b img { height: 100%; width: auto; display: block; }
 
-    /* ============================================
-       ⚙️ MANUAL ADJUST — Heading (01 + Look Name, top left)
-       Figma: X=20, Y=97 (of 393×852)
-       ============================================ */
+    /* ⚙️ Heading */
     .look__heading {
-      /* Position (20/393 = 5.09%, 97/852 = 11.38%) */
       left: 5.09vw;
-      top: 11.38vh; top: 11.38dvh;
+      top: 10vh; top: 10dvh;
       z-index: 5;
-      transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s;
+      transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .look__number {
-      /* Font 40px on 393vw = 10.18vw */
-      font-size: 10.18vw;
+      font-size: 8.5vw;
       font-weight: 300;
       color: rgba(0,0,0,0.12);
       line-height: 1;
       margin-bottom: 2px;
     }
     .look__name {
-      font-size: 10.18vw;
+      font-size: 7.63vw;
       font-weight: 400;
       color: rgba(0,0,0,0.25);
       line-height: 1.15;
     }
 
-    /* ============================================
-       ⚙️ MANUAL ADJUST — Description (bottom right text)
-       Figma: X=191, Y=657, W=187, font-size=16 (of 393×852)
-       z-index: 10 = above image B
-       ============================================ */
+    /* ⚙️ Description */
     .look__desc {
-      /* Position (191/393 = 48.6%, 657/852 = 77.11%, 187/393 = 47.58%) */
       left: 48.6vw;
       top: 77.11vh; top: 77.11dvh;
       width: 47.58vw;
       z-index: 10;
       text-align: right;
-      transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s;
+      transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .look__desc-label {
-      /* Font 16px on 393vw = 4.07vw */
       font-size: 4.07vw;
       font-weight: 300;
       color: rgba(0,0,0,0.35);
@@ -186,23 +210,35 @@
     }
 
     /* ============================================
-       ⚙️ MANUAL ADJUST — Accessory image (middle area)
+       ⚙️⚙️⚙️ PER-LOOK OVERRIDES ⚙️⚙️⚙️
+       Change only what you want different per look
        ============================================ */
-    .look__acc {
-      /* Width scales with viewport (70/393 = 17.81%) */
-      width: 17.81vw;
-      /* Position (150/393 = 38.17%, 380/852 = 44.6%) */
-      left: 38.17vw;
-      top: 44.6vh; top: 44.6dvh;
-      z-index: 6;
-      transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s;
-    }
-    .look__acc img { width: 100%; height: auto; }
 
-    /* SWIPE HINT — bottom center, always visible */
-    .swipe-hint {
+    /* --- LOOK 1 (Midnight Blue Set) --- */
+    /* Uses defaults */
+
+    /* --- LOOK 2 (Denim Overdose) --- */
+    .look[data-look="1"] .look__img-a { left: 50vw; top: 11.38vh; top: 11.38dvh; height: 64.67vh; height: 64.67dvh; }
+    .look[data-look="1"] .look__img-b { left: -14vw; top: 32.87vh; top: 32.87dvh; height: 69.72vh; height: 69.72dvh; }
+    .look[data-look="1"] .look__heading { left: 5.09vw; top: 10vh; top: 10dvh; }
+    .look[data-look="1"] .look__desc { left: 48.6vw; top: 77.11vh; top: 77.11dvh; width: 47.58vw; }
+
+    /* --- LOOK 3 (Bold One) --- */
+    .look[data-look="2"] .look__img-a { left: 50vw; top: 11.38vh; top: 11.38dvh; height: 64.67vh; height: 64.67dvh; }
+    .look[data-look="2"] .look__img-b { left: -14vw; top: 32.87vh; top: 32.87dvh; height: 69.72vh; height: 69.72dvh; }
+    .look[data-look="2"] .look__heading { left: 5.09vw; top: 10vh; top: 10dvh; }
+    .look[data-look="2"] .look__desc { left: 48.6vw; top: 77.11vh; top: 77.11dvh; width: 47.58vw; }
+
+    /* --- LOOK 4 (All Black) --- */
+    .look[data-look="3"] .look__img-a { left: 50vw; top: 11.38vh; top: 11.38dvh; height: 64.67vh; height: 64.67dvh; }
+    .look[data-look="3"] .look__img-b { left: -14vw; top: 32.87vh; top: 32.87dvh; height: 69.72vh; height: 69.72dvh; }
+    .look[data-look="3"] .look__heading { left: 5.09vw; top: 10vh; top: 10dvh; }
+    .look[data-look="3"] .look__desc { left: 48.6vw; top: 77.11vh; top: 77.11dvh; width: 47.58vw; }
+
+    /* SCROLL HINT */
+    .scroll-hint {
       position: fixed;
-      bottom: 4px;
+      bottom: 8px;
       left: 50%; transform: translateX(-50%);
       display: flex; align-items: center; gap: 7px;
       font-size: 10px;
@@ -211,58 +247,67 @@
       color: rgba(0,0,0,0.25);
       z-index: 50;
     }
-    .swipe-hint svg { width: 16px; height: 16px; stroke: rgba(0,0,0,0.25); fill: none; stroke-width: 1.5; animation: nudge 1.5s ease-in-out infinite; }
-    @keyframes nudge { 0%,100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
+    .scroll-hint svg { width: 14px; height: 14px; stroke: rgba(0,0,0,0.25); fill: none; stroke-width: 1.5; animation: nudgeDown 1.5s ease-in-out infinite; }
+    @keyframes nudgeDown { 0%,100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
 
-    /* ANIMATION STATES
-       - Image A, Heading, Description → exit LEFT, enter from RIGHT
-       - Image B → exit RIGHT, enter from LEFT
-       - Accessory follows Image A (exits LEFT, enters from RIGHT) */
+    /* Look indicator dots */
+    .look-dots {
+      position: fixed;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 50;
+    }
+    .look-dots__dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.15);
+      transition: background 0.3s;
+    }
+    .look-dots__dot.active {
+      background: rgba(0,0,0,0.6);
+    }
 
-    /* Active state: everything at natural position */
+    /* ANIMATION STATES */
+    /* When look is active, everything is at natural position and fully visible */
+    .look.active { opacity: 1; }
     .look.active .look__img-a,
     .look.active .look__img-b,
     .look.active .look__heading,
-    .look.active .look__desc,
-    .look.active .look__acc { transform: translateX(0); opacity: 1; }
+    .look.active .look__desc { transform: translateX(0); }
 
-    /* Exiting left (swiped forward): heading, image A, desc, acc go LEFT; image B goes RIGHT */
+    /* When look is inactive but transitioning, keep it visible (no fade) */
+    .look.exit-left, .look.exit-right,
+    .look.enter-left, .look.enter-right { opacity: 1; }
+
+    /* Right group (heading, img-a, desc) → exit LEFT / enter from RIGHT */
+    /* Left group (img-b) → exit RIGHT / enter from LEFT */
+
     .look.exit-left .look__heading,
     .look.exit-left .look__img-a,
-    .look.exit-left .look__desc,
-    .look.exit-left .look__acc { transform: translateX(-110vw); opacity: 0; }
-    .look.exit-left .look__img-b { transform: translateX(110vw); opacity: 0; }
+    .look.exit-left .look__desc { transform: translateX(-110vw); }
+    .look.exit-left .look__img-b { transform: translateX(110vw); }
 
-    /* Entering from right (next look coming in): heading/img-a/desc/acc from RIGHT; image B from LEFT */
     .look.enter-right .look__heading,
     .look.enter-right .look__img-a,
-    .look.enter-right .look__desc,
-    .look.enter-right .look__acc { transform: translateX(110vw); opacity: 0; }
-    .look.enter-right .look__img-b { transform: translateX(-110vw); opacity: 0; }
+    .look.enter-right .look__desc { transform: translateX(110vw); }
+    .look.enter-right .look__img-b { transform: translateX(-110vw); }
 
-    /* Exiting right (swiped backward): reverse */
     .look.exit-right .look__heading,
     .look.exit-right .look__img-a,
-    .look.exit-right .look__desc,
-    .look.exit-right .look__acc { transform: translateX(110vw); opacity: 0; }
-    .look.exit-right .look__img-b { transform: translateX(-110vw); opacity: 0; }
+    .look.exit-right .look__desc { transform: translateX(110vw); }
+    .look.exit-right .look__img-b { transform: translateX(-110vw); }
 
-    /* Entering from left (prev look coming in) */
     .look.enter-left .look__heading,
     .look.enter-left .look__img-a,
-    .look.enter-left .look__desc,
-    .look.enter-left .look__acc { transform: translateX(-110vw); opacity: 0; }
-    .look.enter-left .look__img-b { transform: translateX(110vw); opacity: 0; }
+    .look.enter-left .look__desc { transform: translateX(-110vw); }
+    .look.enter-left .look__img-b { transform: translateX(110vw); }
 
-    /* No transition for initial offscreen state */
     .look.no-transition * { transition: none !important; }
-
-    /* WA FLOAT */
-    .wa { position: fixed; bottom: 18px; right: 18px; width: 42px; height: 42px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 90; box-shadow: 0 2px 10px rgba(0,0,0,0.14); transition: transform 0.3s; }
-    .wa:hover { transform: scale(1.08); }
-    .wa svg { width: 21px; height: 21px; fill: #fff; }
-
-    /* DESKTOP: keeps same pixel positions — the design stays consistent */
   </style>
 </head>
 <body>
@@ -270,26 +315,43 @@
   <!-- NAV -->
   <nav class="nav">
     <a href="index.html" class="nav__logo"><img src="assets/logo/Forewrd_Studio_black.svg" alt="FOREWRD"></a>
-    <ul class="nav__links">
-      <li><a href="collection.html">Collection</a></li>
-      <li><a href="size-guide.html">Size Guide</a></li>
-      <li><a href="story.html">Story</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
     <button class="nav__ham" id="ham"><span></span><span></span><span></span></button>
   </nav>
+
+  <!-- Mobile menu -->
   <div class="nav__menu" id="mob">
-    <a href="collection.html">Collection</a>
+    <div class="nav__dropdown" id="dropdown">
+      <button class="nav__dropdown-trigger" onclick="toggleDropdown()">
+        Collection
+        <span class="nav__dropdown-arrow">▾</span>
+      </button>
+      <div class="nav__dropdown-menu">
+        <a href="collection.html">The Opening Act — Issue: 001</a>
+        <div class="nav__submenu" id="submenu">
+          <button class="nav__submenu-trigger" onclick="toggleSubmenu(event)">
+            Category
+            <span class="nav__dropdown-arrow">▾</span>
+          </button>
+          <div class="nav__submenu-menu">
+            <a href="collection.html#tops">Tops</a>
+            <a href="collection.html#bottoms">Bottoms</a>
+            <a href="collection.html#jackets">Jackets</a>
+            <a href="collection.html#jewellery">Fine Jewellery</a>
+            <a href="collection.html#accessories">Accessories</a>
+          </div>
+        </div>
+      </div>
+    </div>
     <a href="size-guide.html">Size Guide</a>
     <a href="story.html">Story</a>
     <a href="contact.html">Contact</a>
     <div class="nav__menu-f"><img src="assets/logo/f_animated.webp" alt="F"></div>
   </div>
 
-  <!-- STAGE — parchment background stays fixed, only elements animate -->
+  <!-- STAGE -->
   <div class="stage" id="stage">
 
-    <!-- LOOK 1 -->
+    <!-- LOOK 1: Midnight Blue Set -->
     <div class="look active" data-look="0">
       <div class="look__heading">
         <div class="look__number">01</div>
@@ -303,7 +365,7 @@
       </div>
     </div>
 
-    <!-- LOOK 2 -->
+    <!-- LOOK 2: Denim Overdose -->
     <div class="look enter-right no-transition" data-look="1">
       <div class="look__heading">
         <div class="look__number">02</div>
@@ -311,108 +373,182 @@
       </div>
       <div class="look__img-a"><img src="assets/looks/LOOK%202.png" alt="Denim Overdose"></div>
       <div class="look__img-b"><img src="assets/looks/LOOK%202b.png" alt="Denim Overdose detail"></div>
-      <div class="look__acc"><img src="assets/looks/LOOK%202acc..png" alt="Earrings"></div>
       <div class="look__desc">
         <p class="look__desc-label">If you were wearing this :</p>
         <p class="look__desc-text">Imagine being undeniable at work or at restaurants because you look so chic.</p>
       </div>
     </div>
 
+    <!-- LOOK 3: Bold One -->
+    <div class="look enter-right no-transition" data-look="2">
+      <div class="look__heading">
+        <div class="look__number">03</div>
+        <div class="look__name">Bold<br>One</div>
+      </div>
+      <div class="look__img-a"><img src="assets/looks/LOOK%203.png" alt="Bold One"></div>
+      <div class="look__img-b"><img src="assets/looks/LOOK%203b.png" alt="Bold One detail"></div>
+      <div class="look__desc">
+        <p class="look__desc-label">If you were wearing this :</p>
+        <p class="look__desc-text">If you were wearing this</p>
+      </div>
+    </div>
+
+    <!-- LOOK 4: All Black -->
+    <div class="look enter-right no-transition" data-look="3">
+      <div class="look__heading">
+        <div class="look__number">04</div>
+        <div class="look__name">All<br>Black</div>
+      </div>
+      <div class="look__img-a"><img src="assets/looks/LOOK%204.png" alt="All Black"></div>
+      <div class="look__img-b"><img src="assets/looks/LOOK%204b.png" alt="All Black detail"></div>
+      <div class="look__desc">
+        <p class="look__desc-label">If you were wearing this :</p>
+        <p class="look__desc-text">If you were wearing this</p>
+      </div>
+    </div>
+
   </div>
 
-  <!-- SWIPE HINT -->
-  <div class="swipe-hint" id="hint">
-    <span>Swipe for more</span>
-    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+  <!-- Look indicator dots -->
+  <div class="look-dots" id="lookDots">
+    <span class="look-dots__dot active" data-idx="0"></span>
+    <span class="look-dots__dot" data-idx="1"></span>
+    <span class="look-dots__dot" data-idx="2"></span>
+    <span class="look-dots__dot" data-idx="3"></span>
   </div>
 
-  <!-- WA -->
-  <a href="https://wa.me/919167077708" target="_blank" class="wa"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.112.549 4.098 1.51 5.83L0 24l6.326-1.46A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75c-1.89 0-3.69-.49-5.28-1.41l-.38-.22-3.93.91.99-3.81-.25-.39A9.69 9.69 0 012.25 12 9.75 9.75 0 0112 2.25 9.75 9.75 0 0121.75 12 9.75 9.75 0 0112 21.75z"/></svg></a>
+  <!-- Scroll hint -->
+  <div class="scroll-hint" id="hint">
+    <span>Scroll</span>
+    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="5 12 12 19 19 12"/></svg>
+  </div>
 
   <script>
-    /* NAV */
+    /* NAV MENU */
     var ham = document.getElementById('ham'), mob = document.getElementById('mob');
-    ham.addEventListener('click', function() { ham.classList.toggle('open'); mob.classList.toggle('open'); });
-    mob.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { ham.classList.remove('open'); mob.classList.remove('open'); }); });
+    ham.addEventListener('click', function() {
+      ham.classList.toggle('open');
+      mob.classList.toggle('open');
+    });
+    mob.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        ham.classList.remove('open');
+        mob.classList.remove('open');
+      });
+    });
 
-    /* SWIPER — only elements move, background stays */
+    /* DROPDOWN */
+    function toggleDropdown() {
+      document.getElementById('dropdown').classList.toggle('open');
+    }
+    function toggleSubmenu(e) {
+      e.stopPropagation();
+      document.getElementById('submenu').classList.toggle('open');
+    }
+
+    /* SWIPER — vertical scroll triggers horizontal transition, loops back to 1 after 4 */
     var looks = document.querySelectorAll('.look');
+    var dots = document.querySelectorAll('.look-dots__dot');
     var current = 0;
     var total = looks.length;
     var animating = false;
 
     function goTo(next) {
-      if (next < 0 || next >= total || next === current || animating) return;
+      if (animating) return;
+
+      /* Loop back */
+      if (next >= total) next = 0;
+      if (next < 0) next = total - 1;
+      if (next === current) return;
+
       animating = true;
-      var goingForward = next > current;
+      /* Determine direction:
+         - Going forward (down scroll) = current exits LEFT, next enters from RIGHT
+         - Going back (up scroll) = current exits RIGHT, next enters from LEFT
+         - Special loop case (4 → 1): treat as forward for smooth animation */
+      var goingForward;
+      if (current === total - 1 && next === 0) goingForward = true;
+      else if (current === 0 && next === total - 1) goingForward = false;
+      else goingForward = next > current;
+
       var cur = looks[current];
       var nxt = looks[next];
 
-      // Set exit direction on current
       cur.classList.remove('active');
       cur.classList.add(goingForward ? 'exit-left' : 'exit-right');
 
-      // Prepare next: position offscreen instantly (no transition)
       nxt.classList.add('no-transition');
       nxt.classList.remove('enter-right', 'enter-left', 'exit-left', 'exit-right', 'active');
       nxt.classList.add(goingForward ? 'enter-right' : 'enter-left');
 
-      // Force reflow so no-transition applies
       nxt.offsetHeight;
 
-      // Remove no-transition and activate — elements animate in
       nxt.classList.remove('no-transition');
       nxt.classList.remove('enter-right', 'enter-left');
       nxt.classList.add('active');
 
+      /* Update dots */
+      dots.forEach(function(d, i) { d.classList.toggle('active', i === next); });
+
       current = next;
 
+      /* Hide scroll hint after first move */
+      var hint = document.getElementById('hint');
+      if (hint) hint.style.opacity = 0;
+
       setTimeout(function() {
-        // Clean up old slide
         cur.classList.remove('exit-left', 'exit-right');
         animating = false;
-      }, 950);
+      }, 1550);
     }
 
-    /* TOUCH SWIPE */
-    var startX = 0, startY = 0, diffX = 0;
+    /* VERTICAL SCROLL → triggers horizontal transition */
+    var wheelTimer;
+    var wheelAccum = 0;
+    window.addEventListener('wheel', function(e) {
+      e.preventDefault();
+      if (animating) return;
+      wheelAccum += e.deltaY;
+      if (Math.abs(wheelAccum) > 40) {
+        if (wheelAccum > 0) goTo(current + 1);
+        else goTo(current - 1);
+        wheelAccum = 0;
+      }
+      clearTimeout(wheelTimer);
+      wheelTimer = setTimeout(function() { wheelAccum = 0; }, 150);
+    }, { passive: false });
+
+    /* TOUCH — vertical swipe */
+    var touchStartY = 0, touchDiffY = 0;
     var stage = document.getElementById('stage');
 
     stage.addEventListener('touchstart', function(e) {
-      startX = e.touches[0].clientX;
-      startY = e.touches[0].clientY;
-      diffX = 0;
+      touchStartY = e.touches[0].clientY;
+      touchDiffY = 0;
     }, { passive: true });
 
     stage.addEventListener('touchmove', function(e) {
-      diffX = startX - e.touches[0].clientX;
-      var diffY = startY - e.touches[0].clientY;
-      if (Math.abs(diffX) > Math.abs(diffY)) e.preventDefault();
+      touchDiffY = touchStartY - e.touches[0].clientY;
+      e.preventDefault();
     }, { passive: false });
 
     stage.addEventListener('touchend', function() {
-      if (Math.abs(diffX) > 50) {
-        if (diffX > 0) goTo(current + 1);
+      if (Math.abs(touchDiffY) > 50) {
+        if (touchDiffY > 0) goTo(current + 1);
         else goTo(current - 1);
       }
-      diffX = 0;
+      touchDiffY = 0;
     }, { passive: true });
-
-    /* MOUSE WHEEL */
-    var wheelTimer;
-    stage.addEventListener('wheel', function(e) {
-      e.preventDefault();
-      clearTimeout(wheelTimer);
-      wheelTimer = setTimeout(function() {
-        if (e.deltaX > 30 || e.deltaY > 30) goTo(current + 1);
-        else if (e.deltaX < -30 || e.deltaY < -30) goTo(current - 1);
-      }, 50);
-    }, { passive: false });
 
     /* KEYBOARD */
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'ArrowRight') goTo(current + 1);
-      if (e.key === 'ArrowLeft') goTo(current - 1);
+      if (e.key === 'ArrowDown' || e.key === 'PageDown') goTo(current + 1);
+      if (e.key === 'ArrowUp' || e.key === 'PageUp') goTo(current - 1);
+    });
+
+    /* Click dots to jump */
+    dots.forEach(function(d) {
+      d.addEventListener('click', function() { goTo(parseInt(d.dataset.idx)); });
     });
   </script>
 </body>
