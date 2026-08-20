@@ -16,7 +16,7 @@
       --nav-height: 60px;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    html { -webkit-font-smoothing: antialiased; }
     body { font-family: var(--font); font-weight: 400; color: var(--black); background: var(--parchment); overflow-x: hidden; line-height: 1.6; }
     img { max-width: 100%; height: auto; display: block; }
     a { color: inherit; text-decoration: none; }
@@ -87,10 +87,7 @@
       color: var(--black); padding: 0;
     }
     .nav__submenu-trigger { font-size: 0.85rem; letter-spacing: 0.15em; color: rgba(0,0,0,0.7); }
-    .nav__dropdown-arrow { transition: transform 0.3s; font-size: 0.7rem; display: inline-block; }
     /* Only rotate the arrow belonging to THIS trigger (direct child), not nested ones */
-    .nav__dropdown.open > .nav__dropdown-trigger > .nav__dropdown-arrow { transform: rotate(180deg); }
-    .nav__submenu.open > .nav__submenu-trigger > .nav__dropdown-arrow { transform: rotate(180deg); }
     .nav__dropdown-menu, .nav__submenu-menu { display: none; flex-direction: column; gap: 16px; margin-top: 20px; padding: 16px 0; }
     .nav__submenu-menu { gap: 12px; margin-top: 14px; padding: 12px 0 0; }
     .nav__dropdown.open > .nav__dropdown-menu { display: flex; }
@@ -108,7 +105,50 @@
     .footer__links a { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(244,241,237,0.5); transition: color 0.3s; }
     .footer__links a:hover { color: var(--parchment); }
     .footer__bottom { max-width: 1200px; margin: 28px auto 0; padding-top: 16px; border-top: 1px solid rgba(244,241,237,0.1); display: flex; justify-content: space-between; align-items: center; font-size: 0.65rem; letter-spacing: 0.1em; color: rgba(244,241,237,0.3); }
+
+    /* --- Dropdown chevron: drawn in CSS so direction never depends on font --- */
+    .nav__dropdown-arrow {
+      width: 7px; height: 7px;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      display: inline-block;
+      /* 45deg = pointing DOWN when collapsed */
+      transform: rotate(45deg);
+      transform-origin: center;
+      transition: transform 0.3s ease;
+      margin-bottom: 3px;
+      flex-shrink: 0;
+    }
+    /* Expanded = pointing UP (only for its OWN trigger, not nested ones) */
+    .nav__dropdown.open > .nav__dropdown-trigger > .nav__dropdown-arrow { transform: rotate(-135deg); margin-bottom: 0; }
+    .nav__submenu.open  > .nav__submenu-trigger  > .nav__dropdown-arrow { transform: rotate(-135deg); margin-bottom: 0; }
+
+    /* --- Kill the grey/black tap box, replace with a micro-interaction --- */
+    .nav__mobile-menu a,
+    .nav__dropdown-trigger,
+    .nav__submenu-trigger,
+    .nav__hamburger,
+    .footer__links a {
+      -webkit-tap-highlight-color: transparent;
+      tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      transition: opacity 0.18s ease, transform 0.18s ease, letter-spacing 0.25s ease;
+    }
+    /* Micro-interaction: gentle press-in + slight letter-spacing bloom */
+    .nav__mobile-menu a:active,
+    .nav__dropdown-trigger:active,
+    .nav__submenu-trigger:active {
+      opacity: 0.55;
+      transform: scale(0.96);
+    }
+    @media (hover: hover) {
+      .nav__mobile-menu a:hover,
+      .nav__dropdown-trigger:hover,
+      .nav__submenu-trigger:hover { letter-spacing: 0.26em; opacity: 0.7; }
+      .nav__submenu-trigger:hover { letter-spacing: 0.2em; }
+    }
   </style>
+  <link rel="stylesheet" href="css/logo.css">
 </head>
 <body>
 
@@ -126,11 +166,11 @@
   <div class="nav__mobile-menu" id="mob">
     <a href="index.html">Home</a>
     <div class="nav__dropdown" id="dropdown">
-      <button class="nav__dropdown-trigger" onclick="toggleDropdown()">Collection <span class="nav__dropdown-arrow">&#9662;</span></button>
+      <button class="nav__dropdown-trigger" onclick="toggleDropdown()">Collection <span class="nav__dropdown-arrow"></span></button>
       <div class="nav__dropdown-menu">
         <a href="collection.html#looks">The Opening Act &mdash; Issue: 001</a>
         <div class="nav__submenu" id="submenu">
-          <button class="nav__submenu-trigger" onclick="toggleSubmenu(event)">Category <span class="nav__dropdown-arrow">&#9662;</span></button>
+          <button class="nav__submenu-trigger" onclick="toggleSubmenu(event)">Category <span class="nav__dropdown-arrow"></span></button>
           <div class="nav__submenu-menu">
             <a href="collection.html#tops">Tops</a>
             <a href="collection.html#bottoms">Bottoms</a>
@@ -152,7 +192,7 @@
       
       <p class="contact__label">Get in Touch</p>
       <h1 class="contact__title">LET'S TALK</h1>
-      <p class="contact__body">Every Forewrd Studio piece is made-to-order. To place an order, discuss sizing, or just say hello, reach out on WhatsApp or Instagram. We'd love to hear from you.</p>
+      <p class="contact__body">Every Forewrd Studio piece is made-to-order. To place an order, discuss sizing, or just say hello — reach out on WhatsApp or Instagram. We'd love to hear from you.</p>
 
       <div class="contact__links">
         <a href="https://www.instagram.com/forewrd.studio/" target="_blank" class="contact__link">
