@@ -77,6 +77,38 @@
     .wa-float { position: fixed; bottom: 20px; right: 20px; width: 48px; height: 48px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 900; box-shadow: 0 3px 16px rgba(0,0,0,0.15); transition: transform 0.3s; }
     .wa-float:hover { transform: scale(1.08); }
     .wa-float svg { width: 24px; height: 24px; fill: #fff; }
+  
+    /* Dropdown menu in mobile nav */
+    .nav__dropdown, .nav__submenu { text-align: center; position: relative; }
+    .nav__dropdown-trigger, .nav__submenu-trigger {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 1rem; letter-spacing: 0.2em; text-transform: uppercase;
+      font-family: inherit; cursor: pointer; background: none; border: none;
+      color: #000; padding: 0;
+    }
+    .nav__submenu-trigger { font-size: 0.85rem; letter-spacing: 0.15em; color: rgba(0,0,0,0.7); }
+    .nav__dropdown-arrow { transition: transform 0.3s; font-size: 0.7rem; display: inline-block; }
+    .nav__dropdown.open .nav__dropdown-arrow,
+    .nav__submenu.open .nav__dropdown-arrow { transform: rotate(180deg); }
+    .nav__dropdown-menu, .nav__submenu-menu {
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 20px;
+      padding: 16px 0;
+    }
+    .nav__submenu-menu { gap: 12px; margin-top: 14px; }
+    .nav__dropdown.open .nav__dropdown-menu { display: flex; }
+    .nav__submenu.open .nav__submenu-menu { display: flex; }
+    .nav__dropdown-menu a {
+      font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(0,0,0,0.7);
+    }
+    .nav__submenu-menu a {
+      font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(0,0,0,0.55);
+    }
+
   </style>
 </head>
 <body>
@@ -94,7 +126,22 @@
   </nav>
   <div class="nav__mobile-menu" id="mob">
     <a href="index.html">Home</a>
-    <a href="collection.html">Collection</a>
+    <div class="nav__dropdown" id="dropdown">
+      <button class="nav__dropdown-trigger" onclick="toggleDropdown()">Collection <span class="nav__dropdown-arrow">&#9662;</span></button>
+      <div class="nav__dropdown-menu">
+        <a href="collection.html">The Opening Act &mdash; Issue: 001</a>
+        <div class="nav__submenu" id="submenu">
+          <button class="nav__submenu-trigger" onclick="toggleSubmenu(event)">Category <span class="nav__dropdown-arrow">&#9662;</span></button>
+          <div class="nav__submenu-menu">
+            <a href="collection.html#tops">Tops</a>
+            <a href="collection.html#bottoms">Bottoms</a>
+            <a href="collection.html#jackets">Jackets</a>
+            <a href="collection.html#jewellery">Fine Jewellery</a>
+            <a href="collection.html#accessories">Accessories</a>
+          </div>
+        </div>
+      </div>
+    </div>
     <a href="size-guide.html">Size Guide</a>
     <a href="story.html">Story</a>
     <a href="contact.html">Contact</a>
@@ -103,10 +150,10 @@
 
   <section class="contact">
     <div class="contact__inner">
-      <div class="contact__animated-f"><img src="assets/logo/f_animated.webp" alt="F"></div>
+      
       <p class="contact__label">Get in Touch</p>
       <h1 class="contact__title">LET'S TALK</h1>
-      <p class="contact__body">Every Forewrd Studio piece is made-to-order. To place an order, discuss sizing, or just say hello, reach out on WhatsApp or Instagram. We'd love to hear from you.</p>
+      <p class="contact__body">Every FOREWRD piece is made-to-order. To place an order, discuss sizing, or just say hello — reach out on WhatsApp or Instagram. We'd love to hear from you.</p>
 
       <div class="contact__links">
         <a href="https://www.instagram.com/forewrd.studio/" target="_blank" class="contact__link">
@@ -114,9 +161,9 @@
           @forewrd.studio
         </a>
         <div class="contact__divider"></div>
-        <a href="mailto:hello@forewrdstudio.com" class="contact__link">
+        <a href="mailto:forewrdstudio@gmail.com" class="contact__link">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
-          hello@forewrdstudio.com
+          forewrdstudio@gmail.com
         </a>
         <div class="contact__divider"></div>
         <a href="https://wa.me/919167077708?text=Hi%2C%20I'd%20like%20to%20place%20an%20order%20with%20FOREWRD%20Studio" target="_blank" class="contact__link">
@@ -145,6 +192,17 @@
     var ham = document.getElementById('ham'), mob = document.getElementById('mob');
     ham.addEventListener('click', function() { ham.classList.toggle('open'); mob.classList.toggle('open'); document.body.style.overflow = mob.classList.contains('open') ? 'hidden' : ''; });
     mob.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { ham.classList.remove('open'); mob.classList.remove('open'); document.body.style.overflow = ''; }); });
+  
+    function toggleDropdown() {
+      var d = document.getElementById('dropdown');
+      if (d) d.classList.toggle('open');
+    }
+    function toggleSubmenu(e) {
+      e.stopPropagation();
+      var s = document.getElementById('submenu');
+      if (s) s.classList.toggle('open');
+    }
+
   </script>
 </body>
 </html>
