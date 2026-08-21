@@ -11,11 +11,11 @@
   /* SIZE
      Only set the HEIGHT. The width adjusts itself automatically
      so the logo can never look squashed or stretched. */
-  --logo-height: 22px;
+  --logo-height: 40px;
 
   /* POSITION — distance from the top-left corner of the screen */
   --logo-x: 24px;   /* from the LEFT edge  (bigger = further right) */
-  --logo-y: 19px;   /* from the TOP edge   (bigger = further down)  */
+  --logo-y: 28px;   /* from the TOP edge   (bigger = further down)  */
 
   /* Nav bar height. The logo sits vertically centred inside this
      on the inner pages, so if you change --logo-height you may
