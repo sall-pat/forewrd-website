@@ -15,7 +15,7 @@
 
   /* POSITION — measured from the top-left corner of the screen */
   --logo-x: -1px;   /* bigger = further RIGHT */
-  --logo-y: -2px;   /* bigger = further DOWN  */
+  --logo-y: -22px;   /* bigger = further DOWN  */
 
   /* Nav bar height (the parchment strip behind the menu).
      If the logo starts overflowing the strip, raise this. */
