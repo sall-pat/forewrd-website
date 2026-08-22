@@ -37,7 +37,7 @@
     .collection__title { font-family: var(--font-body); font-weight: 400; font-size: clamp(1.5rem, 3vw, 2.2rem); text-transform: uppercase; letter-spacing: 0.18em; margin-top: 4px; }
 
     /* TABS — tight */
-    .collection__tabs { display: flex; justify-content: center; gap: 28px; margin-bottom: 20px; flex-wrap: wrap; padding: 0 20px; }
+    .collection__tabs { display: flex; justify-content: center; gap: 10px 32px; margin-bottom: 20px; flex-wrap: wrap; padding: 0 20px; }
     .collection__tab { font-family: var(--font-body); font-size: 0.7rem; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; padding: 6px 2px; border-bottom: 1px solid transparent; color: rgba(0,0,0,0.45); transition: all 0.3s; cursor: pointer; }
     .collection__tab.active, .collection__tab:hover { color: var(--black); border-bottom-color: var(--black); }
 
@@ -55,7 +55,7 @@
     .product-card__image-wrap img.active { opacity: 1; }
 
     /* Always-visible arrows */
-    .product-card__arrow { display: none; position: absolute; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 5; opacity: 0.5; transition: opacity 0.2s; background: none; border: none; padding: 0; }
+    .product-card__arrow { display: none !important; }
     .product-card__arrow:hover { opacity: 1; }
     .product-card__arrow svg { width: 14px; height: 18px; fill: rgba(255,255,255,0.9); filter: drop-shadow(0 1px 2px rgba(0,0,0,0.25)); }
     .product-card__arrow--left { left: 6px; }
@@ -72,7 +72,7 @@
     .product-card__price { font-family: var(--font-body); font-size: 0.88rem; font-weight: 300; color: rgba(0,0,0,0.45); }
 
     .product-card__whatsapp { position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; background: rgba(0,0,0,0.65); border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; z-index: 5; }
-    .product-card:hover .product-card__whatsapp { opacity: 1; }
+    @media (hover: hover) { .product-card:hover .product-card__whatsapp { opacity: 1; } }
     .product-card__whatsapp svg { width: 16px; height: 16px; fill: #fff; }
 
     /* MODAL */
@@ -81,11 +81,12 @@
     .product-modal__backdrop { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(6px); }
     .product-modal__content { position: absolute; top: 0; right: 0; width: min(480px, 90vw); height: 100%; background: var(--parchment); overflow-y: auto; transform: translateX(100%); transition: transform 0.5s var(--ease-out-expo); }
     .product-modal.open .product-modal__content { transform: translateX(0); }
-    .product-modal__close { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: var(--black); z-index: 2; background: rgba(244,241,237,0.8); cursor: pointer; }
+    .product-modal__close { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; line-height: 1; color: var(--black); z-index: 2; background: none; border: none; padding: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: opacity 0.2s, transform 0.2s; }
+    .product-modal__close:active { opacity: 0.5; transform: scale(0.9); }
     .product-modal__image-wrap { position: relative; width: 100%; aspect-ratio: 3/4; background: #E0DDD8; overflow: hidden; }
     .product-modal__image-wrap img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.35s; }
     .product-modal__image-wrap img.active { opacity: 1; }
-    .modal__arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 5; background: none; border: none; }
+    .modal__arrow { display: none !important; }
     .modal__arrow svg { width: 19px; height: 25px; fill: rgba(255,255,255,0.8); filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4)); }
     .modal__arrow--left { left: 6px; }
     .modal__arrow--left svg { transform: scaleX(-1); }
@@ -140,7 +141,7 @@
     .floating-btn--whatsapp { background: #25D366; }
     .floating-btn--whatsapp svg { width: 24px; height: 24px; fill: #fff; }
     .floating-btn--size { background: var(--black); }
-    .floating-btn--size svg { width: 20px; height: 20px; stroke: var(--parchment); fill: none; }
+    .floating-btn--size svg { width: 21px; height: 21px; color: var(--parchment); fill: none; }
 
     /* SIZE POPUP */
     .size-popup { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
@@ -243,7 +244,7 @@
       .nav__submenu-trigger:hover { letter-spacing: 0.2em; }
     }
   </style>
-  <link rel="stylesheet" href="css/logo.css">
+  <link rel="stylesheet" href="css/logo.css?v=3">
 </head>
 <body>
 
@@ -338,7 +339,7 @@
   <!-- FLOATING -->
   <div class="floating-btns">
     <a href="https://wa.me/919167077708" target="_blank" class="floating-btn floating-btn--whatsapp" title="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.112.549 4.098 1.51 5.83L0 24l6.326-1.46A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75c-1.89 0-3.69-.49-5.28-1.41l-.38-.22-3.93.91.99-3.81-.25-.39A9.69 9.69 0 012.25 12 9.75 9.75 0 0112 2.25 9.75 9.75 0 0121.75 12 9.75 9.75 0 0112 21.75z"/></svg></a>
-    <button class="floating-btn floating-btn--size" id="sizeGuideBtn" title="Size Guide"><svg viewBox="0 0 24 24" stroke-width="1.5"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="3" y2="18"/><line x1="21" y1="6" x2="21" y2="18"/><line x1="7" y1="10" x2="7" y2="14"/><line x1="11" y1="9" x2="11" y2="15"/><line x1="15" y1="10" x2="15" y2="14"/></svg></button>
+    <button class="floating-btn floating-btn--size" id="sizeGuideBtn" title="Size Guide"><svg viewBox="0 0 364 364" fill="none" stroke="currentColor" stroke-width="14"><path d="M75.8335 151.344C75.8335 168.274 102.995 182 136.5 182V151.344C136.5 136.266 136.5 128.726 130.472 124.127C124.443 119.527 118.467 121.248 106.514 124.689C88.1896 129.964 75.8335 139.925 75.8335 151.344Z" stroke-linejoin="round"/><path d="M242.667 128.917C242.667 158.234 195.134 182 136.5 182C77.866 182 30.3335 158.234 30.3335 128.917C30.3335 99.5997 77.866 75.8335 136.5 75.8335C195.134 75.8335 242.667 99.5997 242.667 128.917Z"/><path d="M30.3335 136.5V237.612C30.3335 265.532 77.866 288.167 136.5 288.167H303.334C317.633 288.167 324.782 288.167 329.225 283.724C333.667 279.282 333.667 272.132 333.667 257.833V212.333C333.667 198.034 333.667 190.885 329.225 186.442C324.782 182 317.633 182 303.334 182H136.5"/><path d="M273 288.167V257.833M212.333 288.167V257.833M151.667 288.167V257.833M91 280.583V250.25" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   </div>
 
   <!-- SIZE POPUP -->
@@ -374,43 +375,42 @@
 
     var products = {
       tops: [
-        { id:'mbbs', name:'Metallic Blue Balloon Sleeve Top', price:'₹ 6,700', images:['mbbs-1.png','mbbs-2.png','mbbs-3.png'], folder:'tops', desc:'Dramatic Balloon sleeves with metal hardware detailing|Corset back panel to adjust and cinch the waist|Jacket zipper opening|Fit: Fitted silhouette with an adjustable corset back' },
-        { id:'mb-bra', name:'Metallic Blue Bralette', price:'₹ 5,000', images:['mb-bra-1.png','mb-bra-2.png'], folder:'tops', desc:'Bralette with adjustable straps and Celtic knot button detailing|Hook and eye back closure with adjustable hooks' },
-        { id:'cbc', name:'Champagne Back Cowl Top', price:'₹ 4,500', images:['cbc-1.png','cbc-2.png'], folder:'tops', desc:'Champagne back cowl sleeveless top|Concealed back waist adjuster to cinch|Crushed textured fabric' },
-        { id:'apc', name:'Asymmetrical Peplum Corset', price:'₹ 5,000', images:['apc-1.png','apc-2.png'], folder:'tops', desc:'Corset made up of 32 panels|Asymmetrical neckline and hemline|Size invisible jacket zip opener|Baby Pink lace up back adjuster' },
-        { id:'mr-bra', name:'Maroon Bralette', price:'₹ 4,600', images:['mr-bra-1.png','mr-bra-2.png'], folder:'tops', desc:'Bralette with adjustable straps and Celtic button detailing|Hook and eye back closure with adjustable hooks' },
-        { id:'stu', name:'Silver Tie Up T-Shirt Top', price:'₹ 3,700', images:['stu-1.png','stu-2.png'], folder:'tops', desc:'Silver T-shirt top with a side tie up detail|Half sleeves with fold over|One side off shoulder|Asymmetrical hem' },
-        { id:'ibt', name:'Ice Blue Tie Neck Sheer Blouse', price:'₹ 4,100', images:['ibt-1.png','ibt-2.png'], folder:'tops', desc:'Ice blue and light beige duo tone tissue organza fabric|Deep neckline featuring a tie-up closure|Tiered balloon sleeves|Elastic cuff' },
-        { id:'cfc', name:'Champagne Front Cowl Top', price:'₹ 5,100', images:['cfc-1.png','cfc-2.png'], folder:'tops', desc:'Deep cowl neck tie up top|3/4th length asymmetrical sleeves|Concealed back waist adjuster to cinch|Crushed textured fabric' },
+        { id:'mbbs', name:'Metallic Blue Balloon Sleeve Top', price:'₹ 6,700', images:['mbbs-1.jpeg','mbbs-2.jpeg','mbbs-3.jpeg','mbbs-4.jpeg'], folder:'tops', desc:'Dramatic Balloon sleeves with metal hardware detailing|Corset back panel to adjust and cinch the waist|Jacket zipper opening|Fit: Fitted silhouette with an adjustable corset back' },
+        { id:'mb-bra', name:'Metallic Blue Bralette', price:'₹ 5,000', images:['mb-bra-1.jpeg','mb-bra-2.jpeg','mb-bra-3.jpeg'], folder:'tops', desc:'Bralette with adjustable straps and Celtic knot button detailing|Hook and eye back closure with adjustable hooks' },
+        { id:'cbc', name:'Champagne Back Cowl Top', price:'₹ 4,500', images:['cbc-1.jpeg','cbc-2.jpeg','cbc-3.jpeg'], folder:'tops', desc:'Champagne back cowl sleeveless top|Concealed back waist adjuster to cinch|Crushed textured fabric' },
+        { id:'apc', name:'Asymmetrical Peplum Corset', price:'₹ 5,000', images:['apc-1.jpeg','apc-2.jpeg','apc-3.jpeg'], folder:'tops', desc:'Corset made up of 32 panels|Asymmetrical neckline and hemline|Size invisible jacket zip opener|Baby Pink lace up back adjuster' },
+        { id:'mr-bra', name:'Maroon Bralette', price:'₹ 4,600', images:['mr-bra-1.jpeg','mr-bra-2.jpeg'], folder:'tops', desc:'Bralette with adjustable straps and Celtic button detailing|Hook and eye back closure with adjustable hooks' },
+        { id:'stu', name:'Silver Tie Up T-Shirt Top', price:'₹ 3,700', images:['stu-1.jpeg','stu-2.jpeg','stu-3.jpeg'], folder:'tops', desc:'Silver T-shirt top with a side tie up detail|Half sleeves with fold over|One side off shoulder|Asymmetrical hem' },
+        { id:'ibt', name:'Ice Blue Tie Neck Sheer Blouse', price:'₹ 4,100', images:['ibt-1.jpeg','ibt-2.jpeg','ibt-3.jpeg','ibt-4.jpeg'], folder:'tops', desc:'Ice blue and light beige duo tone tissue organza fabric|Deep neckline featuring a tie-up closure|Tiered balloon sleeves|Elastic cuff' },
+        { id:'cfc', name:'Champagne Front Cowl Top', price:'₹ 5,100', images:['cfc-1.jpeg','cfc-2.jpeg','cfc-3.jpeg'], folder:'tops', desc:'Deep cowl neck tie up top|3/4th length asymmetrical sleeves|Concealed back waist adjuster to cinch|Crushed textured fabric' },
       ],
       bottoms: [
-        { id:'mbw', name:'Metallic Blue Wrap Skirt', price:'₹ 6,400', images:['mbw-1.png','mbw-2.png'], folder:'bottoms', desc:'Wrap skirt with a silver buckle adjuster|Pleated detail on side' },
-        { id:'chm', name:'Champagne Trouser', price:'₹ 5,400', images:['chm-1.png','chm-2.png'], folder:'bottoms', desc:'High waist trouser with front pleat detailing|Side slit pocket|Front zip with hook & eye closure|0.5" belt loops' },
-        { id:'cbj', name:'Cherry Brown Jorts', price:'₹ 5,400', images:['cbj-1.png','cbj-2.png'], folder:'bottoms', desc:'High waist Faux Leather Jorts|Front zip — hook & eye closure|1" belt loop' },
-        { id:'bbp', name:'Brown Baggy Pants', price:'₹ 7,200', images:['bbp-1.png','bbp-2.png'], folder:'bottoms', desc:'High waist — Taffeta fabric (paper like texture)|Centre zip with 2 hook and eyes on waist band|Side slit pockets|3" waistband and side elastic waist adjuster' },
-        { id:'hrm', name:'Harem Pants', price:'₹ 4,100', images:['hrm-1.png','hrm-2.png'], folder:'bottoms', desc:'High waist Harem pants with a bottom cuff tie detail|Side zip opening|Side slit pockets' },
-        { id:'bkp', name:'Black Baggy Pants', price:'₹ 4,900', images:['bkp-1.png','bkp-2.png'], folder:'bottoms', desc:'Baggy pants with buckle waist adjuster|Side zip opening|Adjuster bottom hem belt with buckle closure|Side slit pockets' },
-        { id:'bfd', name:'Baggy Flare Black Denim Pants', price:'₹ 4,300', images:['bfd-1.png','bfd-2.png'], folder:'bottoms', desc:'High Waist denim pants with 1" belt loops|Front zip and hook & eye closure|Dark grey topstitch detailing|Side slit pocket with concealed elastic waist adjuster' },
-        { id:'dzs', name:'Denim Zipper Skirt', price:'₹ 4,200', images:['dzs-1.png','dzs-2.png'], folder:'bottoms', desc:'Blue denim wrap skirt with front side jacket zipper opening|3" waistband — 1" belt loops — elastic waist adjusters|Back pocket with logo detailing|Red top stitch detailing' },
-        { id:'cdj', name:'Cropped Denim Jacket', price:'₹ 4,900', images:['cdj-1.png','cdj-2.png'], folder:'bottoms', desc:'Blue denim cropped jacket — Red denim collar and sleeve fold over|Celtic knot button front closure — Back yoke with logo charm|Red top stitch detailing|Shoulder pads' },
+        { id:'mbw', name:'Metallic Blue Wrap Skirt', price:'₹ 6,400', images:['mbw-1.jpeg','mbw-2.jpeg'], folder:'bottoms', desc:'Wrap skirt with a silver buckle adjuster|Pleated detail on side' },
+        { id:'chm', name:'Champagne Trouser', price:'₹ 5,400', images:['chm-1.jpeg','chm-2.jpeg','chm-3.jpeg'], folder:'bottoms', desc:'High waist trouser with front pleat detailing|Side slit pocket|Front zip with hook & eye closure|0.5" belt loops' },
+        { id:'cbj', name:'Cherry Brown Jorts', price:'₹ 5,400', images:['cbj-1.jpeg','cbj-2.jpeg'], folder:'bottoms', desc:'High waist Faux Leather Jorts|Front zip — hook & eye closure|1" belt loop' },
+        { id:'bbp', name:'Brown Baggy Pants', price:'₹ 7,200', images:['bbp-1.jpeg','bbp-2.jpeg','bbp-3.jpeg'], folder:'bottoms', desc:'High waist — Taffeta fabric (paper like texture)|Centre zip with 2 hook and eyes on waist band|Side slit pockets|3" waistband and side elastic waist adjuster' },
+        { id:'hrm', name:'Harem Pants', price:'₹ 4,100', images:['hrm-1.jpeg','hrm-2.jpeg','hrm-3.jpeg'], folder:'bottoms', desc:'High waist Harem pants with a bottom cuff tie detail|Side zip opening|Side slit pockets' },
+        { id:'bkp', name:'Black Baggy Pants', price:'₹ 4,900', images:['bkp-1.jpeg','bkp-2.jpeg','bkp-3.jpeg','bkp-4.jpeg'], folder:'bottoms', desc:'Baggy pants with buckle waist adjuster|Side zip opening|Adjuster bottom hem belt with buckle closure|Side slit pockets' },
+        { id:'bfd', name:'Baggy Flare Black Denim Pants', price:'₹ 4,300', images:['bfd-1.jpeg','bfd-2.jpeg','bfd-3.jpeg'], folder:'bottoms', desc:'High Waist denim pants with 1" belt loops|Front zip and hook & eye closure|Dark grey topstitch detailing|Side slit pocket with concealed elastic waist adjuster' },
+        { id:'dzs', name:'Denim Zipper Skirt', price:'₹ 4,200', images:['dzs-1.jpeg','dzs-2.jpeg'], folder:'bottoms', desc:'Blue denim wrap skirt with front side jacket zipper opening|3" waistband — 1" belt loops — elastic waist adjusters|Back pocket with logo detailing|Red top stitch detailing' },
       ],
       jackets: [
-        /* Add jacket products here */
+        { id:'cdj', name:'Cropped Denim Jacket', price:'₹ 4,900', images:['cdj-1.jpeg','cdj-2.jpeg','cdj-3.jpeg'], folder:'jackets', desc:'Blue denim cropped jacket — Red denim collar and sleeve fold over|Celtic knot button front closure — Back yoke with logo charm|Red top stitch detailing|Shoulder pads' }
       ],
       jewellery: [
-        { id:'fee', name:'Floral Enamel Earring', price:'5.72g · 22kt Gold', images:['fee.png'], folder:'jewellery', desc:'Earring with Floral enamel Motif|22kt Gold' },
-        { id:'melb', name:'Maroon Enamel Link Bracelet', price:'20.04g · 22kt Gold', images:['melb.png'], folder:'jewellery', desc:'Matte gold & maroon enamel link bracelet|22kt Gold' },
-        { id:'slb', name:'Sculptural Link Bracelet', price:'10.18g · 22kt Gold', images:['slb.png'], folder:'jewellery', desc:'High polish sculptural link bracelet|22kt Gold' },
-        { id:'eme', name:'Enamel Maze Earrings', price:'7.11g · 22kt Gold', images:['eme.png'], folder:'jewellery', desc:'Matte Gold & Enamel Maze Earrings|22kt Gold' },
-        { id:'gmee', name:'Gold & Maroon Enamel Earrings', price:'8.2g · 22kt Gold', images:['gmee.png'], folder:'jewellery', desc:'High Polish Gold & Maroon Enamel Earrings|22kt Gold' },
-        { id:'trqb', name:'Turquoise Bracelet', price:'26.17g · 22kt Gold', images:['trqb.png'], folder:'jewellery', desc:'Matte Gold & Turquoise Bracelet|22kt Gold' },
-        { id:'trs', name:'Triangle Studs', price:'6.2g · 22kt Gold', images:['trs.png'], folder:'jewellery', desc:'Triangle Studs|22kt Gold' },
-        { id:'bsr', name:'3 Band Stack Rings', price:'5.5g total · 22kt Gold', images:['bsr.png'], folder:'jewellery', desc:'3 band stack rings|1.8 grams per ring|22kt Gold' },
-        { id:'frgr', name:'Floral Rose Gold Ring', price:'3.48g · 22kt Gold', images:['frgr.png'], folder:'jewellery', desc:'Floral Rose gold ring|22kt Gold' },
-        { id:'sqrg', name:'Square Rose Gold Ring', price:'7.46g · 22kt Gold', images:['sqrg.png'], folder:'jewellery', desc:'Square Rose gold ring|22kt Gold' },
+        { id:'fee', name:'Floral Enamel Earring', price:'5.72g · 22kt Gold', images:['fee.jpeg'], folder:'jewellery', desc:'Earring with Floral enamel Motif|22kt Gold' },
+        { id:'melb', name:'Maroon Enamel Link Bracelet', price:'20.04g · 22kt Gold', images:['melb.jpeg'], folder:'jewellery', desc:'Matte gold & maroon enamel link bracelet|22kt Gold' },
+        { id:'slb', name:'Sculptural Link Bracelet', price:'10.18g · 22kt Gold', images:['slb.jpeg'], folder:'jewellery', desc:'High polish sculptural link bracelet|22kt Gold' },
+        { id:'eme', name:'Enamel Maze Earrings', price:'7.11g · 22kt Gold', images:['eme.jpeg'], folder:'jewellery', desc:'Matte Gold & Enamel Maze Earrings|22kt Gold' },
+        { id:'gmee', name:'Gold & Maroon Enamel Earrings', price:'8.2g · 22kt Gold', images:['gmee.jpeg'], folder:'jewellery', desc:'High Polish Gold & Maroon Enamel Earrings|22kt Gold' },
+        { id:'trqb', name:'Turquoise Bracelet', price:'26.17g · 22kt Gold', images:['trqb.jpeg'], folder:'jewellery', desc:'Matte Gold & Turquoise Bracelet|22kt Gold' },
+        { id:'trs', name:'Triangle Studs', price:'6.2g · 22kt Gold', images:['trs.jpeg'], folder:'jewellery', desc:'Triangle Studs|22kt Gold' },
+        { id:'bsr', name:'3 Band Stack Rings', price:'5.5g total · 22kt Gold', images:['bsr.jpeg'], folder:'jewellery', desc:'3 band stack rings|1.8 grams per ring|22kt Gold' },
+        { id:'frgr', name:'Floral Rose Gold Ring', price:'3.48g · 22kt Gold', images:['frgr.jpeg'], folder:'jewellery', desc:'Floral Rose gold ring|22kt Gold' },
+        { id:'sqrg', name:'Square Rose Gold Ring', price:'7.46g · 22kt Gold', images:['sqrg.jpeg'], folder:'jewellery', desc:'Square Rose gold ring|22kt Gold' },
       ],
       accessories: [
-        { id:'pscarf', name:'Printed Scarf', price:'₹ 1,100', images:['pscarf.png'], folder:'accessories', desc:'Triangular|40" × 40" × 71"|Georgette fabric' },
+        { id:'pscarf', name:'Printed Scarf', price:'₹ 1,100', images:['pscarf.jpeg'], folder:'accessories', desc:'Triangular|40" × 40" × 71"|Georgette fabric' },
       ]
     };
 
@@ -455,15 +455,15 @@
 
     /* LOOKS DATA */
     var looks = [
-      { name: 'Midnight Blue 3 Piece Set', img: 'assets/lookbook/look-01-midnight-blue-set.png', pieces: ['mbbs','mb-bra','mbw'] },
-      { name: 'Champagne Set', img: 'assets/lookbook/look-02-champagne-set.png', pieces: ['cbc','chm','pscarf','eme'] },
-      { name: 'Asymmetrical Peplum Corset & Cherry Brown Jorts', img: 'assets/lookbook/look-03-peplum-corset-jorts.png', pieces: ['apc','cbj','melb','slb','gmee'] },
-      { name: 'Brown Baggy Pants & Maroon Bralette', img: 'assets/lookbook/look-04-brown-pants-maroon-bralette.png', pieces: ['bbp','mr-bra','trs','bsr'] },
-      { name: 'Asymmetrical Peplum Corset & Harem Pants', img: 'assets/lookbook/look-05-peplum-corset-harem.png', pieces: ['apc','hrm','fee'] },
-      { name: 'Black Baggy Pants & Silver Tie Up T-Shirt Top', img: 'assets/lookbook/look-06-black-pants-silver-top.png', pieces: ['bkp','stu'] },
-      { name: 'Champagne Set With Front Cowl', img: 'assets/lookbook/look-08-champagne-cowl-set.png', pieces: ['chm','cfc','mr-bra'] },
-      { name: 'Cropped Denim Jacket & Denim Zipper Skirt', img: 'assets/lookbook/look-09-denim-jacket-skirt.png', pieces: ['cdj','dzs','mr-bra','gmee'] },
-      { name: 'Baggy Flare Denim Pants & Ice Blue Tie Neck Sheer Blouse', img: 'assets/lookbook/look-07-denim-pants-ice-blue-blouse.png', pieces: ['bfd','ibt','mr-bra','trqb','frgr','sqrg'] },
+      { name: 'Midnight Blue 3 Piece Set', img: 'assets/lookbook/look-01-metallic-blue.jpeg', pieces: ['mbbs','mb-bra','mbw'] },
+      { name: 'Cropped Denim Jacket & Denim Zipper Skirt', img: 'assets/lookbook/look-02-denim.jpeg', pieces: ['cdj','dzs','mr-bra','gmee'] },
+      { name: 'Baggy Flare Denim Pants & Ice Blue Tie Neck Sheer Blouse', img: 'assets/lookbook/look-03-icy-blue.jpeg', pieces: ['bfd','ibt','mr-bra','trqb','frgr','sqrg'] },
+      { name: 'Brown Baggy Pants & Maroon Bralette', img: 'assets/lookbook/look-04-maroon-bralette.jpeg', pieces: ['bbp','mr-bra','trs','bsr'] },
+      { name: 'Champagne Set', img: 'assets/lookbook/look-05-champagne-set.jpeg', pieces: ['cbc','chm','pscarf','eme'] },
+      { name: 'Asymmetrical Peplum Corset & Cherry Brown Jorts', img: 'assets/lookbook/look-06-peplum-corset-jorts.jpeg', pieces: ['apc','cbj','melb','slb','gmee'] },
+      { name: 'Asymmetrical Peplum Corset & Harem Pants', img: 'assets/lookbook/look-07-peplum-corset-harem.jpeg', pieces: ['apc','hrm','fee'] },
+      { name: 'Black Baggy Pants & Silver Tie Up T-Shirt Top', img: 'assets/lookbook/look-08-black-pants-silver-top.jpeg', pieces: ['bkp','stu'] },
+      { name: 'Champagne Set With Front Cowl', img: 'assets/lookbook/look-09-champagne-cowl-set.jpeg', pieces: ['chm','cfc','mr-bra'] },
     ];
 
     /* BUILD LOOK CARDS */
