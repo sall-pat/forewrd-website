@@ -1,51 +1,64 @@
 /* ============================================================
    FOREWRD — LOGO CONTROL
    ------------------------------------------------------------
-   This is the ONLY file you need to edit to change the logo
-   position or size. It applies to every page automatically.
+   The ONLY file you need to edit to move or resize the logo.
+   Works identically on all 5 pages.
 
-   Edit the 4 values below, save, upload. Done.
+   The logo is positioned independently of everything else,
+   so moving it can never disturb the hamburger or the menu.
    ============================================================ */
 
 :root {
-  /* SIZE
-     Only set the HEIGHT. The width adjusts itself automatically
-     so the logo can never look squashed or stretched. */
+  /* SIZE — set the HEIGHT only.
+     Width adjusts itself so the logo can never look squashed. */
   --logo-height: 130px;
 
-  /* POSITION — distance from the top-left corner of the screen */
-  --logo-x: 0px;   /* from the LEFT edge  (bigger = further right) */
-  --logo-y: 20px;   /* from the TOP edge   (bigger = further down)  */
+  /* POSITION — measured from the top-left corner of the screen */
+  --logo-x: -1px;   /* bigger = further RIGHT */
+  --logo-y: 5px;   /* bigger = further DOWN  */
 
-  /* Nav bar height. The logo sits vertically centred inside this
-     on the inner pages, so if you change --logo-height you may
-     want to nudge --logo-y to match. */
+  /* Nav bar height (the parchment strip behind the menu).
+     If the logo starts overflowing the strip, raise this. */
   --nav-height: 60px;
+
+  /* Distance of the hamburger / desktop links from the RIGHT edge.
+     Completely independent of the logo. */
+  --nav-edge: 24px;
 }
 
 
 /* ------------------------------------------------------------
-   Everything below is wiring — you don't need to touch it.
+   WIRING — no need to edit below this line.
    ------------------------------------------------------------ */
 
-/* Logo size — width:auto keeps the original proportions */
+/* The logo is pinned to the viewport, so --logo-x / --logo-y
+   move it freely and nothing else on the page reacts. */
+.nav__logo {
+  position: fixed;
+  left: var(--logo-x);
+  top: var(--logo-y);
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  margin: 0;
+  padding: 0;
+}
+
+/* Height drives the size; width:auto preserves proportions.
+   max-width:none clears an old cap that squashed the logo. */
 .nav__logo img {
   height: var(--logo-height);
   width: auto;
+  max-width: none;
+  display: block;
 }
 
-/* Horizontal position.
-   Inner pages lay the nav out with flexbox, so the logo's X is
-   set by the nav's left padding. */
+/* The logo no longer takes part in the nav's layout, so the
+   remaining items (desktop links / hamburger) are pushed right
+   using their own spacing value. */
 .nav {
-  padding-left: var(--logo-x);
-  padding-right: var(--logo-x);
-}
-
-/* Homepage positions its logo absolutely, so it takes X and Y
-   directly. On the inner pages the logo isn't absolutely
-   positioned, so these two lines are simply ignored there. */
-.nav__logo {
-  left: var(--logo-x);
-  top: var(--logo-y);
+  height: var(--nav-height);
+  justify-content: flex-end;
+  padding-left: var(--nav-edge);
+  padding-right: var(--nav-edge);
 }
