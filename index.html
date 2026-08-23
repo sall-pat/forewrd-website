@@ -233,7 +233,7 @@
     .look[data-look="3"] .look__heading { left: 5.09vw; top: 10vh; top: 10dvh; }
     .look[data-look="3"] .look__desc { left: 48.6vw; top: 77.11vh; top: 77.11dvh; width: 47.58vw; }
 
-    /* SCROLL HINT */
+    /* CTA link at bottom */
     .scroll-hint {
       position: fixed;
       bottom: 8px;
@@ -244,9 +244,10 @@
       text-transform: uppercase;
       color: rgba(0,0,0,0.25);
       z-index: 50;
+      transition: opacity 0.4s;
     }
-    .scroll-hint svg { width: 14px; height: 14px; stroke: rgba(0,0,0,0.25); fill: none; stroke-width: 1.5; animation: nudgeDown 1.5s ease-in-out infinite; }
-    @keyframes nudgeDown { 0%,100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+    .scroll-hint svg { width: 14px; height: 14px; stroke: rgba(0,0,0,0.25); fill: none; stroke-width: 1.5; animation: nudgeRight 1.5s ease-in-out infinite; }
+    @keyframes nudgeRight { 0%,100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
 
     /* Look indicator dots */
     .look-dots {
@@ -271,19 +272,14 @@
     }
 
     /* ANIMATION STATES */
-    /* When look is active, everything is at natural position and fully visible */
     .look.active { opacity: 1; }
     .look.active .look__img-a,
     .look.active .look__img-b,
     .look.active .look__heading,
     .look.active .look__desc { transform: translateX(0); }
 
-    /* When look is inactive but transitioning, keep it visible (no fade) */
     .look.exit-left, .look.exit-right,
     .look.enter-left, .look.enter-right { opacity: 1; }
-
-    /* Right group (heading, img-a, desc) → exit LEFT / enter from RIGHT */
-    /* Left group (img-b) → exit RIGHT / enter from LEFT */
 
     .look.exit-left .look__heading,
     .look.exit-left .look__img-a,
@@ -307,24 +303,22 @@
 
     .look.no-transition * { transition: none !important; }
 
-    /* --- Dropdown chevron: drawn in CSS so direction never depends on font --- */
+    /* --- Dropdown chevron --- */
     .nav__dropdown-arrow {
       width: 7px; height: 7px;
       border-right: 1.5px solid currentColor;
       border-bottom: 1.5px solid currentColor;
       display: inline-block;
-      /* 45deg = pointing DOWN when collapsed */
       transform: rotate(45deg);
       transform-origin: center;
       transition: transform 0.3s ease;
       margin-bottom: 3px;
       flex-shrink: 0;
     }
-    /* Expanded = pointing UP (only for its OWN trigger, not nested ones) */
     .nav__dropdown.open > .nav__dropdown-trigger > .nav__dropdown-arrow { transform: rotate(-135deg); margin-bottom: 0; }
     .nav__submenu.open  > .nav__submenu-trigger  > .nav__dropdown-arrow { transform: rotate(-135deg); margin-bottom: 0; }
 
-    /* --- Kill the grey/black tap box, replace with a micro-interaction --- */
+    /* --- Micro-interaction --- */
     .nav__menu a,
     .nav__dropdown-trigger,
     .nav__submenu-trigger,
@@ -346,6 +340,19 @@
       .nav__dropdown-trigger:hover,
       .nav__submenu-trigger:hover { letter-spacing: 0.26em; opacity: 0.7; }
       .nav__submenu-trigger:hover { letter-spacing: 0.2em; }
+    }
+
+    /* ============================================
+       ⚙️ DESKTOP OVERRIDES (1024px and wider)
+       Only affects laptop/desktop — phone layout untouched.
+       Change the numbers to match your desktop Figma.
+       ============================================ */
+    @media (min-width: 1024px) {
+      .look__img-a { left: 55vw; top: 8vh; top: 8dvh; height: 75vh; height: 75dvh; }
+      .look__img-b { left: 2vw; top: 20vh; top: 20dvh; height: 72vh; height: 72dvh; }
+      .look__heading { left: 5vw; top: 12vh; top: 12dvh; }
+      .look__number { font-size: 4vw; }
+      .look__name { font-size: 3.5vw; }
     }
   </style>
   <link rel="stylesheet" href="css/logo.css?v=3">
@@ -440,11 +447,11 @@
     <span class="look-dots__dot" data-idx="3"></span>
   </div>
 
-  <!-- Scroll hint -->
-  <div class="scroll-hint" id="hint">
-    <span>Scroll</span>
-    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="5 12 12 19 19 12"/></svg>
-  </div>
+  <!-- Collection CTA -->
+  <a href="collection.html" class="scroll-hint" id="hint">
+    <span>Explore the Collection</span>
+    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+  </a>
 
   <script>
     /* NAV MENU */
@@ -479,16 +486,11 @@
     function goTo(next) {
       if (animating) return;
 
-      /* Loop back */
       if (next >= total) next = 0;
       if (next < 0) next = total - 1;
       if (next === current) return;
 
       animating = true;
-      /* Determine direction:
-         - Going forward (down scroll) = current exits LEFT, next enters from RIGHT
-         - Going back (up scroll) = current exits RIGHT, next enters from LEFT
-         - Special loop case (4 → 1): treat as forward for smooth animation */
       var goingForward;
       if (current === total - 1 && next === 0) goingForward = true;
       else if (current === 0 && next === total - 1) goingForward = false;
@@ -510,14 +512,9 @@
       nxt.classList.remove('enter-right', 'enter-left');
       nxt.classList.add('active');
 
-      /* Update dots */
       dots.forEach(function(d, i) { d.classList.toggle('active', i === next); });
 
       current = next;
-
-      /* Hide scroll hint after first move */
-      var hint = document.getElementById('hint');
-      if (hint) hint.style.opacity = 0;
 
       setTimeout(function() {
         cur.classList.remove('exit-left', 'exit-right');
