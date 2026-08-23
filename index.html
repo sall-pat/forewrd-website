@@ -212,11 +212,11 @@
        ============================================ */
 
     /* --- LOOK 1 (Midnight Blue Set) --- */
-    .look[data-look="0"] .look__img-b { left: 5vw; top: 32.87vh; top: 32.87dvh; height: 80vh; height: 80dvh; }
+    .look[data-look="0"] .look__img-b { left: 5vw; top: 28vh; top: 28dvh; height: 80vh; height: 80dvh; }
     .look[data-look="0"] .look__heading { left: 5.09vw; top: 10vh; top: 10dvh; }
 
     /* --- LOOK 2 (Denim Overdose) --- */
-    .look[data-look="1"] .look__img-a { left: 50vw; top: 11.38vh; top: 11.38dvh; height: 64.67vh; height: 64.67dvh; }
+    .look[data-look="1"] .look__img-a { left: 60vw; top: 11.38vh; top: 11.38dvh; height: 64.67vh; height: 64.67dvh; }
     .look[data-look="1"] .look__img-b { left: -14vw; top: 32.87vh; top: 32.87dvh; height: 69.72vh; height: 69.72dvh; }
     .look[data-look="1"] .look__heading { left: 5.09vw; top: 10vh; top: 10dvh; }
     .look[data-look="1"] .look__desc { left: 48.6vw; top: 77.11vh; top: 77.11dvh; width: 47.58vw; }
@@ -236,8 +236,8 @@
     /* CTA link at bottom */
     .scroll-hint {
       position: fixed;
-      bottom: 8px;
-      left: 50%; transform: translateX(-50%);
+      bottom: 15px;
+      left: 80%; transform: translateX(-50%);
       display: flex; align-items: center; gap: 7px;
       font-size: 10px;
       letter-spacing: 0.18em;
@@ -350,9 +350,13 @@
     @media (min-width: 1024px) {
       .look__img-a { left: 55vw; top: 8vh; top: 8dvh; height: 75vh; height: 75dvh; }
       .look__img-b { left: 2vw; top: 20vh; top: 20dvh; height: 72vh; height: 72dvh; }
-      .look__heading { left: 5vw; top: 12vh; top: 12dvh; }
+      .look__heading { left: -5vw; top: 12vh; top: 12dvh; }
       .look__number { font-size: 4vw; }
       .look__name { font-size: 3.5vw; }
+
+      /* Look 1 only — desktop */
+      .look[data-look="0"] .look__img-b { left: 5vw; top: 8vh; top: 8dvh; height: 95vh; height: 95dvh; }
+      .look[data-look="0"] .look__heading { left: 4vw; top: 8vh; top: 8dvh; }
     }
   </style>
   <link rel="stylesheet" href="css/logo.css?v=3">
