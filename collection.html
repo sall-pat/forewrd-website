@@ -37,7 +37,7 @@
     .collection__title { font-family: var(--font-body); font-weight: 400; font-size: clamp(1.5rem, 3vw, 2.2rem); text-transform: uppercase; letter-spacing: 0.18em; margin-top: 4px; }
 
     /* TABS — tight */
-    .collection__tabs { display: flex; justify-content: center; gap: 10px 32px; margin-bottom: 20px; flex-wrap: wrap; padding: 0 20px; }
+    .collection__tabs { display: flex; justify-content: center; gap: 28px; margin-bottom: 20px; flex-wrap: wrap; padding: 0 20px; }
     .collection__tab { font-family: var(--font-body); font-size: 0.7rem; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; padding: 6px 2px; border-bottom: 1px solid transparent; color: rgba(0,0,0,0.45); transition: all 0.3s; cursor: pointer; }
     .collection__tab.active, .collection__tab:hover { color: var(--black); border-bottom-color: var(--black); }
 
@@ -55,7 +55,14 @@
     .product-card__image-wrap img.active { opacity: 1; }
 
     /* Always-visible arrows */
-    .product-card__arrow { display: none !important; }
+    .product-card__arrow { display: none; position: absolute; top: 50%; transform: translateY(-50%); width: 34px; height: 34px; align-items: center; justify-content: center; cursor: pointer; z-index: 6; background: rgba(244,241,237,0.85); border: none; border-radius: 50%; opacity: 0; transition: opacity 0.2s; padding: 0; }
+    .product-card__arrow--left { left: 8px; }
+    .product-card__arrow--right { right: 8px; }
+    .product-card__arrow svg { width: 16px; height: 16px; }
+    /* Desktop only: reveal arrows on hover */
+    @media (hover: hover) and (min-width: 1024px) {
+      .product-card__image-wrap:hover .product-card__arrow { display: flex; opacity: 1; }
+    }
     .product-card__arrow:hover { opacity: 1; }
     .product-card__arrow svg { width: 14px; height: 18px; fill: rgba(255,255,255,0.9); filter: drop-shadow(0 1px 2px rgba(0,0,0,0.25)); }
     .product-card__arrow--left { left: 6px; }
@@ -80,7 +87,20 @@
     .product-modal.open { opacity: 1; pointer-events: all; }
     .product-modal__backdrop { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(6px); }
     .product-modal__content { position: absolute; top: 0; right: 0; width: min(480px, 90vw); height: 100%; background: var(--parchment); overflow-y: auto; transform: translateX(100%); transition: transform 0.5s var(--ease-out-expo); }
+    /* Desktop: center the modal as a card */
+    @media (min-width: 1024px) {
+      .product-modal__content {
+        top: 50%; left: 50%; right: auto; bottom: auto;
+        width: min(920px, 90vw); height: auto; max-height: 88vh;
+        border-radius: 4px;
+        transform: translate(-50%, -50%) scale(0.96);
+        display: grid; grid-template-columns: 1fr 1fr;
+      }
+      .product-modal.open .product-modal__content { transform: translate(-50%, -50%) scale(1); }
+      .product-modal__details { align-self: center; }
+    }
     .product-modal.open .product-modal__content { transform: translateX(0); }
+    @media (min-width: 1024px) { .product-modal.open .product-modal__content { transform: translate(-50%, -50%) scale(1); } }
     .product-modal__close { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; line-height: 1; color: var(--black); z-index: 2; background: none; border: none; padding: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: opacity 0.2s, transform 0.2s; }
     .product-modal__close:active { opacity: 0.5; transform: scale(0.9); }
     .product-modal__image-wrap { position: relative; width: 100%; aspect-ratio: 3/4; background: #E0DDD8; overflow: hidden; }
@@ -271,7 +291,7 @@
             <a href="collection.html#tops">Tops</a>
             <a href="collection.html#bottoms">Bottoms</a>
             <a href="collection.html#jackets">Jackets</a>
-            <a href="collection.html#jewellery">Fine Jewellery</a>
+            <!-- HIDDEN (production paused): <a href="collection.html#jewellery">Fine Jewellery</a> -->
             <a href="collection.html#accessories">Accessories</a>
           </div>
         </div>
@@ -295,7 +315,7 @@
     <button class="collection__tab" data-target="tops">Tops</button>
     <button class="collection__tab" data-target="bottoms">Bottoms</button>
     <button class="collection__tab" data-target="jackets">Jackets</button>
-    <button class="collection__tab" data-target="jewellery">Fine Jewellery</button>
+    <!-- HIDDEN (production paused): <button class="collection__tab" data-target="jewellery">Fine Jewellery</button> -->
     <button class="collection__tab" data-target="accessories">Accessories</button>
   </div>
 
@@ -304,7 +324,7 @@
   <div class="collection__grid" data-category="tops" id="grid-tops"></div>
   <div class="collection__grid" data-category="bottoms" id="grid-bottoms"></div>
   <div class="collection__grid" data-category="jackets" id="grid-jackets"></div>
-  <div class="collection__grid" data-category="jewellery" id="grid-jewellery"></div>
+  <!-- HIDDEN (production paused): <div class="collection__grid" data-category="jewellery" id="grid-jewellery"></div> -->
   <div class="collection__grid" data-category="accessories" id="grid-accessories"></div>
 
   <!-- MODAL -->
@@ -397,7 +417,7 @@
       jackets: [
         { id:'cdj', name:'Cropped Denim Jacket', price:'₹ 4,900', images:['cdj-1.jpeg','cdj-2.jpeg','cdj-3.jpeg'], folder:'jackets', desc:'Blue denim cropped jacket — Red denim collar and sleeve fold over|Celtic knot button front closure — Back yoke with logo charm|Red top stitch detailing|Shoulder pads' }
       ],
-      jewellery: [
+      jewellery_HIDDEN: [   /* production paused — rename back to "jewellery:" to restore */
         { id:'fee', name:'Floral Enamel Earring', price:'5.72g · 22kt Gold', images:['fee.jpeg'], folder:'jewellery', desc:'Earring with Floral enamel Motif|22kt Gold' },
         { id:'melb', name:'Maroon Enamel Link Bracelet', price:'20.04g · 22kt Gold', images:['melb.jpeg'], folder:'jewellery', desc:'Matte gold & maroon enamel link bracelet|22kt Gold' },
         { id:'slb', name:'Sculptural Link Bracelet', price:'10.18g · 22kt Gold', images:['slb.jpeg'], folder:'jewellery', desc:'High polish sculptural link bracelet|22kt Gold' },
@@ -427,23 +447,44 @@
       c.innerHTML = '<div class="product-card__image-wrap">'+imgs+arrows+dots+'</div><div class="product-card__info"><p class="product-card__name">'+p.name+'</p><p class="product-card__price">'+p.price+'</p></div><a href="'+wa+'" target="_blank" class="product-card__whatsapp" title="Enquire">'+WA+'</a>';
       if (multi) {
         var idx = 0;
+        var imgEls = c.querySelectorAll('.product-card__image-wrap img');
+        var dotEls = c.querySelectorAll('.product-card__dot');
+        function show(n) {
+          idx = (n + p.images.length) % p.images.length;
+          imgEls.forEach(function(im){ im.classList.remove('active'); });
+          dotEls.forEach(function(dt){ dt.classList.remove('active'); });
+          imgEls[idx].classList.add('active');
+          if (dotEls[idx]) dotEls[idx].classList.add('active');
+        }
+        /* Desktop hover arrows */
         c.querySelectorAll('.product-card__arrow').forEach(function(b) {
-          b.addEventListener('click', function(e) {
-            e.stopPropagation(); var d = parseInt(b.dataset.dir);
-            idx = (idx + d + p.images.length) % p.images.length;
-            c.querySelectorAll('.product-card__image-wrap img').forEach(function(im){ im.classList.remove('active'); });
-            c.querySelectorAll('.product-card__dot').forEach(function(dt){ dt.classList.remove('active'); });
-            c.querySelectorAll('.product-card__image-wrap img')[idx].classList.add('active');
-            if (c.querySelectorAll('.product-card__dot')[idx]) c.querySelectorAll('.product-card__dot')[idx].classList.add('active');
-          });
+          b.addEventListener('click', function(e) { e.stopPropagation(); show(idx + parseInt(b.dataset.dir)); });
         });
+        /* Tap a dot */
+        dotEls.forEach(function(dt) {
+          dt.addEventListener('click', function(e){ e.stopPropagation(); show(parseInt(dt.dataset.index)); });
+        });
+        /* Mobile swipe on the image */
+        var sx = 0, sy = 0, moved = false;
+        var wrap = c.querySelector('.product-card__image-wrap');
+        wrap.addEventListener('touchstart', function(e){ sx = e.changedTouches[0].screenX; sy = e.changedTouches[0].screenY; moved = false; }, {passive:true});
+        wrap.addEventListener('touchmove', function(e){ if (Math.abs(e.changedTouches[0].screenX - sx) > 8) moved = true; }, {passive:true});
+        wrap.addEventListener('touchend', function(e){
+          var dx = sx - e.changedTouches[0].screenX, dy = sy - e.changedTouches[0].screenY;
+          if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { show(idx + (dx > 0 ? 1 : -1)); }
+        }, {passive:true});
       }
-      c.addEventListener('click', function(e) { if (e.target.closest('.product-card__whatsapp')||e.target.closest('.product-card__arrow')) return; openProductModal(p); });
+      /* Tap card (not a swipe, not arrow/wa) opens the product */
+      c.addEventListener('click', function(e) {
+        if (e.target.closest('.product-card__whatsapp')||e.target.closest('.product-card__arrow')||e.target.closest('.product-card__dot')) return;
+        openProductModal(p);
+      });
       return c;
     }
 
     Object.keys(products).forEach(function(cat) {
       var g = document.getElementById('grid-'+cat);
+      if (!g) return; /* skips hidden categories like jewellery_HIDDEN */
       products[cat].forEach(function(p) { g.appendChild(buildCard(p)); });
     });
 
@@ -456,12 +497,12 @@
     /* LOOKS DATA */
     var looks = [
       { name: 'Midnight Blue 3 Piece Set', img: 'assets/lookbook/look-01-metallic-blue.jpeg', pieces: ['mbbs','mb-bra','mbw'] },
-      { name: 'Cropped Denim Jacket & Denim Zipper Skirt', img: 'assets/lookbook/look-02-denim.jpeg', pieces: ['cdj','dzs','mr-bra','gmee'] },
-      { name: 'Baggy Flare Denim Pants & Ice Blue Tie Neck Sheer Blouse', img: 'assets/lookbook/look-03-icy-blue.jpeg', pieces: ['bfd','ibt','mr-bra','trqb','frgr','sqrg'] },
-      { name: 'Brown Baggy Pants & Maroon Bralette', img: 'assets/lookbook/look-04-maroon-bralette.jpeg', pieces: ['bbp','mr-bra','trs','bsr'] },
-      { name: 'Champagne Set', img: 'assets/lookbook/look-05-champagne-set.jpeg', pieces: ['cbc','chm','pscarf','eme'] },
-      { name: 'Asymmetrical Peplum Corset & Cherry Brown Jorts', img: 'assets/lookbook/look-06-peplum-corset-jorts.jpeg', pieces: ['apc','cbj','melb','slb','gmee'] },
-      { name: 'Asymmetrical Peplum Corset & Harem Pants', img: 'assets/lookbook/look-07-peplum-corset-harem.jpeg', pieces: ['apc','hrm','fee'] },
+      { name: 'Cropped Denim Jacket & Denim Zipper Skirt', img: 'assets/lookbook/look-02-denim.jpeg', pieces: ['cdj','dzs','mr-bra'] },
+      { name: 'Baggy Flare Denim Pants & Ice Blue Tie Neck Sheer Blouse', img: 'assets/lookbook/look-03-icy-blue.jpeg', pieces: ['bfd','ibt','mr-bra'] },
+      { name: 'Brown Baggy Pants & Maroon Bralette', img: 'assets/lookbook/look-04-maroon-bralette.jpeg', pieces: ['bbp','mr-bra'] },
+      { name: 'Champagne Set', img: 'assets/lookbook/look-05-champagne-set.jpeg', pieces: ['cbc','chm','pscarf'] },
+      { name: 'Asymmetrical Peplum Corset & Cherry Brown Jorts', img: 'assets/lookbook/look-06-peplum-corset-jorts.jpeg', pieces: ['apc','cbj'] },
+      { name: 'Asymmetrical Peplum Corset & Harem Pants', img: 'assets/lookbook/look-07-peplum-corset-harem.jpeg', pieces: ['apc','hrm'] },
       { name: 'Black Baggy Pants & Silver Tie Up T-Shirt Top', img: 'assets/lookbook/look-08-black-pants-silver-top.jpeg', pieces: ['bkp','stu'] },
       { name: 'Champagne Set With Front Cowl', img: 'assets/lookbook/look-09-champagne-cowl-set.jpeg', pieces: ['chm','cfc','mr-bra'] },
     ];
@@ -560,10 +601,20 @@
       var s = document.getElementById('submenu');
       if (s) s.classList.toggle('open');
     }
-    /* Open the tab named in the URL hash, e.g. collection.html#tops */
+    /* Open the tab named in the URL hash, e.g. collection.html#tops
+       Also supports collection.html#look-N to open a look's detail overlay. */
     (function() {
       var h = window.location.hash.replace('#','');
       if (!h) return;
+      /* look-N deep link (from the homepage headings) */
+      var lm = h.match(/^look-(\d+)$/);
+      if (lm) {
+        var looksTab = document.querySelector('.collection__tab[data-target="looks"]');
+        if (looksTab) looksTab.click();
+        var idx = parseInt(lm[1], 10) - 1;
+        if (looks[idx]) { setTimeout(function(){ openLookDetail(looks[idx]); }, 60); }
+        return;
+      }
       var tab = document.querySelector('.collection__tab[data-target="' + h + '"]');
       if (tab) tab.click();
     })();
