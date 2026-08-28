@@ -164,6 +164,8 @@
 
     /* ⚙️ Heading */
     .look__heading {
+      cursor: pointer;
+      pointer-events: auto;
       left: 5.09vw;
       top: 40vh; top: 40dvh;
       z-index: 5;
@@ -212,11 +214,11 @@
        ============================================ */
 
     /* --- LOOK 1 (Midnight Blue Set) --- */
-    .look[data-look="0"] .look__img-b { left: 5vw; top: 28vh; top: 28dvh; height: 80vh; height: 80dvh; }
+    .look[data-look="0"] .look__img-b { left: 5vw; top: 32.87vh; top: 32.87dvh; height: 80vh; height: 80dvh; }
     .look[data-look="0"] .look__heading { left: 5.09vw; top: 10vh; top: 10dvh; }
 
     /* --- LOOK 2 (Denim Overdose) --- */
-    .look[data-look="1"] .look__img-a { left: 60vw; top: 11.38vh; top: 11.38dvh; height: 64.67vh; height: 64.67dvh; }
+    .look[data-look="1"] .look__img-a { left: 50vw; top: 11.38vh; top: 11.38dvh; height: 64.67vh; height: 64.67dvh; }
     .look[data-look="1"] .look__img-b { left: -14vw; top: 32.87vh; top: 32.87dvh; height: 69.72vh; height: 69.72dvh; }
     .look[data-look="1"] .look__heading { left: 5.09vw; top: 10vh; top: 10dvh; }
     .look[data-look="1"] .look__desc { left: 48.6vw; top: 77.11vh; top: 77.11dvh; width: 47.58vw; }
@@ -236,17 +238,17 @@
     /* CTA link at bottom */
     .scroll-hint {
       position: fixed;
-      bottom: 15px;
-      left: 80%; transform: translateX(-50%);
+      bottom: 8px;
+      left: 50%; transform: translateX(-50%);
       display: flex; align-items: center; gap: 7px;
       font-size: 10px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(0,0,0,0.25);
+      color: #000;
       z-index: 50;
       transition: opacity 0.4s;
     }
-    .scroll-hint svg { width: 14px; height: 14px; stroke: rgba(0,0,0,0.25); fill: none; stroke-width: 1.5; animation: nudgeRight 1.5s ease-in-out infinite; }
+    .scroll-hint svg { width: 14px; height: 14px; stroke: #000; fill: none; stroke-width: 1.5; animation: nudgeRight 1.5s ease-in-out infinite; }
     @keyframes nudgeRight { 0%,100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
 
     /* Look indicator dots */
@@ -350,12 +352,12 @@
     @media (min-width: 1024px) {
       .look__img-a { left: 55vw; top: 8vh; top: 8dvh; height: 75vh; height: 75dvh; }
       .look__img-b { left: 2vw; top: 20vh; top: 20dvh; height: 72vh; height: 72dvh; }
-      .look__heading { left: -5vw; top: 12vh; top: 12dvh; }
+      .look__heading { left: 5vw; top: 12vh; top: 12dvh; }
       .look__number { font-size: 4vw; }
       .look__name { font-size: 3.5vw; }
 
       /* Look 1 only — desktop */
-      .look[data-look="0"] .look__img-b { left: 5vw; top: 8vh; top: 8dvh; height: 95vh; height: 95dvh; }
+      .look[data-look="0"] .look__img-b { left: 5vw; top: 15vh; top: 15dvh; height: 85vh; height: 85dvh; }
       .look[data-look="0"] .look__heading { left: 4vw; top: 8vh; top: 8dvh; }
     }
   </style>
@@ -404,39 +406,39 @@
 
     <!-- LOOK 1: Midnight Blue Set -->
     <div class="look active" data-look="0">
-      <div class="look__heading">
+      <a class="look__heading" href="collection.html#look-1">
         <div class="look__number">01</div>
         <div class="look__name">Midnight<br>Blue<br>Set</div>
-      </div>
+      </a>
       <div class="look__img-b"><img src="assets/looks/look-1-b.png" alt="Midnight Blue Set detail"></div>
     </div>
 
     <!-- LOOK 2: Denim Overdose -->
     <div class="look enter-right no-transition" data-look="1">
-      <div class="look__heading">
+      <a class="look__heading" href="collection.html#look-2">
         <div class="look__number">02</div>
         <div class="look__name">Cropped Denim Jacket<br>& Denim Zipper Skirt</div>
-      </div>
+      </a>
       <div class="look__img-a"><img src="assets/looks/look-2-a.png" alt="Denim Overdose"></div>
       <div class="look__img-b"><img src="assets/looks/look-2-b.png" alt="Denim Overdose detail"></div>
     </div>
 
     <!-- LOOK 3: Bold One -->
     <div class="look enter-right no-transition" data-look="2">
-      <div class="look__heading">
+      <a class="look__heading" href="collection.html#look-6">
         <div class="look__number">03</div>
         <div class="look__name">Assymentrical Peplum<br>Corset &<br>Cherry Brown Jorts</div>
-      </div>
+      </a>
       <div class="look__img-a"><img src="assets/looks/look-3-a.png" alt="Bold One"></div>
       <div class="look__img-b"><img src="assets/looks/look-3-b.png" alt="Bold One detail"></div>
     </div>
 
     <!-- LOOK 4: All Black -->
     <div class="look enter-right no-transition" data-look="3">
-      <div class="look__heading">
+      <a class="look__heading" href="collection.html#look-7">
         <div class="look__number">04</div>
         <div class="look__name">Assymentrical Peplum<br>Corset &<br>Harem Pants</div>
-      </div>
+      </a>
       <div class="look__img-a"><img src="assets/looks/look-4-a.png" alt="All Black"></div>
       <div class="look__img-b"><img src="assets/looks/look-4-b.png" alt="All Black detail"></div>
     </div>
@@ -453,7 +455,7 @@
 
   <!-- Collection CTA -->
   <a href="collection.html" class="scroll-hint" id="hint">
-    <span>Explore the Collection</span>
+    <span>Explore the full collection</span>
     <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
   </a>
 
@@ -480,21 +482,18 @@
       document.getElementById('submenu').classList.toggle('open');
     }
 
-    /* SWIPER — vertical scroll triggers horizontal transition, loops back to 1 after 4 */
+    /* SWIPER — vertical scroll triggers horizontal transition, loops back to 1 after 4.
+       No wait-lock: you can keep swiping and it advances immediately. */
     var looks = document.querySelectorAll('.look');
     var dots = document.querySelectorAll('.look-dots__dot');
     var current = 0;
     var total = looks.length;
-    var animating = false;
 
     function goTo(next) {
-      if (animating) return;
-
       if (next >= total) next = 0;
       if (next < 0) next = total - 1;
       if (next === current) return;
 
-      animating = true;
       var goingForward;
       if (current === total - 1 && next === 0) goingForward = true;
       else if (current === 0 && next === total - 1) goingForward = false;
@@ -520,23 +519,26 @@
 
       current = next;
 
-      setTimeout(function() {
-        cur.classList.remove('exit-left', 'exit-right');
-        animating = false;
-      }, 1550);
+      /* Clean up the just-exited slide after its transition, without blocking input */
+      (function(exited){
+        setTimeout(function() {
+          if (!exited.classList.contains('active')) exited.classList.remove('exit-left', 'exit-right');
+        }, 1550);
+      })(cur);
     }
 
-    /* VERTICAL SCROLL → triggers horizontal transition */
-    var wheelTimer;
-    var wheelAccum = 0;
+    /* VERTICAL SCROLL → triggers horizontal transition.
+       Small cooldown so one scroll gesture advances exactly one look,
+       but you never have to wait for the animation to finish. */
+    var wheelTimer, wheelReady = true, wheelAccum = 0;
     window.addEventListener('wheel', function(e) {
       e.preventDefault();
-      if (animating) return;
       wheelAccum += e.deltaY;
-      if (Math.abs(wheelAccum) > 40) {
-        if (wheelAccum > 0) goTo(current + 1);
-        else goTo(current - 1);
+      if (wheelReady && Math.abs(wheelAccum) > 40) {
+        goTo(current + (wheelAccum > 0 ? 1 : -1));
         wheelAccum = 0;
+        wheelReady = false;
+        setTimeout(function(){ wheelReady = true; }, 260);
       }
       clearTimeout(wheelTimer);
       wheelTimer = setTimeout(function() { wheelAccum = 0; }, 150);
