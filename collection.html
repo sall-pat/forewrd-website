@@ -175,23 +175,25 @@
         color: var(--black);
         background: linear-gradient(to top, rgba(244,241,237,0.95), rgba(244,241,237,0));
       }
-      /* Right column: SHOP THIS LOOK + product row, scrollable, touches right edge */
+      /* Right column: SHOP THIS LOOK + product row, touches right edge */
       .look-detail__right {
         height: 100vh; overflow-y: auto;
         display: flex; flex-direction: column; justify-content: center;
-        padding: 80px 0 40px 40px;   /* no right padding → rightmost card hits the edge */
+        padding: 80px 0 40px 48px;   /* left padding only; right = 0 so cards reach the edge */
+        width: 100%;
       }
       .look-detail__pieces-label { text-align: left; padding: 0 0 24px 0; font-size: 0.75rem; }
       .look-detail__pieces {
         display: grid;
-        grid-auto-flow: column;
-        grid-auto-columns: 1fr;
-        gap: 20px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
         padding: 0;
+        width: 100%;
       }
-      /* rightmost card's right edge flush with screen edge (no padding/gap after it) */
-      .look-detail__pieces .product-card { width: 100%; }
-      /* 2-piece looks: cards naturally get bigger since only 2 columns fill the space */
+      /* 2-piece looks: 2 equal columns (bigger cards) */
+      .look-detail__pieces[data-count="2"] { grid-template-columns: repeat(2, 1fr); }
+      /* cards fill each column; rightmost column's right edge = screen edge (right padding is 0) */
+      .look-detail__pieces .product-card { width: 100%; max-width: none; }
       .look-detail__info { display: none; }
     }
 
