@@ -55,7 +55,7 @@
     .product-card__image-wrap img.active { opacity: 1; }
 
     /* Always-visible arrows */
-    .product-card__arrow { display: none; position: absolute; top: 50%; transform: translateY(-50%); width: 34px; height: 34px; align-items: center; justify-content: center; cursor: pointer; z-index: 6; background: rgba(244,241,237,0.85); border: none; border-radius: 50%; opacity: 0; transition: opacity 0.2s; padding: 0; }
+    .product-card__arrow { display: none; position: absolute; top: 50%; transform: translateY(-50%); width: 34px; height: 34px; align-items: center; justify-content: center; cursor: pointer; z-index: 6; background: none; border: none; opacity: 0; transition: opacity 0.2s; padding: 0; }
     .product-card__arrow--left { left: 8px; }
     .product-card__arrow--right { right: 8px; }
     .product-card__arrow svg { width: 16px; height: 16px; }
@@ -106,7 +106,13 @@
     .product-modal__image-wrap { position: relative; width: 100%; aspect-ratio: 3/4; background: #E0DDD8; overflow: hidden; }
     .product-modal__image-wrap img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.35s; }
     .product-modal__image-wrap img.active { opacity: 1; }
-    .modal__arrow { display: none !important; }
+    .modal__arrow { display: none; position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; align-items: center; justify-content: center; cursor: pointer; z-index: 6; background: none; border: none; padding: 0; opacity: 0; transition: opacity 0.2s; }
+    .modal__arrow--left { left: 8px; }
+    .modal__arrow--right { right: 8px; }
+    /* Desktop only: show modal arrows on hover of the image */
+    @media (hover: hover) and (min-width: 1024px) {
+      .product-modal__image-wrap:hover .modal__arrow { display: flex; opacity: 1; }
+    }
     .modal__arrow svg { width: 19px; height: 25px; fill: rgba(255,255,255,0.8); filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4)); }
     .modal__arrow--left { left: 6px; }
     .modal__arrow--left svg { transform: scaleX(-1); }
@@ -144,6 +150,51 @@
     .look-detail__pieces { display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px; padding: 0; }
     @media (max-width: 1024px) { .look-detail__pieces { grid-template-columns: repeat(3, 1fr); } }
     @media (max-width: 600px) { .look-detail__pieces { grid-template-columns: repeat(2, 1fr); } }
+
+    /* ===== DESKTOP look-detail: hero edge-to-edge left, products right ===== */
+    @media (min-width: 1024px) {
+      .look-detail { overflow: hidden; }
+      .look-detail__header { position: absolute; top: 0; left: 0; right: 0; background: none; backdrop-filter: none; }
+      .look-detail__inner {
+        display: grid;
+        grid-template-columns: 40vw 1fr;
+        height: 100vh;
+      }
+      /* Hero pinned to the very left edge, full height, no padding */
+      .look-detail__hero {
+        width: 40vw; height: 100vh;
+        position: relative;
+      }
+      .look-detail__hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      /* Look name sits under the hero, overlaid at the bottom-left */
+      .look-detail__hero-name {
+        position: absolute; left: 0; bottom: 0; right: 0;
+        padding: 20px 24px;
+        font-family: var(--font-body); font-weight: 400;
+        font-size: 1.1rem; letter-spacing: 0.04em;
+        color: var(--black);
+        background: linear-gradient(to top, rgba(244,241,237,0.95), rgba(244,241,237,0));
+      }
+      /* Right column: SHOP THIS LOOK + product row, scrollable, touches right edge */
+      .look-detail__right {
+        height: 100vh; overflow-y: auto;
+        display: flex; flex-direction: column; justify-content: center;
+        padding: 80px 0 40px 40px;   /* no right padding → rightmost card hits the edge */
+      }
+      .look-detail__pieces-label { text-align: left; padding: 0 0 24px 0; font-size: 0.75rem; }
+      .look-detail__pieces {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: 1fr;
+        gap: 20px;
+        padding: 0;
+      }
+      /* rightmost card's right edge flush with screen edge (no padding/gap after it) */
+      .look-detail__pieces .product-card { width: 100%; }
+      /* 2-piece looks: cards naturally get bigger since only 2 columns fill the space */
+      .look-detail__info { display: none; }
+    }
+
 
     /* CTA BUTTON */
     .cta-chrome { position: relative; display: inline-flex; align-items: center; justify-content: center; padding: 13px 32px; font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--black); background: transparent; border: 1px solid rgba(0,0,0,0.2); overflow: hidden; transition: color 0.4s, background 0.4s; cursor: pointer; }
@@ -350,10 +401,14 @@
         <span>Back to Collection</span>
       </button>
     </div>
-    <div class="look-detail__hero" id="lookDetailHero"></div>
-    <div class="look-detail__info" id="lookDetailInfo"></div>
-    <div class="look-detail__pieces-label">SHOP THIS LOOK</div>
-    <div class="look-detail__pieces" id="lookDetailPieces"></div>
+    <div class="look-detail__inner">
+      <div class="look-detail__hero" id="lookDetailHero"></div>
+      <div class="look-detail__right">
+        <div class="look-detail__info" id="lookDetailInfo"></div>
+        <div class="look-detail__pieces-label">SHOP THIS LOOK</div>
+        <div class="look-detail__pieces" id="lookDetailPieces"></div>
+      </div>
+    </div>
   </div>
 
   <!-- FLOATING -->
@@ -496,7 +551,7 @@
 
     /* LOOKS DATA */
     var looks = [
-      { name: 'Midnight Blue 3 Piece Set', img: 'assets/lookbook/look-01-metallic-blue.jpeg', pieces: ['mbbs','mb-bra','mbw'] },
+      { name: 'Metallic Blue 3 Piece Set', img: 'assets/lookbook/look-01-metallic-blue.jpeg', pieces: ['mbbs','mb-bra','mbw'] },
       { name: 'Cropped Denim Jacket & Denim Zipper Skirt', img: 'assets/lookbook/look-02-denim.jpeg', pieces: ['cdj','dzs','mr-bra'] },
       { name: 'Baggy Flare Denim Pants & Ice Blue Tie Neck Sheer Blouse', img: 'assets/lookbook/look-03-icy-blue.jpeg', pieces: ['bfd','ibt','mr-bra'] },
       { name: 'Brown Baggy Pants & Maroon Bralette', img: 'assets/lookbook/look-04-maroon-bralette.jpeg', pieces: ['bbp','mr-bra'] },
@@ -519,11 +574,17 @@
 
     /* LOOK DETAIL */
     function openLookDetail(look) {
+      /* 1-piece looks: open the product modal directly instead of the shop-this-look page */
+      if (look.pieces.length === 1) {
+        var only = productMap[look.pieces[0]];
+        if (only) { openProductModal(only); return; }
+      }
       var detail = document.getElementById('lookDetail');
-      document.getElementById('lookDetailHero').innerHTML = '<img src="'+look.img+'" alt="'+look.name+'">';
+      document.getElementById('lookDetailHero').innerHTML = '<img src="'+look.img+'" alt="'+look.name+'"><div class="look-detail__hero-name">'+look.name+'</div>';
       document.getElementById('lookDetailInfo').innerHTML = '<h2 class="look-detail__name">'+look.name+'</h2>';
       var piecesGrid = document.getElementById('lookDetailPieces');
       piecesGrid.innerHTML = '';
+      piecesGrid.setAttribute('data-count', look.pieces.length);
       look.pieces.forEach(function(pid) {
         var p = productMap[pid];
         if (p) piecesGrid.appendChild(buildCard(p));
