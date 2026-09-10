@@ -72,6 +72,6 @@
   :root {
     --logo-height: 200px;   /* size */
     --logo-x: -2px;        /* from left edge */
-    --logo-y: -35px;        /* from top edge */
+    --logo-y: -65px;        /* from top edge */
   }
 }
