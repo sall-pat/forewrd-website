@@ -213,7 +213,7 @@
        Change only what you want different per look
        ============================================ */
 
-    /* --- LOOK 1 (Midnight Blue Set) --- */
+    /* --- LOOK 1 (Metallic Blue Set) --- */
     .look[data-look="0"] .look__img-b { left: 5vw; top: 32.87vh; top: 32.87dvh; height: 80vh; height: 80dvh; }
     .look[data-look="0"] .look__heading { left: 5.09vw; top: 10vh; top: 10dvh; }
 
@@ -350,8 +350,8 @@
        Change the numbers to match your desktop Figma.
        ============================================ */
     @media (min-width: 1024px) {
-      .look__img-a { left: 55vw; top: 8vh; top: 8dvh; height: 75vh; height: 75dvh; }
-      .look__img-b { left: 2vw; top: 20vh; top: 20dvh; height: 72vh; height: 72dvh; }
+      .look__img-a { left: 65vw; top: 8vh; top: 8dvh; height: 75vh; height: 75dvh; }
+      .look__img-b { left: 22vw; top: 20vh; top: 20dvh; height: 72vh; height: 72dvh; }
       .look__heading { left: 5vw; top: 12vh; top: 12dvh; }
       .look__number { font-size: 4vw; }
       .look__name { font-size: 3.5vw; }
@@ -404,13 +404,13 @@
   <!-- STAGE -->
   <div class="stage" id="stage">
 
-    <!-- LOOK 1: Midnight Blue Set -->
+    <!-- LOOK 1: Metallic Blue Set -->
     <div class="look active" data-look="0">
       <a class="look__heading" href="collection.html#look-1">
         <div class="look__number">01</div>
-        <div class="look__name">Midnight<br>Blue<br>Set</div>
+        <div class="look__name">Metallic<br>Blue<br>Set</div>
       </a>
-      <div class="look__img-b"><img src="assets/looks/look-1-b.png" alt="Midnight Blue Set detail"></div>
+      <div class="look__img-b"><img src="assets/looks/look-1-b.png" alt="Metallic Blue Set detail"></div>
     </div>
 
     <!-- LOOK 2: Denim Overdose -->
@@ -540,7 +540,7 @@
         wheelReady = false;
         /* Desktop wheel is very sensitive, so use a slightly longer cooldown there.
            Phone (touch) keeps the snappier 260ms. */
-        var cooldown = window.innerWidth >= 1024 ? 580 : 260;
+        var cooldown = window.innerWidth >= 1024 ? 980 : 260;
         setTimeout(function(){ wheelReady = true; }, cooldown);
       }
       clearTimeout(wheelTimer);
