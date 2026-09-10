@@ -316,6 +316,11 @@
       .nav__submenu-trigger:hover { letter-spacing: 0.26em; opacity: 0.7; }
       .nav__submenu-trigger:hover { letter-spacing: 0.2em; }
     }
+    /* DESKTOP — bigger & darker product name/price (phone unchanged) */
+    @media (min-width: 1024px) {
+      .product-card__name { font-size: 1rem; color: #000; }
+      .product-card__price { font-size: 0.95rem; color: rgba(0,0,0,0.75); }
+    }
   </style>
   <link rel="stylesheet" href="css/logo.css?v=3">
 </head>
@@ -452,27 +457,27 @@
 
     var products = {
       tops: [
-        { id:'mbbs', name:'Metallic Blue Balloon Sleeve Top', price:'₹ 6,700', images:['mbbs-1.jpeg','mbbs-2.jpeg','mbbs-3.jpeg','mbbs-4.jpeg'], folder:'tops', desc:'Dramatic Balloon sleeves with metal hardware detailing|Corset back panel to adjust and cinch the waist|Jacket zipper opening|Fit: Fitted silhouette with an adjustable corset back' },
-        { id:'mb-bra', name:'Metallic Blue Bralette', price:'₹ 5,000', images:['mb-bra-1.jpeg','mb-bra-2.jpeg','mb-bra-3.jpeg'], folder:'tops', desc:'Bralette with adjustable straps and Celtic knot button detailing|Hook and eye back closure with adjustable hooks' },
-        { id:'cbc', name:'Champagne Back Cowl Top', price:'₹ 4,500', images:['cbc-1.jpeg','cbc-2.jpeg','cbc-3.jpeg'], folder:'tops', desc:'Champagne back cowl sleeveless top|Concealed back waist adjuster to cinch|Crushed textured fabric' },
-        { id:'apc', name:'Asymmetrical Peplum Corset', price:'₹ 5,000', images:['apc-1.jpeg','apc-2.jpeg','apc-3.jpeg'], folder:'tops', desc:'Corset made up of 32 panels|Asymmetrical neckline and hemline|Size invisible jacket zip opener|Baby Pink lace up back adjuster' },
-        { id:'mr-bra', name:'Maroon Bralette', price:'₹ 4,600', images:['mr-bra-1.jpeg','mr-bra-2.jpeg'], folder:'tops', desc:'Bralette with adjustable straps and Celtic button detailing|Hook and eye back closure with adjustable hooks' },
-        { id:'stu', name:'Silver Tie Up T-Shirt Top', price:'₹ 3,700', images:['stu-1.jpeg','stu-2.jpeg','stu-3.jpeg'], folder:'tops', desc:'Silver T-shirt top with a side tie up detail|Half sleeves with fold over|One side off shoulder|Asymmetrical hem' },
-        { id:'ibt', name:'Ice Blue Tie Neck Sheer Blouse', price:'₹ 4,100', images:['ibt-1.jpeg','ibt-2.jpeg','ibt-3.jpeg','ibt-4.jpeg'], folder:'tops', desc:'Ice blue and light beige duo tone tissue organza fabric|Deep neckline featuring a tie-up closure|Tiered balloon sleeves|Elastic cuff' },
-        { id:'cfc', name:'Champagne Front Cowl Top', price:'₹ 5,100', images:['cfc-1.jpeg','cfc-2.jpeg','cfc-3.jpeg'], folder:'tops', desc:'Deep cowl neck tie up top|3/4th length asymmetrical sleeves|Concealed back waist adjuster to cinch|Crushed textured fabric' },
+        { id:'mbbs', name:'Metallic Blue Balloon Sleeve Top', price:'₹ 6,700', images:['mbbs-1.jpeg','mbbs-2.jpeg','mbbs-3.jpeg','mbbs-4.jpeg','mbbs-5.jpeg'], folder:'tops', desc:'Dramatic Balloon sleeves with metal hardware detailing|Corset back panel to adjust and cinch the waist|Jacket zipper opening|Fit: Fitted silhouette with an adjustable corset back' },
+        { id:'mb-bra', name:'Metallic Blue Bralette', price:'₹ 5,300', images:['mb-bra-1.jpeg','mb-bra-2.jpeg','mb-bra-3.jpeg'], folder:'tops', desc:'Bralette with adjustable straps and Celtic knot button detailing|Hook and eye back closure with adjustable hooks' },
+        { id:'cbc', name:'Champagne Back Cowl Sleeveless Top', price:'₹ 4,800', images:['cbc-1.jpeg','cbc-2.jpeg','cbc-3.jpeg','cbc-4.jpeg'], folder:'tops', desc:'Champagne back cowl sleeveless top|Concealed back waist adjuster to cinch|Crushed textured fabric' },
+        { id:'apc', name:'Asymmetrical Peplum Corset', price:'₹ 6,300', images:['apc-1.jpeg','apc-2.jpeg','apc-3.jpeg','apc-4.jpeg','apc-5.jpeg','apc-6.jpeg'], folder:'tops', desc:'Corset made up of 32 panels|Asymmetrical neckline and hemline|Size invisible jacket zip opener|Baby Pink lace up back adjuster' },
+        { id:'mr-bra', name:'Maroon Bralette', price:'₹ 4,700', images:['mr-bra-1.jpeg','mr-bra-2.jpeg','mr-bra-3.jpeg','mr-bra-4.jpeg'], folder:'tops', desc:'Bralette with adjustable straps and Celtic button detailing|Hook and eye back closure with adjustable hooks' },
+        { id:'stu', name:'Silver Tie-up Tshirt Top', price:'₹ 4,000', images:['stu-1.jpeg','stu-2.jpeg','stu-3.jpeg','stu-4.jpeg'], folder:'tops', desc:'Silver T-shirt top with a side tie up detail|Half sleeves with fold over|One side off shoulder|Asymmetrical hem' },
+        { id:'ibt', name:'Deep Neck Duo-Tone Top', price:'₹ 4,400', images:['ibt-1.jpeg','ibt-2.jpeg','ibt-3.jpeg','ibt-4.jpeg','ibt-5.jpeg'], folder:'tops', desc:'Ice blue and light beige duo tone tissue organza fabric|Deep neckline featuring a tie-up closure|Tiered balloon sleeves|Elastic cuff' },
+        { id:'cfc', name:'Champagne Front Cowl Top', price:'₹ 5,200', images:['cfc-1.jpeg','cfc-2.jpeg','cfc-3.jpeg','cfc-4.jpeg'], folder:'tops', desc:'Deep cowl neck tie up top|3/4th length asymmetrical sleeves|Concealed back waist adjuster to cinch|Crushed textured fabric' },
       ],
       bottoms: [
-        { id:'mbw', name:'Metallic Blue Wrap Skirt', price:'₹ 6,400', images:['mbw-1.jpeg','mbw-2.jpeg'], folder:'bottoms', desc:'Wrap skirt with a silver buckle adjuster|Pleated detail on side' },
-        { id:'chm', name:'Champagne Trouser', price:'₹ 5,400', images:['chm-1.jpeg','chm-2.jpeg','chm-3.jpeg'], folder:'bottoms', desc:'High waist trouser with front pleat detailing|Side slit pocket|Front zip with hook & eye closure|0.5" belt loops' },
-        { id:'cbj', name:'Cherry Brown Jorts', price:'₹ 5,400', images:['cbj-1.jpeg','cbj-2.jpeg'], folder:'bottoms', desc:'High waist Faux Leather Jorts|Front zip — hook & eye closure|1" belt loop' },
-        { id:'bbp', name:'Brown Baggy Pants', price:'₹ 7,200', images:['bbp-1.jpeg','bbp-2.jpeg','bbp-3.jpeg'], folder:'bottoms', desc:'High waist — Taffeta fabric (paper like texture)|Centre zip with 2 hook and eyes on waist band|Side slit pockets|3" waistband and side elastic waist adjuster' },
-        { id:'hrm', name:'Harem Pants', price:'₹ 4,100', images:['hrm-1.jpeg','hrm-2.jpeg','hrm-3.jpeg'], folder:'bottoms', desc:'High waist Harem pants with a bottom cuff tie detail|Side zip opening|Side slit pockets' },
-        { id:'bkp', name:'Black Baggy Pants', price:'₹ 4,900', images:['bkp-1.jpeg','bkp-2.jpeg','bkp-3.jpeg','bkp-4.jpeg'], folder:'bottoms', desc:'Baggy pants with buckle waist adjuster|Side zip opening|Adjuster bottom hem belt with buckle closure|Side slit pockets' },
-        { id:'bfd', name:'Baggy Flare Black Denim Pants', price:'₹ 4,300', images:['bfd-1.jpeg','bfd-2.jpeg','bfd-3.jpeg'], folder:'bottoms', desc:'High Waist denim pants with 1" belt loops|Front zip and hook & eye closure|Dark grey topstitch detailing|Side slit pocket with concealed elastic waist adjuster' },
-        { id:'dzs', name:'Denim Zipper Skirt', price:'₹ 4,200', images:['dzs-1.jpeg','dzs-2.jpeg'], folder:'bottoms', desc:'Blue denim wrap skirt with front side jacket zipper opening|3" waistband — 1" belt loops — elastic waist adjusters|Back pocket with logo detailing|Red top stitch detailing' },
+        { id:'mbw', name:'Metallic Blue Wrap Skirt', price:'₹ 6,800', images:['mbw-1.jpeg','mbw-2.jpeg','mbw-3.jpeg','mbw-4.jpeg'], folder:'bottoms', desc:'Wrap skirt with a silver buckle adjuster|Pleated detail on side' },
+        { id:'chm', name:'Champagne Tailored Trousers', price:'₹ 5,400', images:['chm-1.jpeg','chm-2.jpeg','chm-3.jpeg','chm-4.jpeg'], folder:'bottoms', desc:'High waist trouser with front pleat detailing|Side slit pocket|Front zip with hook & eye closure|0.5" belt loops' },
+        { id:'cbj', name:'Cherry Brown Jorts', price:'₹ 5,600', images:['cbj-1.jpeg','cbj-2.jpeg'], folder:'bottoms', desc:'High waist Faux Leather Jorts|Front zip — hook & eye closure|1" belt loop' },
+        { id:'bbp', name:'Brown Quad Baggy Pants', price:'₹ 7,300', images:['bbp-1.jpeg','bbp-2.jpeg','bbp-3.jpeg','bbp-4.jpeg'], folder:'bottoms', desc:'High waist — Taffeta fabric (paper like texture)|Centre zip with 2 hook and eyes on waist band|Side slit pockets|3" waistband and side elastic waist adjuster' },
+        { id:'hrm', name:'Black Harem Pants', price:'₹ 4,200', images:['hrm-1.jpeg','hrm-2.jpeg','hrm-3.jpeg'], folder:'bottoms', desc:'High waist Harem pants with a bottom cuff tie detail|Side zip opening|Side slit pockets' },
+        { id:'bkp', name:'Black Baggy Pants', price:'₹ 5,100', images:['bkp-1.jpeg','bkp-2.jpeg','bkp-3.jpeg','bkp-4.jpeg','bkp-5.jpeg'], folder:'bottoms', desc:'Baggy pants with buckle waist adjuster|Side zip opening|Adjuster bottom hem belt with buckle closure|Side slit pockets' },
+        { id:'bfd', name:'Flare Black Denim Pants', price:'₹ 5,000', images:['bfd-1.jpeg','bfd-2.jpeg','bfd-3.jpeg'], folder:'bottoms', desc:'High Waist denim pants with 1" belt loops|Front zip and hook & eye closure|Dark grey topstitch detailing|Side slit pocket with concealed elastic waist adjuster' },
+        { id:'dzs', name:'Denim Zipper Skirt', price:'₹ 4,400', images:['dzs-1.jpeg','dzs-2.jpeg','dzs-3.jpeg','dzs-4.jpeg'], folder:'bottoms', desc:'Blue denim wrap skirt with front side jacket zipper opening|3" waistband — 1" belt loops — elastic waist adjusters|Back pocket with logo detailing|Red top stitch detailing' },
       ],
       jackets: [
-        { id:'cdj', name:'Cropped Denim Jacket', price:'₹ 4,900', images:['cdj-1.jpeg','cdj-2.jpeg','cdj-3.jpeg'], folder:'jackets', desc:'Blue denim cropped jacket — Red denim collar and sleeve fold over|Celtic knot button front closure — Back yoke with logo charm|Red top stitch detailing|Shoulder pads' }
+        { id:'cdj', name:'Cropped Denim Jacket', price:'₹ 5,100', images:['cdj-1.jpeg','cdj-2.jpeg','cdj-3.jpeg','cdj-4.jpeg'], folder:'jackets', desc:'Blue denim cropped jacket — Red denim collar and sleeve fold over|Celtic knot button front closure — Back yoke with logo charm|Red top stitch detailing|Shoulder pads' }
       ],
       jewellery_HIDDEN: [   /* production paused — rename back to "jewellery:" to restore */
         { id:'fee', name:'Floral Enamel Earring', price:'5.72g · 22kt Gold', images:['fee.jpeg'], folder:'jewellery', desc:'Earring with Floral enamel Motif|22kt Gold' },
@@ -487,7 +492,7 @@
         { id:'sqrg', name:'Square Rose Gold Ring', price:'7.46g · 22kt Gold', images:['sqrg.jpeg'], folder:'jewellery', desc:'Square Rose gold ring|22kt Gold' },
       ],
       accessories: [
-        { id:'pscarf', name:'Printed Scarf', price:'₹ 1,100', images:['pscarf-1.jpeg','pscarf-2.jpeg'], folder:'accessories', desc:'Triangular|40" × 40" × 71"|Georgette fabric' },
+        { id:'pscarf', name:'Multi-Colour Printed Scarf', price:'₹ 1,100', images:['pscarf-1.jpeg','pscarf-2.jpeg'], folder:'accessories', desc:'Triangular|40" × 40" × 71"|Georgette fabric' },
       ]
     };
 
