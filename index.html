@@ -209,7 +209,7 @@
     }
 
     /* ============================================
-       ⚙️⚙️⚙️ PER-LOOK OVERRIDES ⚙️⚙️⚙️
+       ⚙️⚙️⚙️ PER-LOOK OVERRIDES (MOBILE) ⚙️⚙️⚙️
        Change only what you want different per look
        ============================================ */
 
@@ -347,18 +347,39 @@
     /* ============================================
        ⚙️ DESKTOP OVERRIDES (1024px and wider)
        Only affects laptop/desktop — phone layout untouched.
-       Change the numbers to match your desktop Figma.
+
+       The [data-look] on these selectors makes them beat the
+       mobile per-look overrides above, so ONE value here moves
+       ALL looks (2, 3, 4). Change these to move everything.
+       Formula: figma_X ÷ 3.93 = vw  |  figma_Y ÷ 8.52 = vh
        ============================================ */
     @media (min-width: 1024px) {
-      .look__img-a { left: 65vw; top: 8vh; top: 8dvh; height: 75vh; height: 75dvh; }
-      .look__img-b { left: 22vw; top: 20vh; top: 20dvh; height: 72vh; height: 72dvh; }
-      .look__heading { left: 5vw; top: 12vh; top: 12dvh; }
+      /* ALL LOOKS (applies to looks 2, 3, 4 — and look 1's Image A if it had one) */
+      .look[data-look] .look__img-a  { left: 75vw; top: 8vh;  top: 8dvh;  height: 75vh; height: 75dvh; }
+      .look[data-look] .look__img-b  { left: 42vw; top: 20vh; top: 20dvh; height: 72vh; height: 72dvh; }
+      .look[data-look] .look__heading{ left: 5vw;  top: 12vh; top: 12dvh; }
       .look__number { font-size: 4vw; }
-      .look__name { font-size: 3.5vw; }
+      .look__name   { font-size: 3.5vw; }
 
-      /* Look 1 only — desktop */
-      .look[data-look="0"] .look__img-b { left: 5vw; top: 15vh; top: 15dvh; height: 85vh; height: 85dvh; }
-      .look[data-look="0"] .look__heading { left: 4vw; top: 8vh; top: 8dvh; }
+      /* ===== LOOK 1 ONLY (Metallic Blue Set — has just Image B, no Image A) ===== */
+      .look[data-look="0"] .look__img-b  { left: 55vw; top: 15vh; top: 15dvh; height: 85vh; height: 85dvh; }
+      .look[data-look="0"] .look__heading{ left: 4vw; top: 8vh;  top: 8dvh; }
+
+      /* ===== Want to fine-tune ONE of the other looks on desktop? =====
+         Uncomment a block below and edit it. It will override the "ALL LOOKS" values.
+
+      .look[data-look="1"] .look__img-a  { left: 65vw; top: 8vh; top: 8dvh; height: 75vh; height: 75dvh; }
+      .look[data-look="1"] .look__img-b  { left: 22vw; top: 20vh; top: 20dvh; height: 72vh; height: 72dvh; }
+      .look[data-look="1"] .look__heading{ left: 5vw; top: 12vh; top: 12dvh; }
+
+      .look[data-look="2"] .look__img-a  { left: 65vw; top: 8vh; top: 8dvh; height: 75vh; height: 75dvh; }
+      .look[data-look="2"] .look__img-b  { left: 22vw; top: 20vh; top: 20dvh; height: 72vh; height: 72dvh; }
+      .look[data-look="2"] .look__heading{ left: 5vw; top: 12vh; top: 12dvh; }
+
+      .look[data-look="3"] .look__img-a  { left: 65vw; top: 8vh; top: 8dvh; height: 75vh; height: 75dvh; }
+      .look[data-look="3"] .look__img-b  { left: 22vw; top: 20vh; top: 20dvh; height: 72vh; height: 72dvh; }
+      .look[data-look="3"] .look__heading{ left: 5vw; top: 12vh; top: 12dvh; }
+      */
     }
   </style>
   <link rel="stylesheet" href="css/logo.css?v=3">
@@ -538,8 +559,9 @@
         goTo(current + (wheelAccum > 0 ? 1 : -1));
         wheelAccum = 0;
         wheelReady = false;
-        /* Desktop wheel is very sensitive, so use a slightly longer cooldown there.
-           Phone (touch) keeps the snappier 260ms. */
+        /* Desktop wheel is very sensitive, so use a longer cooldown there.
+           Phone (touch) keeps the snappier 260ms.
+           ⚙️ To change desktop scroll speed, edit the 980 below (bigger = slower). */
         var cooldown = window.innerWidth >= 1024 ? 980 : 260;
         setTimeout(function(){ wheelReady = true; }, cooldown);
       }
