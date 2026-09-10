@@ -62,3 +62,12 @@
   padding-left: var(--nav-edge);
   padding-right: var(--nav-edge);
 }
+
+
+/* ------------------------------------------------------------
+   DESKTOP — bigger logo (1024px and wider). Phone size unchanged.
+   Change 55px to taste.
+   ------------------------------------------------------------ */
+@media (min-width: 1024px) {
+  :root { --logo-height: 55px; }
+}
