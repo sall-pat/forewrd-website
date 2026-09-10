@@ -71,7 +71,7 @@
 @media (min-width: 1024px) {
   :root {
     --logo-height: 200px;   /* size */
-    --logo-x: 2px;        /* from left edge */
-    --logo-y: 2px;        /* from top edge */
+    --logo-x: -2px;        /* from left edge */
+    --logo-y: -22px;        /* from top edge */
   }
 }
