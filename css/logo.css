@@ -70,8 +70,8 @@
    ------------------------------------------------------------ */
 @media (min-width: 1024px) {
   :root {
-    --logo-height: 180px;   /* size */
+    --logo-height: 185px;   /* size */
     --logo-x: 4px;        /* from left edge */
-    --logo-y: -45px;        /* from top edge */
+    --logo-y: -43px;        /* from top edge */
   }
 }
