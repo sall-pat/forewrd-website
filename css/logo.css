@@ -73,7 +73,5 @@
     --logo-height: 150px;   /* size */
     --logo-x: 4px;        /* from left edge */
     --logo-y: -30px;        /* from top edge */
-    .nav__logo img { height: 205px !important; width: auto !important; }
-    .nav__logo { left: 4px !important; top: -45px !important; }
   }
 }
