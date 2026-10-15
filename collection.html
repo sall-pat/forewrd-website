@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collection — FOREWRD STUDIO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #000000;
+      --parchment: #F4F1ED;
+      --parchment-dark: #E8E4DF;
+      --white: #FFFFFF;
+      --maroon: #4A0E0E;
+      --silver-mid: #C0C0C0;
+      --font-heading: 'Josefin Sans', 'Helvetica Neue', sans-serif;
+      --font-body: 'Josefin Sans', 'Helvetica Neue', sans-serif;
+      --font-accent: 'Josefin Sans', 'Helvetica Neue', sans-serif;
+      --nav-height: 60px;
+      --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font-body); font-weight: 400; color: var(--black); background: var(--parchment); overflow-x: hidden; line-height: 1.6; }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+
+    /* HEADER — compact */
+    .collection__header { text-align: center; padding: calc(var(--nav-height) + 24px) 20px 20px; }
+    .section-label { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--maroon); margin-bottom: 6px; }
+    .collection__title { font-family: var(--font-body); font-weight: 400; font-size: clamp(1.5rem, 3vw, 2.2rem); text-transform: uppercase; letter-spacing: 0.18em; margin-top: 4px; }
+
+    /* TABS — tight */
+    .collection__tabs { display: flex; justify-content: center; gap: 28px; margin-bottom: 20px; flex-wrap: wrap; padding: 0 20px; }
+    .collection__tab { font-family: var(--font-body); font-size: 0.7rem; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; padding: 6px 2px; border-bottom: 1px solid transparent; color: rgba(0,0,0,0.45); transition: all 0.3s; cursor: pointer; }
+    .collection__tab.active, .collection__tab:hover { color: var(--black); border-bottom-color: var(--black); }
+
+    /* GRID — edge to edge, no padding */
+    .collection__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px; padding: 0; }
+    .collection__grid[data-category] { display: none; }
+    .collection__grid.active { display: grid; }
+    @media (max-width: 1024px) { .collection__grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 600px) { .collection__grid { grid-template-columns: repeat(2, 1fr); } }
+
+    /* PRODUCT CARD */
+    .product-card { position: relative; cursor: pointer; background: var(--parchment); }
+    .product-card__image-wrap { position: relative; aspect-ratio: 3/4; overflow: hidden; background: var(--parchment-dark); }
+    .product-card__image-wrap img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.35s; }
+    .product-card__image-wrap img.active { opacity: 1; }
+
+    /* Always-visible arrows */
+    .product-card__arrow { display: none; position: absolute; top: 50%; transform: translateY(-50%); width: 34px; height: 34px; align-items: center; justify-content: center; cursor: pointer; z-index: 6; background: none; border: none; opacity: 0; transition: opacity 0.2s; padding: 0; }
+    .product-card__arrow--left { left: 8px; }
+    .product-card__arrow--right { right: 8px; }
+    .product-card__arrow svg { width: 16px; height: 16px; }
+    /* Desktop only: reveal arrows on hover */
+    @media (hover: hover) and (min-width: 1024px) {
+      .product-card__image-wrap:hover .product-card__arrow { display: flex; opacity: 1; }
+    }
+    .product-card__arrow:hover { opacity: 1; }
+    .product-card__arrow svg { width: 14px; height: 18px; fill: rgba(255,255,255,0.9); filter: drop-shadow(0 1px 2px rgba(0,0,0,0.25)); }
+    .product-card__arrow--left { left: 6px; }
+    .product-card__arrow--left svg { transform: scaleX(-1); }
+    .product-card__arrow--right { right: 6px; }
+
+    /* Always-visible dots */
+    .product-card__dots { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 5px; z-index: 5; }
+    .product-card__dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.35); transition: background 0.3s; }
+    .product-card__dot.active { background: rgba(255,255,255,0.9); }
+
+    .product-card__info { padding: 10px 8px 18px; text-align: center; }
+    .product-card__name { font-family: var(--font-body); font-size: 0.85rem; font-weight: 400; letter-spacing: 0.04em; margin-bottom: 2px; line-height: 1.4; }
+    .product-card__price { font-family: var(--font-body); font-size: 0.88rem; font-weight: 300; color: rgba(0,0,0,0.45); }
+
+    .product-card__whatsapp { position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; background: rgba(0,0,0,0.65); border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; z-index: 5; }
+    @media (hover: hover) { .product-card:hover .product-card__whatsapp { opacity: 1; } }
+    .product-card__whatsapp svg { width: 16px; height: 16px; fill: #fff; }
+
+    /* MODAL */
+    .product-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+    .product-modal.open { opacity: 1; pointer-events: all; }
+    .product-modal__backdrop { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(6px); }
+    .product-modal__content { position: absolute; top: 0; right: 0; width: min(480px, 90vw); height: 100%; background: var(--parchment); overflow-y: auto; transform: translateX(100%); transition: transform 0.5s var(--ease-out-expo); }
+    /* Desktop: center the modal as a card */
+    @media (min-width: 1024px) {
+      .product-modal__content {
+        top: 50%; left: 50%; right: auto; bottom: auto;
+        width: min(920px, 90vw); height: auto; max-height: 88vh;
+        border-radius: 4px;
+        transform: translate(-50%, -50%) scale(0.96);
+        display: grid; grid-template-columns: 1fr 1fr;
+      }
+      .product-modal.open .product-modal__content { transform: translate(-50%, -50%) scale(1); }
+      .product-modal__details { align-self: center; }
+    }
+    .product-modal.open .product-modal__content { transform: translateX(0); }
+    @media (min-width: 1024px) { .product-modal.open .product-modal__content { transform: translate(-50%, -50%) scale(1); } }
+    .product-modal__close { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; line-height: 1; color: var(--black); z-index: 2; background: none; border: none; padding: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: opacity 0.2s, transform 0.2s; }
+    .product-modal__close:active { opacity: 0.5; transform: scale(0.9); }
+    .product-modal__image-wrap { position: relative; width: 100%; aspect-ratio: 3/4; background: #E0DDD8; overflow: hidden; }
+    .product-modal__image-wrap img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.35s; }
+    .product-modal__image-wrap img.active { opacity: 1; }
+    .modal__arrow { display: none; position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; align-items: center; justify-content: center; cursor: pointer; z-index: 6; background: none; border: none; padding: 0; opacity: 0; transition: opacity 0.2s; }
+    .modal__arrow--left { left: 8px; }
+    .modal__arrow--right { right: 8px; }
+    /* Desktop only: show modal arrows on hover of the image */
+    @media (hover: hover) and (min-width: 1024px) {
+      .product-modal__image-wrap:hover .modal__arrow { display: flex; opacity: 1; }
+    }
+    .modal__arrow svg { width: 19px; height: 25px; fill: rgba(255,255,255,0.8); filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4)); }
+    .modal__arrow--left { left: 6px; }
+    .modal__arrow--left svg { transform: scaleX(-1); }
+    .modal__arrow--right { right: 6px; }
+    .modal__dots { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 7px; }
+    .modal__dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: background 0.3s; }
+    .modal__dot.active { background: #fff; }
+    .product-modal__details { padding: 24px 28px 36px; }
+    .product-modal__name { font-family: var(--font-heading); font-weight: 500; font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+    .product-modal__price { font-family: var(--font-body); font-size: 1rem; color: rgba(0,0,0,0.5); margin-bottom: 18px; }
+    .product-modal__desc { font-family: var(--font-body); font-size: 0.88rem; line-height: 1.8; color: rgba(0,0,0,0.65); margin-bottom: 24px; list-style: none; }
+    .product-modal__desc li { padding: 3px 0 3px 14px; position: relative; }
+    .product-modal__desc li::before { content: '·'; position: absolute; left: 0; color: var(--silver-mid); }
+
+    /* LOOK CARD (in grid) */
+    .look-card { position: relative; cursor: pointer; background: var(--parchment); }
+    .look-card__image { aspect-ratio: 3/4; overflow: hidden; background: var(--parchment-dark); }
+    .look-card__image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s var(--ease-out-expo); }
+    .look-card:hover .look-card__image img { transform: scale(1.03); }
+    .look-card__info { padding: 10px 8px 18px; text-align: center; }
+    .look-card__name { font-family: var(--font-body); font-size: 0.72rem; font-weight: 400; letter-spacing: 0.04em; margin-bottom: 2px; line-height: 1.4; }
+    .look-card__count { font-family: var(--font-body); font-size: 0.7rem; font-weight: 300; color: rgba(0,0,0,0.4); }
+
+    /* LOOK DETAIL OVERLAY */
+    .look-detail { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 1500; background: var(--parchment); overflow-y: auto; transform: translateX(100%); transition: transform 0.45s var(--ease-out-expo); }
+    .look-detail.open { transform: translateX(0); }
+    .look-detail__header { position: sticky; top: 0; z-index: 10; background: rgba(244,241,237,0.95); backdrop-filter: blur(16px); padding: 16px clamp(16px, 3vw, 36px); }
+    .look-detail__back { display: flex; align-items: center; gap: 8px; font-family: var(--font-body); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--black); cursor: pointer; background: none; border: none; padding: 4px 0; }
+    .look-detail__back:hover { opacity: 0.6; }
+    .look-detail__hero { width: 100%; }
+    .look-detail__hero img { width: 100%; display: block; }
+    .look-detail__info { padding: 28px clamp(16px, 3vw, 36px) 12px; text-align: center; }
+    .look-detail__name { font-family: var(--font-heading); font-weight: 700; font-size: clamp(1.4rem, 2.5vw, 2rem); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 6px; }
+    .look-detail__pieces-label { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--maroon); text-align: center; padding: 20px 0 16px; }
+    .look-detail__pieces { display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px; padding: 0; }
+    @media (max-width: 1024px) { .look-detail__pieces { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 600px) { .look-detail__pieces { grid-template-columns: repeat(2, 1fr); } }
+
+    /* ===== DESKTOP look-detail: hero edge-to-edge left, products right ===== */
+    @media (min-width: 1024px) {
+      .look-detail { overflow: hidden; }
+      .look-detail__header { position: absolute; top: 0; left: 0; right: 0; background: none; backdrop-filter: none; }
+      .look-detail__inner {
+        display: grid;
+        grid-template-columns: 40vw 1fr;
+        height: 100vh;
+      }
+      /* Hero pinned to the very left edge, full height, no padding */
+      .look-detail__hero {
+        width: 40vw; height: 100vh;
+        position: relative;
+      }
+      .look-detail__hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      /* Look name sits under the hero, overlaid at the bottom-left */
+      .look-detail__hero-name {
+        position: absolute; left: 0; bottom: 0; right: 0;
+        padding: 20px 24px;
+        font-family: var(--font-body); font-weight: 400;
+        font-size: 1.1rem; letter-spacing: 0.04em;
+        color: var(--black);
+        background: linear-gradient(to top, rgba(244,241,237,0.95), rgba(244,241,237,0));
+      }
+      /* Right column: SHOP THIS LOOK + product row, touches right edge */
+      .look-detail__right {
+        height: 100vh; overflow-y: auto;
+        display: flex; flex-direction: column; justify-content: center;
+        padding: 80px 0 40px 48px;   /* left padding only; right = 0 so cards reach the edge */
+        width: 100%;
+      }
+      .look-detail__pieces-label { text-align: left; padding: 0 0 24px 0; font-size: 0.75rem; }
+      .look-detail__pieces {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        padding: 0;
+        width: 100%;
+      }
+      /* 2-piece looks: 2 equal columns (bigger cards) */
+      .look-detail__pieces[data-count="2"] { grid-template-columns: repeat(2, 1fr); }
+      /* cards fill each column; rightmost column's right edge = screen edge (right padding is 0) */
+      .look-detail__pieces .product-card { width: 100%; max-width: none; }
+      .look-detail__info { display: none; }
+    }
+
+
+    /* CTA BUTTON */
+    .cta-chrome { position: relative; display: inline-flex; align-items: center; justify-content: center; padding: 13px 32px; font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--black); background: transparent; border: 1px solid rgba(0,0,0,0.2); overflow: hidden; transition: color 0.4s, background 0.4s; cursor: pointer; }
+    .cta-chrome::before { content: ''; position: absolute; top: -1px; left: -1px; right: -1px; bottom: -1px; background: linear-gradient(90deg, transparent 0%, rgba(192,192,192,0.1) 20%, rgba(255,255,255,0.8) 40%, rgba(212,212,212,0.9) 50%, rgba(255,255,255,0.8) 60%, rgba(192,192,192,0.1) 80%, transparent 100%); background-size: 200% 100%; animation: chromeGlide 3s ease-in-out infinite; pointer-events: none; z-index: 0; }
+    .cta-chrome::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; border: 1px solid transparent; background: linear-gradient(90deg, transparent 0%, rgba(200,200,200,0.3) 25%, rgba(255,255,255,0.7) 50%, rgba(200,200,200,0.3) 75%, transparent 100%) border-box; background-size: 300% 100%; -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: chromeRim 3s ease-in-out infinite; pointer-events: none; z-index: 1; }
+    .cta-chrome span { position: relative; z-index: 2; }
+    .cta-chrome:hover { background: var(--black); color: var(--parchment); border-color: var(--black); }
+    @keyframes chromeGlide { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    @keyframes chromeRim { 0% { background-position: 300% 0; } 100% { background-position: -300% 0; } }
+
+    /* FLOATING */
+    .floating-btns { position: fixed; bottom: 24px; right: 24px; display: flex; flex-direction: column; gap: 10px; z-index: 900; }
+    .floating-btn { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform 0.3s; box-shadow: 0 3px 16px rgba(0,0,0,0.15); }
+    .floating-btn:hover { transform: scale(1.08); }
+    .floating-btn--whatsapp { background: #25D366; }
+    .floating-btn--whatsapp svg { width: 24px; height: 24px; fill: #fff; }
+    .floating-btn--size { background: var(--black); }
+    .floating-btn--size svg { width: 21px; height: 21px; color: var(--parchment); fill: none; }
+
+    /* SIZE POPUP */
+    .size-popup { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+    .size-popup.open { opacity: 1; pointer-events: all; }
+    .size-popup__backdrop { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
+    .size-popup__content { position: relative; background: var(--parchment); max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; padding: 40px 32px; }
+    .size-popup.open .size-popup__content { transform: translateY(0); }
+    .size-popup__close { position: absolute; top: 14px; right: 14px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; color: var(--black); cursor: pointer; }
+    .size-popup__title { font-family: var(--font-heading); font-weight: 600; font-size: 1.3rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+    .size-popup__subtitle { font-family: var(--font-body); font-weight: 300; font-size: 0.85rem; color: rgba(0,0,0,0.5); margin-bottom: 24px; }
+    .size-popup table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+    .size-popup th { font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.65rem; padding: 10px 12px; border-bottom: 1px solid var(--black); text-align: left; }
+    .size-popup td { padding: 9px 12px; border-bottom: 1px solid rgba(0,0,0,0.08); }
+
+    /* NAV */
+    .nav { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-height); display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(20px, 4vw, 48px); z-index: 1000; background: rgba(244,241,237,0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+    .nav__logo { display: flex; align-items: center; }
+    .nav__logo img { height: 22px; }
+    .nav__links { display: flex; gap: clamp(16px, 3vw, 36px); list-style: none; }
+    .nav__links a { font-size: 0.68rem; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; position: relative; padding: 4px 0; }
+    .nav__links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--black); transition: width 0.3s; }
+    .nav__links a:hover::after, .nav__links a.active::after { width: 100%; }
+    .nav__hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; z-index: 1001; }
+    .nav__hamburger span { width: 22px; height: 1px; background: var(--black); transition: all 0.3s; }
+    .nav__hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+    .nav__hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav__hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+    .nav__mobile-menu { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--parchment); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 999; overflow-y: auto; padding: 100px 20px; }
+    .nav__mobile-menu.open { opacity: 1; pointer-events: all; }
+    .nav__mobile-menu a { font-size: 1rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; }
+    .nav__mobile-menu-f { margin-top: 40px; }
+    .nav__mobile-menu-f img { width: 80px; height: auto; }
+    /* Dropdown in mobile menu */
+    .nav__dropdown, .nav__submenu { text-align: center; position: relative; }
+    .nav__dropdown-trigger, .nav__submenu-trigger {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 1rem; letter-spacing: 0.2em; text-transform: uppercase;
+      font-family: inherit; cursor: pointer; background: none; border: none;
+      color: var(--black); padding: 0;
+    }
+    .nav__submenu-trigger { font-size: 0.85rem; letter-spacing: 0.15em; color: rgba(0,0,0,0.7); }
+    /* Only rotate the arrow belonging to THIS trigger (direct child), not nested ones */
+    .nav__dropdown-menu, .nav__submenu-menu { display: none; flex-direction: column; gap: 16px; margin-top: 20px; padding: 16px 0; }
+    .nav__submenu-menu { gap: 12px; margin-top: 14px; padding: 12px 0 0; }
+    .nav__dropdown.open > .nav__dropdown-menu { display: flex; }
+    .nav__submenu.open > .nav__submenu-menu { display: flex; }
+    .nav__dropdown-menu a { font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(0,0,0,0.7); }
+    .nav__submenu-menu a { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(0,0,0,0.55); }
+    @media (max-width: 768px) { .nav__links { display: none; } .nav__hamburger { display: flex; } }
+
+    /* FOOTER */
+    .footer { background: var(--black); color: var(--parchment); padding: 36px clamp(20px, 4vw, 40px) 24px; }
+    .footer__inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+    .footer__brand { display: flex; align-items: center; }
+    .footer__brand img { height: 40px; width: auto; }
+    .footer__links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .footer__links a { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(244,241,237,0.5); transition: color 0.3s; }
+    .footer__links a:hover { color: var(--parchment); }
+    .footer__bottom { max-width: 1200px; margin: 28px auto 0; padding-top: 16px; border-top: 1px solid rgba(244,241,237,0.1); display: flex; justify-content: space-between; align-items: center; font-size: 0.65rem; letter-spacing: 0.1em; color: rgba(244,241,237,0.3); }
+
+    /* --- Dropdown chevron: drawn in CSS so direction never depends on font --- */
+    .nav__dropdown-arrow {
+      width: 7px; height: 7px;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      display: inline-block;
+      /* 45deg = pointing DOWN when collapsed */
+      transform: rotate(45deg);
+      transform-origin: center;
+      transition: transform 0.3s ease;
+      margin-bottom: 3px;
+      flex-shrink: 0;
+    }
+    /* Expanded = pointing UP (only for its OWN trigger, not nested ones) */
+    .nav__dropdown.open > .nav__dropdown-trigger > .nav__dropdown-arrow { transform: rotate(-135deg); margin-bottom: 0; }
+    .nav__submenu.open  > .nav__submenu-trigger  > .nav__dropdown-arrow { transform: rotate(-135deg); margin-bottom: 0; }
+
+    /* --- Kill the grey/black tap box, replace with a micro-interaction --- */
+    .nav__mobile-menu a,
+    .nav__dropdown-trigger,
+    .nav__submenu-trigger,
+    .nav__hamburger,
+    .footer__links a {
+      -webkit-tap-highlight-color: transparent;
+      tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      transition: opacity 0.18s ease, transform 0.18s ease, letter-spacing 0.25s ease;
+    }
+    /* Micro-interaction: gentle press-in + slight letter-spacing bloom */
+    .nav__mobile-menu a:active,
+    .nav__dropdown-trigger:active,
+    .nav__submenu-trigger:active {
+      opacity: 0.55;
+      transform: scale(0.96);
+    }
+    @media (hover: hover) {
+      .nav__mobile-menu a:hover,
+      .nav__dropdown-trigger:hover,
+      .nav__submenu-trigger:hover { letter-spacing: 0.26em; opacity: 0.7; }
+      .nav__submenu-trigger:hover { letter-spacing: 0.2em; }
+    }
+    /* DESKTOP — bigger & darker product name/price (phone unchanged) */
+    @media (min-width: 1024px) {
+      .product-card__name { font-size: 1rem; color: #000; }
+      .product-card__price { font-size: 0.95rem; color: rgba(0,0,0,0.75); }
+      #grid-looks .look-card__name { font-size: 1rem; }
+      #grid-looks .look-card__count { font-size: 0.95rem; }
+    }
+  </style>
+  <link rel="stylesheet" href="css/logo.css?v=3">
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav__logo"><img src="assets/logo/Forewrd_Studio_black.svg" alt="FOREWRD"></a>
+    <ul class="nav__links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="collection.html" class="active">Collection</a></li>
+      <li><a href="size-guide.html">Size Guide</a></li>
+      <li><a href="story.html">Story</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="nav__hamburger" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="nav__mobile-menu" id="mob">
+    <a href="index.html">Home</a>
+    <div class="nav__dropdown" id="dropdown">
+      <button class="nav__dropdown-trigger" onclick="toggleDropdown()">Collection <span class="nav__dropdown-arrow"></span></button>
+      <div class="nav__dropdown-menu">
+        <a href="collection.html#looks">The Opening Act &mdash; Issue: 001</a>
+        <div class="nav__submenu" id="submenu">
+          <button class="nav__submenu-trigger" onclick="toggleSubmenu(event)">Category <span class="nav__dropdown-arrow"></span></button>
+          <div class="nav__submenu-menu">
+            <a href="collection.html#tops">Tops</a>
+            <a href="collection.html#bottoms">Bottoms</a>
+            <a href="collection.html#jackets">Jackets</a>
+            <!-- HIDDEN (production paused): <a href="collection.html#jewellery">Fine Jewellery</a> -->
+            <a href="collection.html#accessories">Accessories</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a href="size-guide.html">Size Guide</a>
+    <a href="story.html">Story</a>
+    <a href="contact.html">Contact</a>
+    <div class="nav__mobile-menu-f"><img src="assets/logo/f_animated.webp" alt="F"></div>
+  </div>
+
+  <!-- HEADER -->
+  <div class="collection__header">
+    <p class="section-label">Collection</p>
+    <h1 class="collection__title">The Opening Act &mdash; Issue: 001</h1>
+  </div>
+
+  <!-- TABS -->
+  <div class="collection__tabs">
+    <button class="collection__tab active" data-target="looks">Looks</button>
+    <button class="collection__tab" data-target="tops">Tops</button>
+    <button class="collection__tab" data-target="bottoms">Bottoms</button>
+    <button class="collection__tab" data-target="jackets">Jackets</button>
+    <!-- HIDDEN (production paused): <button class="collection__tab" data-target="jewellery">Fine Jewellery</button> -->
+    <button class="collection__tab" data-target="accessories">Accessories</button>
+  </div>
+
+  <!-- GRIDS -->
+  <div class="collection__grid active" data-category="looks" id="grid-looks"></div>
+  <div class="collection__grid" data-category="tops" id="grid-tops"></div>
+  <div class="collection__grid" data-category="bottoms" id="grid-bottoms"></div>
+  <div class="collection__grid" data-category="jackets" id="grid-jackets"></div>
+  <!-- HIDDEN (production paused): <div class="collection__grid" data-category="jewellery" id="grid-jewellery"></div> -->
+  <div class="collection__grid" data-category="accessories" id="grid-accessories"></div>
+
+  <!-- MODAL -->
+  <div class="product-modal" id="productModal">
+    <div class="product-modal__backdrop" onclick="closeProductModal()"></div>
+    <div class="product-modal__content">
+      <button class="product-modal__close" onclick="closeProductModal()">×</button>
+      <div class="product-modal__image-wrap" id="modalImageWrap"></div>
+      <div class="product-modal__details">
+        <h2 class="product-modal__name" id="modalName"></h2>
+        <p class="product-modal__price" id="modalPrice"></p>
+        <ul class="product-modal__desc" id="modalDesc"></ul>
+        <a href="#" id="modalWhatsapp" target="_blank" class="cta-chrome" style="width:100%;"><span>Enquire on WhatsApp</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOOK DETAIL OVERLAY -->
+  <div class="look-detail" id="lookDetail">
+    <div class="look-detail__header">
+      <button class="look-detail__back" onclick="closeLookDetail()">
+        <svg width="19" height="25" viewBox="0 0 19 25" fill="currentColor" style="transform:scaleX(-1);width:12px;height:16px;"><path d="M13.5753 12.05C6.37532 11.65 1.57532 3.88332 0.0753174 0.0499878H4.57532L4.57767 0.0570117C5.57768 3.04142 7.08394 7.53672 18.0753 10.5344V13.5344C14.0753 15.05 5.07532 19.5344 4.57532 24.05H0.0753174C3.27532 16.45 10.4087 12.8833 13.5753 12.05Z"/></svg>
+        <span>Back to Collection</span>
+      </button>
+    </div>
+    <div class="look-detail__inner">
+      <div class="look-detail__hero" id="lookDetailHero"></div>
+      <div class="look-detail__right">
+        <div class="look-detail__info" id="lookDetailInfo"></div>
+        <div class="look-detail__pieces-label">SHOP THIS LOOK</div>
+        <div class="look-detail__pieces" id="lookDetailPieces"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING -->
+  <div class="floating-btns">
+    <a href="https://wa.me/919167077708" target="_blank" class="floating-btn floating-btn--whatsapp" title="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.112.549 4.098 1.51 5.83L0 24l6.326-1.46A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75c-1.89 0-3.69-.49-5.28-1.41l-.38-.22-3.93.91.99-3.81-.25-.39A9.69 9.69 0 012.25 12 9.75 9.75 0 0112 2.25 9.75 9.75 0 0121.75 12 9.75 9.75 0 0112 21.75z"/></svg></a>
+    <button class="floating-btn floating-btn--size" id="sizeGuideBtn" title="Size Guide"><svg viewBox="0 0 364 364" fill="none" stroke="currentColor" stroke-width="14"><path d="M75.8335 151.344C75.8335 168.274 102.995 182 136.5 182V151.344C136.5 136.266 136.5 128.726 130.472 124.127C124.443 119.527 118.467 121.248 106.514 124.689C88.1896 129.964 75.8335 139.925 75.8335 151.344Z" stroke-linejoin="round"/><path d="M242.667 128.917C242.667 158.234 195.134 182 136.5 182C77.866 182 30.3335 158.234 30.3335 128.917C30.3335 99.5997 77.866 75.8335 136.5 75.8335C195.134 75.8335 242.667 99.5997 242.667 128.917Z"/><path d="M30.3335 136.5V237.612C30.3335 265.532 77.866 288.167 136.5 288.167H303.334C317.633 288.167 324.782 288.167 329.225 283.724C333.667 279.282 333.667 272.132 333.667 257.833V212.333C333.667 198.034 333.667 190.885 329.225 186.442C324.782 182 317.633 182 303.334 182H136.5"/><path d="M273 288.167V257.833M212.333 288.167V257.833M151.667 288.167V257.833M91 280.583V250.25" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </div>
+
+  <!-- SIZE POPUP -->
+  <div class="size-popup" id="sizePopup">
+    <div class="size-popup__backdrop" onclick="closeSizePopup()"></div>
+    <div class="size-popup__content">
+      <button class="size-popup__close" onclick="closeSizePopup()">×</button>
+      <h3 class="size-popup__title">Size Guide</h3>
+      <p class="size-popup__subtitle">All pieces are made-to-order</p>
+      <table><thead><tr><th>Size</th><th>Bust</th><th>Waist</th><th>Hips</th></tr></thead><tbody><tr><td>XS</td><td>32"</td><td>26"</td><td>35"</td></tr><tr><td>S</td><td>34"</td><td>28"</td><td>37"</td></tr><tr><td>M</td><td>36"</td><td>30"</td><td>39"</td></tr><tr><td>L</td><td>38"</td><td>32"</td><td>41"</td></tr><tr><td>XL</td><td>40"</td><td>34"</td><td>43"</td></tr></tbody></table>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <span class="footer__brand"><img src="assets/logo/f_animated.webp" alt="FOREWRD"></span>
+      <div class="footer__links"><a href="index.html">Home</a><a href="collection.html">Collection</a><a href="size-guide.html">Size Guide</a><a href="story.html">Story</a><a href="contact.html">Contact</a></div>
+    </div>
+    <div class="footer__bottom"><span>&copy; 2026 Forewrd Studio. All rights reserved.</span><a href="https://www.instagram.com/forewrd.studio/" target="_blank" style="color:rgba(244,241,237,0.5);">@forewrd.studio</a></div>
+  </footer>
+
+  <script>
+
+    /* SIZE POPUP */
+    document.getElementById('sizeGuideBtn').addEventListener('click', function() { document.getElementById('sizePopup').classList.add('open'); document.body.style.overflow = 'hidden'; });
+    function closeSizePopup() { document.getElementById('sizePopup').classList.remove('open'); document.body.style.overflow = ''; }
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { closeSizePopup(); closeProductModal(); closeLookDetail(); } });
+
+    /* PRODUCT DATA */
+    var ARROW = '<svg width="19" height="25" viewBox="0 0 19 25" fill="currentColor"><path d="M13.5753 12.05C6.37532 11.65 1.57532 3.88332 0.0753174 0.0499878H4.57532L4.57767 0.0570117C5.57768 3.04142 7.08394 7.53672 18.0753 10.5344V13.5344C14.0753 15.05 5.07532 19.5344 4.57532 24.05H0.0753174C3.27532 16.45 10.4087 12.8833 13.5753 12.05Z"/></svg>';
+    var WA = '<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.112.549 4.098 1.51 5.83L0 24l6.326-1.46A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75c-1.89 0-3.69-.49-5.28-1.41l-.38-.22-3.93.91.99-3.81-.25-.39A9.69 9.69 0 012.25 12 9.75 9.75 0 0112 2.25 9.75 9.75 0 0121.75 12 9.75 9.75 0 0112 21.75z"/></svg>';
+
+    /* Catalogue is loaded from data/products.json at the bottom of this script.
+       These holders are filled by loadCollection(). Prices are shown or hidden
+       site-wide based on settings.showPrices in that same file. */
+    var products = {};
+    var productMap = {};
+    var looks = [];
+    var SHOW_PRICES = true;
+
+    function buildCard(p) {
+      var c = document.createElement('div'); c.className = 'product-card';
+      var multi = p.images.length > 1, path = 'assets/products/' + p.folder + '/';
+      var imgs = p.images.map(function(f,i) { return '<img src="'+path+f+'" alt="'+p.name+'" loading="lazy" class="'+(i===0?'active':'')+'" data-index="'+i+'">'; }).join('');
+      var arrows = '', dots = '';
+      if (multi) {
+        arrows = '<button class="product-card__arrow product-card__arrow--left" data-dir="-1">'+ARROW+'</button><button class="product-card__arrow product-card__arrow--right" data-dir="1">'+ARROW+'</button>';
+        dots = '<div class="product-card__dots">'+p.images.map(function(_,i){ return '<span class="product-card__dot '+(i===0?'active':'')+'" data-index="'+i+'"></span>'; }).join('')+'</div>';
+      }
+      var wa = 'https://wa.me/919167077708?text='+encodeURIComponent("Hi, I'm interested in the "+p.name);
+      var priceHtml = SHOW_PRICES ? '<p class="product-card__price">'+p.price+'</p>' : '';
+      c.innerHTML = '<div class="product-card__image-wrap">'+imgs+arrows+dots+'</div><div class="product-card__info"><p class="product-card__name">'+p.name+'</p>'+priceHtml+'</div><a href="'+wa+'" target="_blank" class="product-card__whatsapp" title="Enquire">'+WA+'</a>';
+      if (multi) {
+        var idx = 0;
+        var imgEls = c.querySelectorAll('.product-card__image-wrap img');
+        var dotEls = c.querySelectorAll('.product-card__dot');
+        function show(n) {
+          idx = (n + p.images.length) % p.images.length;
+          imgEls.forEach(function(im){ im.classList.remove('active'); });
+          dotEls.forEach(function(dt){ dt.classList.remove('active'); });
+          imgEls[idx].classList.add('active');
+          if (dotEls[idx]) dotEls[idx].classList.add('active');
+        }
+        /* Desktop hover arrows */
+        c.querySelectorAll('.product-card__arrow').forEach(function(b) {
+          b.addEventListener('click', function(e) { e.stopPropagation(); show(idx + parseInt(b.dataset.dir)); });
+        });
+        /* Tap a dot */
+        dotEls.forEach(function(dt) {
+          dt.addEventListener('click', function(e){ e.stopPropagation(); show(parseInt(dt.dataset.index)); });
+        });
+        /* Mobile swipe on the image */
+        var sx = 0, sy = 0, moved = false;
+        var wrap = c.querySelector('.product-card__image-wrap');
+        wrap.addEventListener('touchstart', function(e){ sx = e.changedTouches[0].screenX; sy = e.changedTouches[0].screenY; moved = false; }, {passive:true});
+        wrap.addEventListener('touchmove', function(e){ if (Math.abs(e.changedTouches[0].screenX - sx) > 8) moved = true; }, {passive:true});
+        wrap.addEventListener('touchend', function(e){
+          var dx = sx - e.changedTouches[0].screenX, dy = sy - e.changedTouches[0].screenY;
+          if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { show(idx + (dx > 0 ? 1 : -1)); }
+        }, {passive:true});
+      }
+      /* Tap card (not a swipe, not arrow/wa) opens the product */
+      c.addEventListener('click', function(e) {
+        if (e.target.closest('.product-card__whatsapp')||e.target.closest('.product-card__arrow')||e.target.closest('.product-card__dot')) return;
+        openProductModal(p);
+      });
+      return c;
+    }
+
+    function renderGrids() {
+      Object.keys(products).forEach(function(cat) {
+        var g = document.getElementById('grid-'+cat);
+        if (!g) return; /* skips categories with no grid on the page */
+        g.innerHTML = '';
+        products[cat].forEach(function(p) { g.appendChild(buildCard(p)); });
+      });
+    }
+
+    /* BUILD LOOK CARDS — looks come from data/products.json */
+    function renderLooks() {
+      var lookGrid = document.getElementById('grid-looks');
+      if (!lookGrid) return;
+      lookGrid.innerHTML = '';
+      looks.forEach(function(look, i) {
+        var card = document.createElement('div');
+        card.className = 'look-card';
+        card.innerHTML = '<div class="look-card__image"><img src="'+look.img+'" alt="'+look.name+'" loading="lazy"></div><div class="look-card__info"><p class="look-card__name">'+look.name+'</p><p class="look-card__count">'+look.pieces.length+' pieces</p></div>';
+        card.addEventListener('click', function() { openLookDetail(look); });
+        lookGrid.appendChild(card);
+      });
+    }
+
+    /* LOOK DETAIL */
+    function openLookDetail(look) {
+      /* 1-piece looks: open the product modal directly instead of the shop-this-look page */
+      if (look.pieces.length === 1) {
+        var only = productMap[look.pieces[0]];
+        if (only) { openProductModal(only); return; }
+      }
+      var detail = document.getElementById('lookDetail');
+      document.getElementById('lookDetailHero').innerHTML = '<img src="'+look.img+'" alt="'+look.name+'"><div class="look-detail__hero-name">'+look.name+'</div>';
+      document.getElementById('lookDetailInfo').innerHTML = '<h2 class="look-detail__name">'+look.name+'</h2>';
+      var piecesGrid = document.getElementById('lookDetailPieces');
+      piecesGrid.innerHTML = '';
+      piecesGrid.setAttribute('data-count', look.pieces.length);
+      look.pieces.forEach(function(pid) {
+        var p = productMap[pid];
+        if (p) piecesGrid.appendChild(buildCard(p));
+      });
+      detail.classList.add('open');
+      detail.scrollTop = 0;
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLookDetail() {
+      document.getElementById('lookDetail').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    /* TABS */
+    document.querySelectorAll('.collection__tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var t = tab.dataset.target;
+        document.querySelectorAll('.collection__tab').forEach(function(x){ x.classList.remove('active'); });
+        tab.classList.add('active');
+        document.querySelectorAll('.collection__grid').forEach(function(g){ g.classList.toggle('active', g.dataset.category===t); });
+      });
+    });
+
+    /* MODAL */
+    var mIdx = 0, mProd = null;
+    function openProductModal(p) {
+      mProd = p; mIdx = 0;
+      var wrap = document.getElementById('modalImageWrap'), path = 'assets/products/'+p.folder+'/', multi = p.images.length > 1;
+      var h = p.images.map(function(f,i){ return '<img src="'+path+f+'" alt="'+p.name+'" class="'+(i===0?'active':'')+'" data-index="'+i+'">'; }).join('');
+      if (multi) { h += '<button class="modal__arrow modal__arrow--left" onclick="modalNav(-1)">'+ARROW+'</button><button class="modal__arrow modal__arrow--right" onclick="modalNav(1)">'+ARROW+'</button><div class="modal__dots">'+p.images.map(function(_,i){ return '<span class="modal__dot '+(i===0?'active':'')+'" onclick="modalGoTo('+i+')"></span>'; }).join('')+'</div>'; }
+      wrap.innerHTML = h;
+      document.getElementById('modalName').textContent = p.name;
+      var mPrice = document.getElementById('modalPrice');
+      mPrice.textContent = SHOW_PRICES ? p.price : '';
+      mPrice.style.display = SHOW_PRICES ? '' : 'none';
+      var dl = document.getElementById('modalDesc'); dl.innerHTML = '';
+      if (p.desc) p.desc.split('|').forEach(function(s){ var li = document.createElement('li'); li.textContent = s.trim(); dl.appendChild(li); });
+      document.getElementById('modalWhatsapp').href = 'https://wa.me/919167077708?text='+encodeURIComponent("Hi, I'm interested in the "+p.name);
+      document.getElementById('productModal').classList.add('open'); document.body.style.overflow = 'hidden';
+    }
+    function modalNav(d) { if(!mProd) return; mIdx=(mIdx+d+mProd.images.length)%mProd.images.length; updModal(); }
+    function modalGoTo(i) { mIdx=i; updModal(); }
+    function updModal() {
+      var w = document.getElementById('modalImageWrap');
+      w.querySelectorAll('img').forEach(function(i){ i.classList.remove('active'); });
+      w.querySelectorAll('.modal__dot').forEach(function(d){ d.classList.remove('active'); });
+      var t = w.querySelector('img[data-index="'+mIdx+'"]'); if(t) t.classList.add('active');
+      var dots = w.querySelectorAll('.modal__dot'); if(dots[mIdx]) dots[mIdx].classList.add('active');
+    }
+    function closeProductModal() { document.getElementById('productModal').classList.remove('open'); document.body.style.overflow=''; }
+    var mtx=0;
+    document.getElementById('modalImageWrap').addEventListener('touchstart',function(e){mtx=e.changedTouches[0].screenX;},{passive:true});
+    document.getElementById('modalImageWrap').addEventListener('touchend',function(e){var d=mtx-e.changedTouches[0].screenX;if(Math.abs(d)>50&&mProd&&mProd.images.length>1)modalNav(d>0?1:-1);},{passive:true});
+  
+    /* NAV — shared across all pages */
+    var ham = document.getElementById('ham'), mob = document.getElementById('mob');
+    if (ham && mob) {
+      ham.addEventListener('click', function() {
+        ham.classList.toggle('open');
+        mob.classList.toggle('open');
+        document.body.style.overflow = mob.classList.contains('open') ? 'hidden' : '';
+      });
+      mob.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          ham.classList.remove('open');
+          mob.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      });
+    }
+    function toggleDropdown() {
+      var d = document.getElementById('dropdown');
+      if (d) d.classList.toggle('open');
+    }
+    function toggleSubmenu(e) {
+      e.stopPropagation();
+      var s = document.getElementById('submenu');
+      if (s) s.classList.toggle('open');
+    }
+    /* Open the tab named in the URL hash, e.g. collection.html#tops
+       Also supports collection.html#look-N to open a look detail overlay. */
+    function applyHash() {
+      var h = window.location.hash.replace('#','');
+      if (!h) return;
+      var lm = h.match(/^look-(\d+)$/);
+      if (lm) {
+        var looksTab = document.querySelector('.collection__tab[data-target="looks"]');
+        if (looksTab) looksTab.click();
+        var idx = parseInt(lm[1], 10) - 1;
+        if (looks[idx]) { setTimeout(function(){ openLookDetail(looks[idx]); }, 60); }
+        return;
+      }
+      var tab = document.querySelector('.collection__tab[data-target="' + h + '"]');
+      if (tab) tab.click();
+    }
+
+    /* LOAD CATALOGUE — reads data/products.json (the file the admin panel edits). */
+    (function loadCollection() {
+      fetch('data/products.json', { cache: 'no-store' })
+        .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+        .then(function(data){
+          SHOW_PRICES = data.settings ? data.settings.showPrices !== false : true;
+          products = {};
+          (data.products || []).forEach(function(p){
+            if (p.status && p.status !== 'live') return;
+            (products[p.category] = products[p.category] || []).push(p);
+          });
+          productMap = {};
+          (data.products || []).forEach(function(p){ productMap[p.id] = p; });
+          looks = (data.looks || []).filter(function(l){ return !l.status || l.status === 'live'; });
+          renderGrids();
+          renderLooks();
+          applyHash();
+        })
+        .catch(function(err){ console.error('Could not load collection data:', err); });
+    })();
+  </script>
+</body>
+</html>
