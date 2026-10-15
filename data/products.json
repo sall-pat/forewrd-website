@@ -13,7 +13,7 @@
     {
       "id": "mbbs",
       "name": "Metallic Blue Balloon Sleeve Top",
-      "price": "₹ 6,700",
+      "price": "₹ 8,000",
       "category": "tops",
       "folder": "tops",
       "images": [
@@ -488,7 +488,7 @@
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-15T11:11:46.243Z",
+    "updatedAt": "2026-10-15T11:18:08.152Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
