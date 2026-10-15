@@ -1,0 +1,494 @@
+{
+  "settings": {
+    "showPrices": true,
+    "currency": "INR"
+  },
+  "categories": [
+    "tops",
+    "bottoms",
+    "jackets",
+    "accessories"
+  ],
+  "products": [
+    {
+      "id": "mbbs",
+      "name": "Metallic Blue Balloon Sleeve Top",
+      "price": "₹ 6,700",
+      "category": "tops",
+      "folder": "tops",
+      "images": [
+        "mbbs-1.jpeg",
+        "mbbs-2.jpeg",
+        "mbbs-3.jpeg",
+        "mbbs-4.jpeg",
+        "mbbs-5.jpeg"
+      ],
+      "desc": "Dramatic Balloon sleeves with metal hardware detailing|Corset back panel to adjust and cinch the waist|Jacket zipper opening|Fit: Fitted silhouette with an adjustable corset back",
+      "status": "live"
+    },
+    {
+      "id": "mb-bra",
+      "name": "Metallic Blue Bralette",
+      "price": "₹ 5,300",
+      "category": "tops",
+      "folder": "tops",
+      "images": [
+        "mb-bra-1.jpeg",
+        "mb-bra-2.jpeg",
+        "mb-bra-3.jpeg"
+      ],
+      "desc": "Bralette with adjustable straps and Celtic knot button detailing|Hook and eye back closure with adjustable hooks",
+      "status": "live"
+    },
+    {
+      "id": "cbc",
+      "name": "Champagne Back Cowl Sleeveless Top",
+      "price": "₹ 4,800",
+      "category": "tops",
+      "folder": "tops",
+      "images": [
+        "cbc-1.jpeg",
+        "cbc-2.jpeg",
+        "cbc-3.jpeg",
+        "cbc-4.jpeg"
+      ],
+      "desc": "Champagne back cowl sleeveless top|Concealed back waist adjuster to cinch|Crushed textured fabric",
+      "status": "live"
+    },
+    {
+      "id": "apc",
+      "name": "Asymmetrical Peplum Corset",
+      "price": "₹ 6,300",
+      "category": "tops",
+      "folder": "tops",
+      "images": [
+        "apc-1.jpeg",
+        "apc-2.jpeg",
+        "apc-3.jpeg",
+        "apc-4.jpeg",
+        "apc-5.jpeg",
+        "apc-6.jpeg"
+      ],
+      "desc": "Corset made up of 32 panels|Asymmetrical neckline and hemline|Size invisible jacket zip opener|Baby Pink lace up back adjuster",
+      "status": "live"
+    },
+    {
+      "id": "mr-bra",
+      "name": "Maroon Bralette",
+      "price": "₹ 4,700",
+      "category": "tops",
+      "folder": "tops",
+      "images": [
+        "mr-bra-1.jpeg",
+        "mr-bra-2.jpeg",
+        "mr-bra-3.jpeg",
+        "mr-bra-4.jpeg"
+      ],
+      "desc": "Bralette with adjustable straps and Celtic button detailing|Hook and eye back closure with adjustable hooks",
+      "status": "live"
+    },
+    {
+      "id": "stu",
+      "name": "Silver Tie-up Tshirt Top",
+      "price": "₹ 4,000",
+      "category": "tops",
+      "folder": "tops",
+      "images": [
+        "stu-1.jpeg",
+        "stu-2.jpeg",
+        "stu-3.jpeg",
+        "stu-4.jpeg"
+      ],
+      "desc": "Silver T-shirt top with a side tie up detail|Half sleeves with fold over|One side off shoulder|Asymmetrical hem",
+      "status": "live"
+    },
+    {
+      "id": "ibt",
+      "name": "Deep Neck Duo-Tone Top",
+      "price": "₹ 4,400",
+      "category": "tops",
+      "folder": "tops",
+      "images": [
+        "ibt-1.jpeg",
+        "ibt-2.jpeg",
+        "ibt-3.jpeg",
+        "ibt-4.jpeg",
+        "ibt-5.jpeg"
+      ],
+      "desc": "Ice blue and light beige duo tone tissue organza fabric|Deep neckline featuring a tie-up closure|Tiered balloon sleeves|Elastic cuff",
+      "status": "live"
+    },
+    {
+      "id": "cfc",
+      "name": "Champagne Front Cowl Top",
+      "price": "₹ 5,200",
+      "category": "tops",
+      "folder": "tops",
+      "images": [
+        "cfc-1.jpeg",
+        "cfc-2.jpeg",
+        "cfc-3.jpeg",
+        "cfc-4.jpeg"
+      ],
+      "desc": "Deep cowl neck tie up top|3/4th length asymmetrical sleeves|Concealed back waist adjuster to cinch|Crushed textured fabric",
+      "status": "live"
+    },
+    {
+      "id": "mbw",
+      "name": "Metallic Blue Wrap Skirt",
+      "price": "₹ 6,800",
+      "category": "bottoms",
+      "folder": "bottoms",
+      "images": [
+        "mbw-1.jpeg",
+        "mbw-2.jpeg",
+        "mbw-3.jpeg",
+        "mbw-4.jpeg"
+      ],
+      "desc": "Wrap skirt with a silver buckle adjuster|Pleated detail on side",
+      "status": "live"
+    },
+    {
+      "id": "chm",
+      "name": "Champagne Tailored Trousers",
+      "price": "₹ 5,400",
+      "category": "bottoms",
+      "folder": "bottoms",
+      "images": [
+        "chm-1.jpeg",
+        "chm-2.jpeg",
+        "chm-3.jpeg",
+        "chm-4.jpeg"
+      ],
+      "desc": "High waist trouser with front pleat detailing|Side slit pocket|Front zip with hook & eye closure|0.5\" belt loops",
+      "status": "live"
+    },
+    {
+      "id": "cbj",
+      "name": "Cherry Brown Jorts",
+      "price": "₹ 5,600",
+      "category": "bottoms",
+      "folder": "bottoms",
+      "images": [
+        "cbj-1.jpeg",
+        "cbj-2.jpeg"
+      ],
+      "desc": "High waist Faux Leather Jorts|Front zip — hook & eye closure|1\" belt loop",
+      "status": "live"
+    },
+    {
+      "id": "bbp",
+      "name": "Brown Quad Baggy Pants",
+      "price": "₹ 7,300",
+      "category": "bottoms",
+      "folder": "bottoms",
+      "images": [
+        "bbp-1.jpeg",
+        "bbp-2.jpeg",
+        "bbp-3.jpeg",
+        "bbp-4.jpeg"
+      ],
+      "desc": "High waist — Taffeta fabric (paper like texture)|Centre zip with 2 hook and eyes on waist band|Side slit pockets|3\" waistband and side elastic waist adjuster",
+      "status": "live"
+    },
+    {
+      "id": "hrm",
+      "name": "Black Harem Pants",
+      "price": "₹ 4,200",
+      "category": "bottoms",
+      "folder": "bottoms",
+      "images": [
+        "hrm-1.jpeg",
+        "hrm-2.jpeg",
+        "hrm-3.jpeg"
+      ],
+      "desc": "High waist Harem pants with a bottom cuff tie detail|Side zip opening|Side slit pockets",
+      "status": "live"
+    },
+    {
+      "id": "bkp",
+      "name": "Black Baggy Pants",
+      "price": "₹ 5,100",
+      "category": "bottoms",
+      "folder": "bottoms",
+      "images": [
+        "bkp-1.jpeg",
+        "bkp-2.jpeg",
+        "bkp-3.jpeg",
+        "bkp-4.jpeg",
+        "bkp-5.jpeg"
+      ],
+      "desc": "Baggy pants with buckle waist adjuster|Side zip opening|Adjuster bottom hem belt with buckle closure|Side slit pockets",
+      "status": "live"
+    },
+    {
+      "id": "bfd",
+      "name": "Flare Black Denim Pants",
+      "price": "₹ 5,000",
+      "category": "bottoms",
+      "folder": "bottoms",
+      "images": [
+        "bfd-1.jpeg",
+        "bfd-2.jpeg",
+        "bfd-3.jpeg"
+      ],
+      "desc": "High Waist denim pants with 1\" belt loops|Front zip and hook & eye closure|Dark grey topstitch detailing|Side slit pocket with concealed elastic waist adjuster",
+      "status": "live"
+    },
+    {
+      "id": "dzs",
+      "name": "Denim Zipper Skirt",
+      "price": "₹ 4,400",
+      "category": "bottoms",
+      "folder": "bottoms",
+      "images": [
+        "dzs-1.jpeg",
+        "dzs-2.jpeg",
+        "dzs-3.jpeg",
+        "dzs-4.jpeg"
+      ],
+      "desc": "Blue denim wrap skirt with front side jacket zipper opening|3\" waistband — 1\" belt loops — elastic waist adjusters|Back pocket with logo detailing|Red top stitch detailing",
+      "status": "live"
+    },
+    {
+      "id": "cdj",
+      "name": "Cropped Denim Jacket",
+      "price": "₹ 5,100",
+      "category": "jackets",
+      "folder": "jackets",
+      "images": [
+        "cdj-1.jpeg",
+        "cdj-2.jpeg",
+        "cdj-3.jpeg",
+        "cdj-4.jpeg"
+      ],
+      "desc": "Blue denim cropped jacket — Rust denim collar and sleeve fold over|Celtic knot button front closure — Back yoke with logo charm|Red top stitch detailing|Shoulder pads",
+      "status": "live"
+    },
+    {
+      "id": "fee",
+      "name": "Floral Enamel Earring",
+      "price": "5.72g · 22kt Gold",
+      "category": "jewellery",
+      "folder": "jewellery",
+      "images": [
+        "fee.jpeg"
+      ],
+      "desc": "Earring with Floral enamel Motif|22kt Gold",
+      "status": "hidden"
+    },
+    {
+      "id": "melb",
+      "name": "Maroon Enamel Link Bracelet",
+      "price": "20.04g · 22kt Gold",
+      "category": "jewellery",
+      "folder": "jewellery",
+      "images": [
+        "melb.jpeg"
+      ],
+      "desc": "Matte gold & maroon enamel link bracelet|22kt Gold",
+      "status": "hidden"
+    },
+    {
+      "id": "slb",
+      "name": "Sculptural Link Bracelet",
+      "price": "10.18g · 22kt Gold",
+      "category": "jewellery",
+      "folder": "jewellery",
+      "images": [
+        "slb.jpeg"
+      ],
+      "desc": "High polish sculptural link bracelet|22kt Gold",
+      "status": "hidden"
+    },
+    {
+      "id": "eme",
+      "name": "Enamel Maze Earrings",
+      "price": "7.11g · 22kt Gold",
+      "category": "jewellery",
+      "folder": "jewellery",
+      "images": [
+        "eme.jpeg"
+      ],
+      "desc": "Matte Gold & Enamel Maze Earrings|22kt Gold",
+      "status": "hidden"
+    },
+    {
+      "id": "gmee",
+      "name": "Gold & Maroon Enamel Earrings",
+      "price": "8.2g · 22kt Gold",
+      "category": "jewellery",
+      "folder": "jewellery",
+      "images": [
+        "gmee.jpeg"
+      ],
+      "desc": "High Polish Gold & Maroon Enamel Earrings|22kt Gold",
+      "status": "hidden"
+    },
+    {
+      "id": "trqb",
+      "name": "Turquoise Bracelet",
+      "price": "26.17g · 22kt Gold",
+      "category": "jewellery",
+      "folder": "jewellery",
+      "images": [
+        "trqb.jpeg"
+      ],
+      "desc": "Matte Gold & Turquoise Bracelet|22kt Gold",
+      "status": "hidden"
+    },
+    {
+      "id": "trs",
+      "name": "Triangle Studs",
+      "price": "6.2g · 22kt Gold",
+      "category": "jewellery",
+      "folder": "jewellery",
+      "images": [
+        "trs.jpeg"
+      ],
+      "desc": "Triangle Studs|22kt Gold",
+      "status": "hidden"
+    },
+    {
+      "id": "bsr",
+      "name": "3 Band Stack Rings",
+      "price": "5.5g total · 22kt Gold",
+      "category": "jewellery",
+      "folder": "jewellery",
+      "images": [
+        "bsr.jpeg"
+      ],
+      "desc": "3 band stack rings|1.8 grams per ring|22kt Gold",
+      "status": "hidden"
+    },
+    {
+      "id": "frgr",
+      "name": "Floral Rose Gold Ring",
+      "price": "3.48g · 22kt Gold",
+      "category": "jewellery",
+      "folder": "jewellery",
+      "images": [
+        "frgr.jpeg"
+      ],
+      "desc": "Floral Rose gold ring|22kt Gold",
+      "status": "hidden"
+    },
+    {
+      "id": "sqrg",
+      "name": "Square Rose Gold Ring",
+      "price": "7.46g · 22kt Gold",
+      "category": "jewellery",
+      "folder": "jewellery",
+      "images": [
+        "sqrg.jpeg"
+      ],
+      "desc": "Square Rose gold ring|22kt Gold",
+      "status": "hidden"
+    },
+    {
+      "id": "pscarf",
+      "name": "Multi-Colour Printed Scarf",
+      "price": "₹ 1,100",
+      "category": "accessories",
+      "folder": "accessories",
+      "images": [
+        "pscarf-1.jpeg",
+        "pscarf-2.jpeg"
+      ],
+      "desc": "Triangular|40\" × 40\" × 71\"|Georgette fabric",
+      "status": "live"
+    }
+  ],
+  "looks": [
+    {
+      "name": "Metallic Blue Set",
+      "img": "assets/lookbook/look-01-metallic-blue.jpeg",
+      "pieces": [
+        "mbbs",
+        "mb-bra",
+        "mbw"
+      ],
+      "status": "live"
+    },
+    {
+      "name": "Cropped Denim Jacket & Denim Zipper Skirt",
+      "img": "assets/lookbook/look-02-denim.jpeg",
+      "pieces": [
+        "cdj",
+        "dzs",
+        "mr-bra"
+      ],
+      "status": "live"
+    },
+    {
+      "name": "Flare Black Denim Pants & Duo-Tone Deep Neck Sheer Top",
+      "img": "assets/lookbook/look-03-icy-blue.jpeg",
+      "pieces": [
+        "bfd",
+        "ibt",
+        "mr-bra"
+      ],
+      "status": "live"
+    },
+    {
+      "name": "Brown Quad Baggy Pants & Maroon Bralette",
+      "img": "assets/lookbook/look-04-maroon-bralette.jpeg",
+      "pieces": [
+        "bbp",
+        "mr-bra"
+      ],
+      "status": "live"
+    },
+    {
+      "name": "Champagne Trouser & Back Cowl Top",
+      "img": "assets/lookbook/look-05-champagne-set.jpeg",
+      "pieces": [
+        "cbc",
+        "chm",
+        "pscarf"
+      ],
+      "status": "live"
+    },
+    {
+      "name": "Asymmetrical Peplum Corset & Cherry Brown Jorts",
+      "img": "assets/lookbook/look-06-peplum-corset-jorts.jpeg",
+      "pieces": [
+        "apc",
+        "cbj"
+      ],
+      "status": "live"
+    },
+    {
+      "name": "Asymmetrical Peplum Corset & Black Harem Pants",
+      "img": "assets/lookbook/look-07-peplum-corset-harem.jpeg",
+      "pieces": [
+        "apc",
+        "hrm"
+      ],
+      "status": "live"
+    },
+    {
+      "name": "Black Baggy Pants & Silver Tie Up T-Shirt Top",
+      "img": "assets/lookbook/look-08-black-pants-silver-top.jpeg",
+      "pieces": [
+        "bkp",
+        "stu"
+      ],
+      "status": "live"
+    },
+    {
+      "name": "Champagne Trouser & Front Cowl Top",
+      "img": "assets/lookbook/look-09-champagne-cowl-set.jpeg",
+      "pieces": [
+        "chm",
+        "cfc",
+        "mr-bra"
+      ],
+      "status": "live"
+    }
+  ],
+  "_meta": {
+    "updatedAt": "2026-10-15T09:43:21.212Z",
+    "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
+  }
+}
