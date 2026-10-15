@@ -397,18 +397,6 @@
       ],
       "desc": "Triangular|40\" × 40\" × 71\"|Georgette fabric",
       "status": "live"
-    },
-    {
-      "id": "new-secret-outfit-7x4f",
-      "name": "New Secret Outfit",
-      "price": "₹ 8,000",
-      "category": "jackets",
-      "folder": "jackets",
-      "images": [
-        "new-secret-outfit-1.jpg"
-      ],
-      "desc": "Hello, world",
-      "status": "live"
     }
   ],
   "looks": [
@@ -500,7 +488,7 @@
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-15T11:21:44.612Z",
+    "updatedAt": "2026-10-15T11:34:47.758Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
