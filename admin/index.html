@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FOREWRD Studio Admin</title>
+<style>
+  /* ===== ONE SETTING TO EDIT: paste your Worker URL below (Step 4 of the runbook) ===== */
+  /* It is set in the <script> at the bottom: CONFIG.WORKER_URL */
+
+  :root{
+    --bg:#f3f1ec; --surface:#fff; --surface-2:#faf8f3; --ink:#1a1815; --muted:#8a8477;
+    --line:#e2ddd3; --accent:#2b2a27; --ok:#3f7d55; --warn:#b5533a; --info:#5a6b8c;
+    --radius:10px; --font:"Josefin Sans","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);-webkit-font-smoothing:antialiased;}
+  button,input,select,textarea{font-family:var(--font);}
+  .hidden{display:none !important;}
+
+  /* ---------- Login ---------- */
+  .login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;}
+  .login .box{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:34px 30px;width:100%;max-width:360px;text-align:center;}
+  .login .brand{font-weight:700;letter-spacing:.18em;font-size:18px;}
+  .login .brand small{display:block;font-size:10px;letter-spacing:.22em;color:var(--muted);font-weight:400;margin-top:5px;}
+  .login h1{font-size:16px;font-weight:500;margin:26px 0 18px;color:var(--muted);}
+  .login input{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font-size:15px;margin-bottom:14px;text-align:center;}
+  .login input:focus{outline:2px solid var(--accent);outline-offset:-1px;}
+  .login .err{color:var(--warn);font-size:13px;min-height:18px;margin-bottom:10px;}
+
+  .btn{font-size:13px;letter-spacing:.04em;padding:11px 20px;border-radius:var(--radius);border:1px solid var(--accent);background:var(--accent);color:var(--bg);cursor:pointer;white-space:nowrap;}
+  .btn:hover{opacity:.88;}
+  .btn:disabled{opacity:.5;cursor:default;}
+  .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line);}
+  .btn.ghost:hover{border-color:var(--accent);opacity:1;}
+  .btn.danger{background:transparent;color:var(--warn);border-color:var(--warn);}
+  .btn.sm{padding:7px 12px;font-size:12px;}
+  .btn.block{width:100%;}
+
+  /* ---------- Shell ---------- */
+  .app{display:flex;min-height:100vh;}
+  .side{width:210px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--line);padding:22px 0;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;}
+  .brand{font-weight:700;letter-spacing:.16em;font-size:15px;padding:0 22px 18px;border-bottom:1px solid var(--line);}
+  .brand small{display:block;font-size:10px;letter-spacing:.22em;color:var(--muted);font-weight:400;margin-top:4px;}
+  .nav{display:flex;flex-direction:column;gap:2px;margin-top:12px;flex:1;}
+  .nav-item{padding:11px 22px;font-size:14px;color:var(--muted);cursor:pointer;border-left:2px solid transparent;}
+  .nav-item:hover{color:var(--ink);}
+  .nav-item.active{color:var(--ink);border-left-color:var(--accent);font-weight:600;}
+  .side .foot{padding:14px 22px 0;border-top:1px solid var(--line);}
+  .side .foot .who{font-size:11px;color:var(--muted);margin-bottom:10px;}
+
+  .main{flex:1;min-width:0;padding:24px 30px 80px;}
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:6px;}
+  .topbar h1{font-weight:600;font-size:22px;margin:0;}
+  .sub{color:var(--muted);font-size:13px;margin:2px 0 22px;}
+
+  .toolrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:20px;}
+  .search{flex:1;min-width:160px;padding:10px 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);color:var(--ink);font-size:14px;}
+  .search:focus{outline:2px solid var(--accent);outline-offset:-1px;}
+
+  /* dirty / save bar */
+  .savebar{position:fixed;left:210px;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);padding:12px 30px;display:flex;align-items:center;justify-content:space-between;gap:12px;z-index:30;}
+  .savebar .state{font-size:13px;color:var(--muted);}
+  .savebar .state.dirty{color:var(--warn);}
+  @media(max-width:720px){.savebar{left:0;}}
+
+  /* grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;}
+  .thumb{aspect-ratio:3/4;background:var(--bg) center/cover no-repeat;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:700;color:var(--line);position:relative;}
+  .badge{position:absolute;top:9px;left:9px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:20px;font-weight:600;color:#fff;}
+  .badge.live{background:var(--ok);} .badge.draft{background:var(--muted);} .badge.hidden{background:var(--warn);}
+  .card-body{padding:13px;display:flex;flex-direction:column;gap:3px;flex:1;}
+  .card-body .cat{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;}
+  .card-body .name{font-size:14px;font-weight:600;}
+  .card-body .price{font-size:13px;font-variant-numeric:tabular-nums;}
+  .card-body .imgs{font-size:11px;color:var(--muted);}
+  .card-actions{display:flex;gap:8px;padding:0 13px 13px;}
+  .card-actions .btn{flex:1;text-align:center;}
+
+  /* looks list */
+  .looklist{display:flex;flex-direction:column;gap:12px;}
+  .lookrow{display:flex;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;}
+  .lookrow .lthumb{width:54px;height:70px;border-radius:6px;background:var(--bg) center/cover no-repeat;flex-shrink:0;}
+  .lookrow .lmeta{flex:1;min-width:0;}
+  .lookrow .lmeta .nm{font-weight:600;font-size:14px;}
+  .lookrow .lmeta .pc{font-size:12px;color:var(--muted);}
+  .lookrow .lacts{display:flex;gap:8px;}
+
+  .empty{padding:50px 20px;text-align:center;color:var(--muted);font-size:14px;}
+
+  /* settings */
+  .settings{max-width:560px;}
+  .setcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;margin-bottom:14px;}
+  .setcard h3{font-size:15px;font-weight:600;margin:0 0 6px;}
+  .setcard p{font-size:13px;color:var(--muted);margin:0 0 14px;line-height:1.5;}
+  .toggle-row{display:flex;align-items:center;justify-content:space-between;gap:16px;}
+  .toggle-row .lab{font-size:14px;font-weight:600;}
+  .switch{position:relative;width:52px;height:30px;flex-shrink:0;}
+  .switch input{opacity:0;width:0;height:0;}
+  .slider{position:absolute;inset:0;background:var(--line);border-radius:30px;transition:.2s;cursor:pointer;}
+  .slider::before{content:"";position:absolute;width:24px;height:24px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s;}
+  .switch input:checked + .slider{background:var(--ok);}
+  .switch input:checked + .slider::before{transform:translateX(22px);}
+  .state-line{font-size:13px;margin-top:12px;}
+  .state-line b{font-weight:600;}
+
+  /* modal */
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-start;justify-content:center;padding:34px 16px;overflow-y:auto;z-index:50;}
+  .modal{background:var(--surface);border-radius:var(--radius);width:100%;max-width:500px;border:1px solid var(--line);padding:24px;}
+  .modal h2{font-size:19px;font-weight:600;margin:0 0 16px;}
+  .field{margin-bottom:14px;}
+  .field label{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+  .field input,.field select,.field textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font-size:14px;}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--accent);outline-offset:-1px;}
+  .field textarea{resize:vertical;min-height:64px;}
+  .field .hint{font-size:11px;color:var(--muted);margin-top:5px;}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .thumbs{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+  .thumbs .t{position:relative;width:56px;height:72px;border-radius:6px;background:var(--bg) center/cover no-repeat;border:1px solid var(--line);}
+  .thumbs .t button{position:absolute;top:-7px;right:-7px;width:20px;height:20px;border-radius:50%;border:none;background:var(--warn);color:#fff;font-size:12px;cursor:pointer;line-height:1;}
+  .dropzone{border:1.5px dashed var(--line);border-radius:8px;padding:16px;text-align:center;color:var(--muted);font-size:13px;cursor:pointer;}
+  .dropzone:hover{border-color:var(--accent);color:var(--ink);}
+  .pieces-pick{display:grid;grid-template-columns:1fr 1fr;gap:6px;max-height:200px;overflow-y:auto;border:1px solid var(--line);border-radius:8px;padding:10px;}
+  .pieces-pick label{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink);text-transform:none;letter-spacing:0;margin:0;cursor:pointer;}
+  .pieces-pick input{width:auto;}
+  .modal-actions{display:flex;gap:10px;justify-content:space-between;align-items:center;margin-top:20px;}
+  .modal-actions .right{display:flex;gap:10px;}
+
+  .toast{position:fixed;bottom:76px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:12px 22px;border-radius:30px;font-size:13px;z-index:80;opacity:0;transition:.25s;pointer-events:none;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(-4px);}
+  .toast.err{background:var(--warn);}
+
+  .loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:var(--bg);z-index:90;color:var(--muted);font-size:14px;}
+
+  @media(max-width:720px){
+    .app{flex-direction:column;}
+    .side{position:static;width:100%;height:auto;flex-direction:row;overflow-x:auto;align-items:center;padding:12px 8px;border-right:none;border-bottom:1px solid var(--line);}
+    .brand,.side .foot{display:none;}
+    .nav{flex-direction:row;margin:0;}
+    .nav-item{border-left:none;border-bottom:2px solid transparent;white-space:nowrap;padding:8px 14px;}
+    .nav-item.active{border-left:none;border-bottom-color:var(--accent);}
+    .main{padding:18px 16px 90px;}
+    .row2{grid-template-columns:1fr;}
+    .pieces-pick{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login" id="loginView">
+  <div class="box">
+    <div class="brand">FOREWRD<small>Studio · Admin</small></div>
+    <h1>Sign in to manage the store</h1>
+    <div class="err" id="loginErr"></div>
+    <input type="password" id="loginPass" placeholder="Password" autocomplete="current-password">
+    <button class="btn block" id="loginBtn">Sign in</button>
+  </div>
+</div>
+
+<!-- APP -->
+<div class="app hidden" id="appView">
+  <aside class="side">
+    <div class="brand">FOREWRD<small>Studio · Admin</small></div>
+    <nav class="nav">
+      <div class="nav-item active" data-tab="pieces">Pieces</div>
+      <div class="nav-item" data-tab="looks">Looks</div>
+      <div class="nav-item" data-tab="settings">Settings</div>
+    </nav>
+    <div class="foot">
+      <div class="who" id="whoLine">Signed in</div>
+      <button class="btn ghost sm block" id="logoutBtn">Log out</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <!-- PIECES -->
+    <section id="tab-pieces">
+      <div class="topbar">
+        <h1>Pieces</h1>
+        <button class="btn" id="addPieceBtn">+ Add piece</button>
+      </div>
+      <p class="sub">Everything shown as a product on your collection page.</p>
+      <div class="toolrow">
+        <input class="search" id="pieceSearch" placeholder="Search pieces…">
+        <select class="search" id="catFilter" style="flex:0 0 auto;max-width:170px;">
+          <option value="all">All categories</option>
+          <option value="tops">Tops</option>
+          <option value="bottoms">Bottoms</option>
+          <option value="jackets">Jackets</option>
+          <option value="accessories">Accessories</option>
+        </select>
+      </div>
+      <div class="grid" id="pieceGrid"></div>
+      <div class="empty hidden" id="pieceEmpty">No pieces match.</div>
+    </section>
+
+    <!-- LOOKS -->
+    <section id="tab-looks" class="hidden">
+      <div class="topbar">
+        <h1>Looks</h1>
+        <button class="btn" id="addLookBtn">+ Add look</button>
+      </div>
+      <p class="sub">Styled sets built from pieces you already have.</p>
+      <div class="looklist" id="lookList"></div>
+      <div class="empty hidden" id="lookEmpty">No looks yet.</div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="tab-settings" class="hidden">
+      <div class="topbar"><h1>Settings</h1></div>
+      <p class="sub">Site-wide controls.</p>
+      <div class="settings">
+        <div class="setcard">
+          <h3>Show prices on the website</h3>
+          <p>When this is on, every product price is visible to visitors. Turn it off to hide all prices at once — the price simply disappears from each product (nothing is shown in its place). This does not change your prices, only whether visitors see them.</p>
+          <div class="toggle-row">
+            <span class="lab">Prices are <span id="priceStateWord">visible</span></span>
+            <label class="switch"><input type="checkbox" id="priceToggle"><span class="slider"></span></label>
+          </div>
+          <div class="state-line" id="priceStateLine"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- SAVE BAR -->
+  <div class="savebar">
+    <span class="state" id="saveState">All changes published</span>
+    <button class="btn" id="publishBtn" disabled>Publish changes</button>
+  </div>
+</div>
+
+<!-- PIECE MODAL -->
+<div class="overlay hidden" id="pieceOverlay">
+  <div class="modal">
+    <h2 id="pieceModalTitle">Add piece</h2>
+    <div class="field"><label>Piece name</label><input id="pName" placeholder="e.g. Metallic Blue Bralette"></div>
+    <div class="row2">
+      <div class="field"><label>Category</label>
+        <select id="pCat"><option value="tops">Tops</option><option value="bottoms">Bottoms</option><option value="jackets">Jackets</option><option value="accessories">Accessories</option></select>
+      </div>
+      <div class="field"><label>Price</label><input id="pPrice" placeholder="₹ 5,300"></div>
+    </div>
+    <div class="field"><label>Description</label><textarea id="pDesc" placeholder="One point per line"></textarea><div class="hint">Each line becomes a bullet on the product page.</div></div>
+    <div class="field"><label>Photos</label>
+      <div class="dropzone" id="pDrop">Click to upload photos</div>
+      <input type="file" id="pFile" accept="image/*" multiple class="hidden">
+      <div class="thumbs" id="pThumbs"></div>
+      <div class="hint">First photo is the one shown on the grid.</div>
+    </div>
+    <div class="field"><label>Visibility</label>
+      <select id="pStatus"><option value="live">Live — shown on site</option><option value="draft">Draft — saved, not shown</option><option value="hidden">Hidden — temporarily off</option></select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn danger sm hidden" id="pDelete">Delete piece</button>
+      <div class="right">
+        <button class="btn ghost" id="pCancel">Cancel</button>
+        <button class="btn" id="pSave">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LOOK MODAL -->
+<div class="overlay hidden" id="lookOverlay">
+  <div class="modal">
+    <h2 id="lookModalTitle">Add look</h2>
+    <div class="field"><label>Look name</label><input id="lName" placeholder="e.g. Metallic Blue Set"></div>
+    <div class="field"><label>Hero image</label>
+      <div class="dropzone" id="lDrop">Click to upload the look's main photo</div>
+      <input type="file" id="lFile" accept="image/*" class="hidden">
+      <div class="thumbs" id="lThumbs"></div>
+    </div>
+    <div class="field"><label>Pieces in this look</label>
+      <div class="pieces-pick" id="lPieces"></div>
+      <div class="hint">Tick the pieces that belong to this look.</div>
+    </div>
+    <div class="field"><label>Visibility</label>
+      <select id="lStatus"><option value="live">Live — shown on site</option><option value="draft">Draft — saved, not shown</option><option value="hidden">Hidden — temporarily off</option></select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn danger sm hidden" id="lDelete">Delete look</button>
+      <div class="right">
+        <button class="btn ghost" id="lCancel">Cancel</button>
+        <button class="btn" id="lSave">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="loading hidden" id="loading">Loading…</div>
+
+<script>
+/* ============================================================
+   CONFIG — paste your Worker URL here (Step 4 of the runbook).
+   Example: "https://forewrd-admin.yourname.workers.dev"
+   ============================================================ */
+var CONFIG = {
+  WORKER_URL: "https://forewrd-admin.YOUR-SUBDOMAIN.workers.dev"
+};
+
+/* ---------------- state ---------------- */
+var TOKEN = null;
+var DATA = null;      // the whole products.json object
+var dirty = false;
+
+function api(path){ return CONFIG.WORKER_URL.replace(/\/$/,'') + path; }
+
+function setDirty(v){
+  dirty = v;
+  var s = document.getElementById('saveState');
+  var b = document.getElementById('publishBtn');
+  if(v){ s.textContent = 'Unpublished changes'; s.classList.add('dirty'); b.disabled = false; }
+  else { s.textContent = 'All changes published'; s.classList.remove('dirty'); b.disabled = true; }
+}
+
+function toast(msg, isErr){
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.classList.toggle('err', !!isErr); t.classList.add('show');
+  clearTimeout(t._id); t._id = setTimeout(function(){ t.classList.remove('show'); }, 2600);
+}
+
+function money(p){ return p || ''; }
+
+/* ---------------- auth ---------------- */
+async function login(){
+  var pass = document.getElementById('loginPass').value;
+  var err = document.getElementById('loginErr');
+  err.textContent = '';
+  if(!pass){ err.textContent = 'Enter your password'; return; }
+  var btn = document.getElementById('loginBtn'); btn.disabled = true; btn.textContent = 'Signing in…';
+  try{
+    var r = await fetch(api('/api/login'), { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ password: pass }) });
+    var j = await r.json();
+    if(!r.ok){ err.textContent = j.error || 'Could not sign in'; return; }
+    TOKEN = j.token;
+    try{ sessionStorage.setItem('forewrd_token', TOKEN); }catch(e){}
+    await startApp();
+  }catch(e){
+    err.textContent = 'Could not reach the server. Check the Worker URL.';
+  }finally{
+    btn.disabled = false; btn.textContent = 'Sign in';
+  }
+}
+
+function logout(){
+  TOKEN = null;
+  try{ sessionStorage.removeItem('forewrd_token'); }catch(e){}
+  document.getElementById('appView').classList.add('hidden');
+  document.getElementById('loginView').classList.remove('hidden');
+  document.getElementById('loginPass').value = '';
+}
+
+async function authFetch(path, opts){
+  opts = opts || {};
+  opts.headers = Object.assign({}, opts.headers, { 'Authorization': 'Bearer ' + TOKEN });
+  var r = await fetch(api(path), opts);
+  if(r.status === 401){ toast('Session expired — please sign in again', true); logout(); throw new Error('401'); }
+  return r;
+}
+
+/* ---------------- load ---------------- */
+async function startApp(){
+  document.getElementById('loginView').classList.add('hidden');
+  document.getElementById('appView').classList.remove('hidden');
+  document.getElementById('loading').classList.remove('hidden');
+  try{
+    var r = await authFetch('/api/data', { headers:{'Content-Type':'application/json'} });
+    var j = await r.json();
+    DATA = j.data || { settings:{showPrices:true,currency:'INR'}, categories:['tops','bottoms','jackets','accessories'], products:[], looks:[] };
+    if(!DATA.settings) DATA.settings = { showPrices:true, currency:'INR' };
+    if(!DATA.products) DATA.products = [];
+    if(!DATA.looks) DATA.looks = [];
+    setDirty(false);
+    renderAll();
+  }catch(e){
+    if(String(e.message)!=='401') toast('Could not load the catalogue', true);
+  }finally{
+    document.getElementById('loading').classList.add('hidden');
+  }
+}
+
+/* ---------------- publish ---------------- */
+async function publish(){
+  var b = document.getElementById('publishBtn'); b.disabled = true; b.textContent = 'Publishing…';
+  try{
+    DATA._meta = DATA._meta || {};
+    DATA._meta.updatedAt = new Date().toISOString();
+    var r = await authFetch('/api/data', { method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ data: DATA, message: 'Update catalogue via admin panel' }) });
+    var j = await r.json();
+    if(!r.ok) throw new Error(j.error||'Publish failed');
+    setDirty(false);
+    toast('Published — live on the site in ~2–3 minutes');
+  }catch(e){
+    toast(String(e.message)||'Publish failed', true);
+    setDirty(true);
+  }finally{
+    b.textContent = 'Publish changes';
+  }
+}
+
+/* ---------------- image upload ---------------- */
+function fileToBase64(file){
+  return new Promise(function(res,rej){
+    var fr = new FileReader();
+    fr.onload = function(){ res(String(fr.result).split(',')[1]); };
+    fr.onerror = rej;
+    fr.readAsDataURL(file);
+  });
+}
+async function uploadImage(file, folder, idBase, index){
+  var ext = (file.name.split('.').pop()||'jpg').toLowerCase();
+  var filename = idBase + '-' + index + '.' + ext;
+  var b64 = await fileToBase64(file);
+  // product images live under assets/products/<folder>/
+  var r = await authFetch('/api/upload', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ filename: filename, dir: 'products/' + folder, contentBase64: b64 }) });
+  var j = await r.json();
+  if(!r.ok) throw new Error(j.error||'Upload failed');
+  return filename;
+}
+
+/* ---------------- render ---------------- */
+function renderAll(){ renderPieces(); renderLooks(); renderSettings(); }
+
+function statusBadge(st){
+  if(st==='draft') return '<span class="badge draft">Draft</span>';
+  if(st==='hidden') return '<span class="badge hidden">Hidden</span>';
+  return '<span class="badge live">Live</span>';
+}
+
+function renderPieces(){
+  var q = (document.getElementById('pieceSearch').value||'').toLowerCase().trim();
+  var cat = document.getElementById('catFilter').value;
+  var grid = document.getElementById('pieceGrid'); grid.innerHTML = '';
+  var list = DATA.products.filter(function(p){
+    if(cat!=='all' && p.category!==cat) return false;
+    if(q && p.name.toLowerCase().indexOf(q)<0) return false;
+    return true;
+  });
+  document.getElementById('pieceEmpty').classList.toggle('hidden', list.length>0);
+  list.forEach(function(p){
+    var firstImg = (p.images&&p.images[0]) ? ('../assets/products/'+p.folder+'/'+p.images[0]) : '';
+    var initials = p.name.split(' ').slice(0,2).map(function(w){return w[0]||'';}).join('');
+    var c = document.createElement('div'); c.className='card';
+    c.innerHTML =
+      '<div class="thumb" '+(firstImg?'style="background-image:url(\''+firstImg+'\')"':'')+'>'+statusBadge(p.status)+(firstImg?'':initials)+'</div>'+
+      '<div class="card-body"><span class="cat">'+p.category+'</span><span class="name">'+p.name+'</span>'+
+      '<span class="price">'+money(p.price)+'</span><span class="imgs">'+((p.images||[]).length)+' photo'+(((p.images||[]).length)===1?'':'s')+'</span></div>'+
+      '<div class="card-actions"><button class="btn ghost sm" data-edit="'+p.id+'">Edit</button></div>';
+    grid.appendChild(c);
+  });
+}
+
+function renderLooks(){
+  var list = document.getElementById('lookList'); list.innerHTML='';
+  document.getElementById('lookEmpty').classList.toggle('hidden', DATA.looks.length>0);
+  DATA.looks.forEach(function(l, i){
+    var hero = l.img ? ('../'+l.img) : '';
+    var row = document.createElement('div'); row.className='lookrow';
+    row.innerHTML =
+      '<div class="lthumb" '+(hero?'style="background-image:url(\''+hero+'\')"':'')+'></div>'+
+      '<div class="lmeta"><div class="nm">'+l.name+'</div><div class="pc">'+(l.pieces||[]).length+' pieces · '+(l.status||'live')+'</div></div>'+
+      '<div class="lacts"><button class="btn ghost sm" data-editlook="'+i+'">Edit</button></div>';
+    list.appendChild(row);
+  });
+}
+
+function renderSettings(){
+  var on = DATA.settings.showPrices !== false;
+  document.getElementById('priceToggle').checked = on;
+  document.getElementById('priceStateWord').textContent = on ? 'visible' : 'hidden';
+  document.getElementById('priceStateLine').innerHTML = on
+    ? 'Visitors <b>can</b> see prices.'
+    : 'Visitors <b>cannot</b> see prices — the price is removed from every product.';
+}
+
+/* ---------------- piece modal ---------------- */
+var editingPieceId = null;
+var pieceImages = [];  // filenames
+
+function openPiece(id){
+  editingPieceId = id || null;
+  pieceImages = [];
+  var del = document.getElementById('pDelete');
+  if(id){
+    var p = DATA.products.find(function(x){return x.id===id;});
+    document.getElementById('pieceModalTitle').textContent = 'Edit piece';
+    document.getElementById('pName').value = p.name;
+    document.getElementById('pCat').value = p.category;
+    document.getElementById('pPrice').value = p.price||'';
+    document.getElementById('pDesc').value = (p.desc||'').split('|').join('\n');
+    document.getElementById('pStatus').value = p.status||'live';
+    pieceImages = (p.images||[]).slice();
+    del.classList.remove('hidden');
+  }else{
+    document.getElementById('pieceModalTitle').textContent = 'Add piece';
+    document.getElementById('pName').value='';
+    document.getElementById('pCat').value='tops';
+    document.getElementById('pPrice').value='';
+    document.getElementById('pDesc').value='';
+    document.getElementById('pStatus').value='live';
+    del.classList.add('hidden');
+  }
+  renderPieceThumbs();
+  document.getElementById('pieceOverlay').classList.remove('hidden');
+}
+function renderPieceThumbs(){
+  var wrap = document.getElementById('pThumbs'); wrap.innerHTML='';
+  var folder = document.getElementById('pCat').value;
+  pieceImages.forEach(function(fn, i){
+    var url = '../assets/products/'+folder+'/'+fn;
+    var t = document.createElement('div'); t.className='t'; t.style.backgroundImage="url('"+url+"')";
+    t.innerHTML = '<button data-rm="'+i+'" title="Remove">×</button>';
+    wrap.appendChild(t);
+  });
+}
+function slugify(s){ return (s||'piece').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,24) || 'piece'; }
+
+async function pieceFilesChosen(files){
+  if(!files.length) return;
+  var folder = document.getElementById('pCat').value;
+  var idBase = editingPieceId || slugify(document.getElementById('pName').value);
+  toast('Uploading '+files.length+' photo'+(files.length===1?'':'s')+'…');
+  try{
+    for(var i=0;i<files.length;i++){
+      var idx = pieceImages.length + 1;
+      var fn = await uploadImage(files[i], folder, idBase, idx);
+      pieceImages.push(fn);
+      renderPieceThumbs();
+    }
+    toast('Photos uploaded');
+  }catch(e){ toast(String(e.message)||'Upload failed', true); }
+}
+
+function savePiece(){
+  var name = document.getElementById('pName').value.trim();
+  if(!name){ toast('Give the piece a name', true); return; }
+  var cat = document.getElementById('pCat').value;
+  var rec = {
+    id: editingPieceId || (slugify(name)+'-'+Date.now().toString(36).slice(-4)),
+    name: name,
+    price: document.getElementById('pPrice').value.trim(),
+    category: cat,
+    folder: cat,
+    images: pieceImages.slice(),
+    desc: document.getElementById('pDesc').value.split('\n').map(function(s){return s.trim();}).filter(Boolean).join('|'),
+    status: document.getElementById('pStatus').value
+  };
+  if(editingPieceId){
+    var i = DATA.products.findIndex(function(x){return x.id===editingPieceId;});
+    DATA.products[i] = rec;
+    toast('“'+name+'” updated');
+  }else{
+    DATA.products.push(rec);
+    toast('“'+name+'” added');
+  }
+  setDirty(true);
+  closePiece();
+  renderPieces();
+}
+function deletePiece(){
+  if(!editingPieceId) return;
+  var p = DATA.products.find(function(x){return x.id===editingPieceId;});
+  DATA.products = DATA.products.filter(function(x){return x.id!==editingPieceId;});
+  // also drop it from any looks
+  DATA.looks.forEach(function(l){ l.pieces = (l.pieces||[]).filter(function(id){return id!==editingPieceId;}); });
+  setDirty(true); closePiece(); renderPieces(); renderLooks();
+  toast('“'+(p?p.name:'Piece')+'” removed');
+}
+function closePiece(){ document.getElementById('pieceOverlay').classList.add('hidden'); }
+
+/* ---------------- look modal ---------------- */
+var editingLookIndex = null;
+var lookImage = null;
+
+function openLook(index){
+  editingLookIndex = (index===undefined||index===null) ? null : index;
+  var del = document.getElementById('lDelete');
+  if(editingLookIndex!==null){
+    var l = DATA.looks[editingLookIndex];
+    document.getElementById('lookModalTitle').textContent = 'Edit look';
+    document.getElementById('lName').value = l.name;
+    document.getElementById('lStatus').value = l.status||'live';
+    lookImage = l.img || null;
+    del.classList.remove('hidden');
+    renderPiecePicker(l.pieces||[]);
+  }else{
+    document.getElementById('lookModalTitle').textContent = 'Add look';
+    document.getElementById('lName').value='';
+    document.getElementById('lStatus').value='live';
+    lookImage = null;
+    del.classList.add('hidden');
+    renderPiecePicker([]);
+  }
+  renderLookThumb();
+  document.getElementById('lookOverlay').classList.remove('hidden');
+}
+function renderPiecePicker(selected){
+  var wrap = document.getElementById('lPieces'); wrap.innerHTML='';
+  DATA.products.forEach(function(p){
+    var id = 'pick-'+p.id;
+    var lab = document.createElement('label');
+    lab.innerHTML = '<input type="checkbox" value="'+p.id+'" '+(selected.indexOf(p.id)>=0?'checked':'')+'> '+p.name;
+    wrap.appendChild(lab);
+  });
+}
+function renderLookThumb(){
+  var wrap = document.getElementById('lThumbs'); wrap.innerHTML='';
+  if(lookImage){
+    var t = document.createElement('div'); t.className='t'; t.style.backgroundImage="url('../"+lookImage+"')";
+    t.innerHTML='<button data-rmlook="1">×</button>';
+    wrap.appendChild(t);
+  }
+}
+async function lookFileChosen(file){
+  var idBase = 'look-' + (DATA.looks.length+1) + '-' + slugify(document.getElementById('lName').value);
+  toast('Uploading…');
+  try{
+    // looks images live in assets/lookbook/
+    var ext = (file.name.split('.').pop()||'jpg').toLowerCase();
+    var filename = idBase + '.' + ext;
+    var b64 = await fileToBase64(file);
+    // look images live under assets/lookbook/
+    var r = await authFetch('/api/upload', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ filename: filename, dir: 'lookbook', contentBase64: b64 }) });
+    var j = await r.json();
+    if(!r.ok) throw new Error(j.error||'Upload failed');
+    lookImage = 'assets/lookbook/' + filename;
+    renderLookThumb();
+    toast('Image uploaded');
+  }catch(e){ toast(String(e.message)||'Upload failed', true); }
+}
+function saveLook(){
+  var name = document.getElementById('lName').value.trim();
+  if(!name){ toast('Give the look a name', true); return; }
+  var picks = Array.prototype.map.call(document.querySelectorAll('#lPieces input:checked'), function(c){return c.value;});
+  if(!picks.length){ toast('Pick at least one piece', true); return; }
+  var rec = { name:name, img: lookImage||'', pieces: picks, status: document.getElementById('lStatus').value };
+  if(editingLookIndex!==null){ DATA.looks[editingLookIndex] = rec; toast('“'+name+'” updated'); }
+  else { DATA.looks.push(rec); toast('“'+name+'” added'); }
+  setDirty(true); closeLook(); renderLooks();
+}
+function deleteLook(){
+  if(editingLookIndex===null) return;
+  var l = DATA.looks[editingLookIndex];
+  DATA.looks.splice(editingLookIndex,1);
+  setDirty(true); closeLook(); renderLooks();
+  toast('“'+(l?l.name:'Look')+'” removed');
+}
+function closeLook(){ document.getElementById('lookOverlay').classList.add('hidden'); }
+
+/* ---------------- wiring ---------------- */
+document.getElementById('loginBtn').onclick = login;
+document.getElementById('loginPass').addEventListener('keydown', function(e){ if(e.key==='Enter') login(); });
+document.getElementById('logoutBtn').onclick = logout;
+document.getElementById('publishBtn').onclick = publish;
+
+document.querySelector('.nav').addEventListener('click', function(e){
+  var it = e.target.closest('.nav-item'); if(!it) return;
+  document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});
+  it.classList.add('active');
+  var tab = it.dataset.tab;
+  ['pieces','looks','settings'].forEach(function(t){
+    document.getElementById('tab-'+t).classList.toggle('hidden', t!==tab);
+  });
+});
+
+document.getElementById('addPieceBtn').onclick = function(){ openPiece(null); };
+document.getElementById('pieceSearch').oninput = renderPieces;
+document.getElementById('catFilter').onchange = renderPieces;
+document.getElementById('pieceGrid').addEventListener('click', function(e){
+  var id = e.target.getAttribute('data-edit'); if(id) openPiece(id);
+});
+document.getElementById('pCancel').onclick = closePiece;
+document.getElementById('pSave').onclick = savePiece;
+document.getElementById('pDelete').onclick = deletePiece;
+document.getElementById('pCat').onchange = renderPieceThumbs;
+document.getElementById('pDrop').onclick = function(){ document.getElementById('pFile').click(); };
+document.getElementById('pFile').onchange = function(e){ pieceFilesChosen(Array.prototype.slice.call(e.target.files)); e.target.value=''; };
+document.getElementById('pThumbs').addEventListener('click', function(e){
+  var i = e.target.getAttribute('data-rm'); if(i!==null){ pieceImages.splice(+i,1); renderPieceThumbs(); }
+});
+document.getElementById('pieceOverlay').addEventListener('click', function(e){ if(e.target===this) closePiece(); });
+
+document.getElementById('addLookBtn').onclick = function(){ openLook(null); };
+document.getElementById('lookList').addEventListener('click', function(e){
+  var i = e.target.getAttribute('data-editlook'); if(i!==null) openLook(+i);
+});
+document.getElementById('lCancel').onclick = closeLook;
+document.getElementById('lSave').onclick = saveLook;
+document.getElementById('lDelete').onclick = deleteLook;
+document.getElementById('lDrop').onclick = function(){ document.getElementById('lFile').click(); };
+document.getElementById('lFile').onchange = function(e){ if(e.target.files[0]) lookFileChosen(e.target.files[0]); e.target.value=''; };
+document.getElementById('lThumbs').addEventListener('click', function(e){ if(e.target.getAttribute('data-rmlook')){ lookImage=null; renderLookThumb(); } });
+document.getElementById('lookOverlay').addEventListener('click', function(e){ if(e.target===this) closeLook(); });
+
+document.getElementById('priceToggle').onchange = function(e){
+  DATA.settings.showPrices = e.target.checked;
+  renderSettings(); setDirty(true);
+};
+
+document.addEventListener('keydown', function(e){
+  if(e.key==='Escape'){ closePiece(); closeLook(); }
+});
+window.addEventListener('beforeunload', function(e){ if(dirty){ e.preventDefault(); e.returnValue=''; } });
+
+/* resume session if present */
+(function(){
+  try{
+    var t = sessionStorage.getItem('forewrd_token');
+    if(t){ TOKEN = t; startApp(); }
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
