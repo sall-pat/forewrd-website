@@ -397,6 +397,22 @@
       ],
       "desc": "Triangular|40\" × 40\" × 71\"|Georgette fabric",
       "status": "live"
+    },
+    {
+      "id": "straight-quad-jeans-pare",
+      "name": "Straight Quad Jeans",
+      "price": "",
+      "category": "bottoms",
+      "folder": "bottoms",
+      "images": [
+        "straight-quad-jeans-1.jpeg",
+        "straight-quad-jeans-6.jpeg",
+        "straight-quad-jeans-3.jpeg",
+        "straight-quad-jeans-4.jpeg",
+        "straight-quad-jeans-5.jpeg"
+      ],
+      "desc": "High-waisted|Straight-leg, baggy fit|Hardware detailing at the right hem|Adjustable waistband with metal hardware|Contrast red stitching",
+      "status": "live"
     }
   ],
   "looks": [
@@ -488,7 +504,7 @@
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-15T11:34:47.758Z",
+    "updatedAt": "2026-10-16T10:55:13.864Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
