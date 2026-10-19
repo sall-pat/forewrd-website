@@ -405,7 +405,11 @@
       "category": "bottoms",
       "folder": "bottoms",
       "images": [
-        "piece-1.jpeg"
+        "piece-1.jpeg",
+        "straight-quad-jeans-336z-2.jpeg",
+        "straight-quad-jeans-336z-3.jpeg",
+        "straight-quad-jeans-336z-4.jpeg",
+        "straight-quad-jeans-336z-5.jpeg"
       ],
       "desc": "",
       "status": "live"
@@ -500,7 +504,7 @@
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-19T06:44:49.747Z",
+    "updatedAt": "2026-10-19T06:50:26.399Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
