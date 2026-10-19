@@ -397,6 +397,18 @@
       ],
       "desc": "Triangular|40\" × 40\" × 71\"|Georgette fabric",
       "status": "live"
+    },
+    {
+      "id": "straight-quad-jeans-336z",
+      "name": "Straight Quad Jeans",
+      "price": "",
+      "category": "bottoms",
+      "folder": "bottoms",
+      "images": [
+        "piece-1.jpeg"
+      ],
+      "desc": "",
+      "status": "live"
     }
   ],
   "looks": [
@@ -488,7 +500,7 @@
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-19T06:33:05.107Z",
+    "updatedAt": "2026-10-19T06:44:49.747Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
