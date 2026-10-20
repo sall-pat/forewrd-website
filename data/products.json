@@ -401,7 +401,7 @@
     {
       "id": "straight-quad-jeans-336z",
       "name": "Straight Quad Jeans",
-      "price": "",
+      "price": "₹ 7,300",
       "category": "bottoms",
       "folder": "bottoms",
       "images": [
@@ -520,7 +520,7 @@
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-20T08:21:20.425Z",
+    "updatedAt": "2026-10-20T08:21:45.826Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
