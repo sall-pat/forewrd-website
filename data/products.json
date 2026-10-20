@@ -557,10 +557,19 @@
         "rust-denim-jacket-z4ro"
       ],
       "status": "live"
+    },
+    {
+      "name": "Green Ombre Tulle Set",
+      "img": "assets/lookbook/look-11-green-ombre-tulle-set.jpeg",
+      "pieces": [
+        "green-ombre-tulle-top-rzgw",
+        "green-ombre-tulle-skirt-zngw"
+      ],
+      "status": "live"
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-20T12:05:39.939Z",
+    "updatedAt": "2026-10-20T12:09:19.941Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
