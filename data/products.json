@@ -412,6 +412,23 @@
       ],
       "desc": "High-waisted|Straight-leg, baggy fit|Hardware detailing at the right hem|Adjustable waistband with metal hardware|Red stitch line detail",
       "status": "live"
+    },
+    {
+      "id": "rust-denim-jacket-z4ro",
+      "name": "Rust Denim Jacket",
+      "price": "₹ 7,600",
+      "category": "jackets",
+      "folder": "jackets",
+      "images": [
+        "rust-denim-jacket-1.jpeg",
+        "rust-denim-jacket-2.jpeg",
+        "rust-denim-jacket-3.jpeg",
+        "rust-denim-jacket-4.jpeg",
+        "rust-denim-jacket-5.jpeg",
+        "rust-denim-jacket-6.jpeg"
+      ],
+      "desc": "Rust Denim|Black faux leather collar|Black faux leather fold over cuff|Side pockets|Structured padded shoulders",
+      "status": "live"
     }
   ],
   "looks": [
@@ -503,7 +520,7 @@
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-19T06:59:04.275Z",
+    "updatedAt": "2026-10-20T08:21:20.425Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
