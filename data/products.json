@@ -445,6 +445,21 @@
       ],
       "desc": "Asymmetrical top|Green ombre Tulle|Ruffle collar|Maroon neck tie",
       "status": "live"
+    },
+    {
+      "id": "green-ombre-tulle-skirt-zngw",
+      "name": "Green Ombre Tulle Skirt",
+      "price": "₹ 9,000",
+      "category": "bottoms",
+      "folder": "bottoms",
+      "images": [
+        "green-ombre-tulle-skirt-1.jpeg",
+        "green-ombre-tulle-skirt-2.jpeg",
+        "green-ombre-tulle-skirt-3.jpeg",
+        "green-ombre-tulle-skirt-4.jpeg"
+      ],
+      "desc": "Green ombre tulle skirt|Side slit detailing|Waterfall pleat detailing",
+      "status": "live"
     }
   ],
   "looks": [
@@ -545,7 +560,7 @@
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-20T11:59:41.160Z",
+    "updatedAt": "2026-10-20T12:05:39.939Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
