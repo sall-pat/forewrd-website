@@ -517,10 +517,19 @@
         "mr-bra"
       ],
       "status": "live"
+    },
+    {
+      "name": "Rust Denim Jacket & Straight Quad Jeans",
+      "img": "assets/lookbook/look-10-rust-denim-jacket-straig.jpeg",
+      "pieces": [
+        "straight-quad-jeans-336z",
+        "rust-denim-jacket-z4ro"
+      ],
+      "status": "live"
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-20T08:21:45.826Z",
+    "updatedAt": "2026-10-20T08:22:55.010Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
