@@ -429,6 +429,22 @@
       ],
       "desc": "Rust Denim|Black faux leather collar|Black faux leather fold over cuff|Side pockets|Structured padded shoulders",
       "status": "live"
+    },
+    {
+      "id": "green-ombre-tulle-top-rzgw",
+      "name": "Green Ombre Tulle Top",
+      "price": "₹ 6,000",
+      "category": "tops",
+      "folder": "tops",
+      "images": [
+        "green-ombre-tulle-top-1.jpeg",
+        "green-ombre-tulle-top-2.jpeg",
+        "green-ombre-tulle-top-3.jpeg",
+        "green-ombre-tulle-top-4.jpeg",
+        "green-ombre-tulle-top-5.jpeg"
+      ],
+      "desc": "Asymmetrical top|Green ombre Tulle|Ruffle collar|Maroon neck tie",
+      "status": "live"
     }
   ],
   "looks": [
@@ -529,7 +545,7 @@
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-20T08:22:55.010Z",
+    "updatedAt": "2026-10-20T11:59:41.160Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
