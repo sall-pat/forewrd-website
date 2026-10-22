@@ -460,6 +460,23 @@
       ],
       "desc": "Green ombre tulle skirt|Side slit detailing|Waterfall pleat detailing",
       "status": "live"
+    },
+    {
+      "id": "balloon-sleeve-denim-jac-spt0",
+      "name": "Balloon Sleeve Denim Jacket",
+      "price": "₹ 7,200",
+      "category": "jackets",
+      "folder": "jackets",
+      "images": [
+        "balloon-sleeve-denim-jac-1.jpeg",
+        "balloon-sleeve-denim-jac-2.jpeg",
+        "balloon-sleeve-denim-jac-3.jpeg",
+        "balloon-sleeve-denim-jac-4.jpeg",
+        "balloon-sleeve-denim-jac-5.jpeg",
+        "balloon-sleeve-denim-jac-6.jpeg"
+      ],
+      "desc": "Balloon sleeves with silver hardware detailing|Corset-style adjuster detailing at the back|Front zipper closure",
+      "status": "live"
     }
   ],
   "looks": [
@@ -569,7 +586,7 @@
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-20T12:09:19.941Z",
+    "updatedAt": "2026-10-22T10:11:42.409Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
