@@ -600,10 +600,19 @@
         "green-ombre-tulle-skirt-zngw"
       ],
       "status": "live"
+    },
+    {
+      "name": "Balloon Sleeve Denim Jacket & Denim Tie-up Shorts",
+      "img": "",
+      "pieces": [
+        "balloon-sleeve-denim-jac-spt0",
+        "denim-tie-up-shorts-tk5u"
+      ],
+      "status": "live"
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-24T11:11:40.231Z",
+    "updatedAt": "2026-10-24T11:12:37.070Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
