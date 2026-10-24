@@ -603,7 +603,7 @@
     },
     {
       "name": "Balloon Sleeve Denim Jacket & Denim Tie-up Shorts",
-      "img": "",
+      "img": "assets/lookbook/look-13-balloon-sleeve-denim-jac.jpeg",
       "pieces": [
         "balloon-sleeve-denim-jac-spt0",
         "denim-tie-up-shorts-tk5u"
@@ -612,7 +612,7 @@
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-24T11:12:37.070Z",
+    "updatedAt": "2026-10-24T11:18:21.622Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
