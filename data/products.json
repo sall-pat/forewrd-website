@@ -477,6 +477,23 @@
       ],
       "desc": "Balloon sleeves with silver hardware detailing|Corset-style adjuster detailing at the back|Front zipper closure",
       "status": "live"
+    },
+    {
+      "id": "denim-tie-up-shorts-tk5u",
+      "name": "Denim Tie-up Shorts",
+      "price": "₹ 5,800",
+      "category": "bottoms",
+      "folder": "bottoms",
+      "images": [
+        "denim-tie-up-shorts-1.jpeg",
+        "denim-tie-up-shorts-2.jpeg",
+        "denim-tie-up-shorts-3.jpeg",
+        "denim-tie-up-shorts-4.jpeg",
+        "denim-tie-up-shorts-5.jpeg",
+        "denim-tie-up-shorts-6.jpeg"
+      ],
+      "desc": "High-waisted denim shorts|Rust denim tie-up detailing on the sides|Back pocket detailing|Concealed side pockets",
+      "status": "live"
     }
   ],
   "looks": [
@@ -586,7 +603,7 @@
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-22T10:11:42.409Z",
+    "updatedAt": "2026-10-24T11:11:40.231Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
