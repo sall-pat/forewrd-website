@@ -1,6 +1,6 @@
 {
   "settings": {
-    "showPrices": false,
+    "showPrices": true,
     "currency": "INR"
   },
   "categories": [
@@ -43,7 +43,7 @@
     {
       "id": "cbc",
       "name": "Champagne Back Cowl Sleeveless Top",
-      "price": "₹ 4,800",
+      "price": "₹ 6,000",
       "category": "tops",
       "folder": "tops",
       "images": [
@@ -75,7 +75,7 @@
     {
       "id": "mr-bra",
       "name": "Maroon Bralette",
-      "price": "₹ 4,700",
+      "price": "₹ 6,400",
       "category": "tops",
       "folder": "tops",
       "images": [
@@ -90,7 +90,7 @@
     {
       "id": "stu",
       "name": "Silver Tie-up Tshirt Top",
-      "price": "₹ 4,000",
+      "price": "₹ 4,900",
       "category": "tops",
       "folder": "tops",
       "images": [
@@ -105,7 +105,7 @@
     {
       "id": "ibt",
       "name": "Deep Neck Duo-Tone Top",
-      "price": "₹ 4,400",
+      "price": "₹ 5,500",
       "category": "tops",
       "folder": "tops",
       "images": [
@@ -121,7 +121,7 @@
     {
       "id": "cfc",
       "name": "Champagne Front Cowl Top",
-      "price": "₹ 5,200",
+      "price": "₹ 6,400",
       "category": "tops",
       "folder": "tops",
       "images": [
@@ -136,7 +136,7 @@
     {
       "id": "mbw",
       "name": "Metallic Blue Wrap Skirt",
-      "price": "₹ 6,800",
+      "price": "₹ 8,500",
       "category": "bottoms",
       "folder": "bottoms",
       "images": [
@@ -151,7 +151,7 @@
     {
       "id": "chm",
       "name": "Champagne Tailored Trousers",
-      "price": "₹ 5,400",
+      "price": "₹ 6,500",
       "category": "bottoms",
       "folder": "bottoms",
       "images": [
@@ -166,7 +166,7 @@
     {
       "id": "cbj",
       "name": "Cherry Brown Jorts",
-      "price": "₹ 5,600",
+      "price": "₹ 6,600",
       "category": "bottoms",
       "folder": "bottoms",
       "images": [
@@ -179,7 +179,7 @@
     {
       "id": "bbp",
       "name": "Brown Quad Baggy Pants",
-      "price": "₹ 7,300",
+      "price": "₹ 8,600",
       "category": "bottoms",
       "folder": "bottoms",
       "images": [
@@ -194,7 +194,7 @@
     {
       "id": "hrm",
       "name": "Black Harem Pants",
-      "price": "₹ 4,200",
+      "price": "₹ 5,400",
       "category": "bottoms",
       "folder": "bottoms",
       "images": [
@@ -208,7 +208,7 @@
     {
       "id": "bkp",
       "name": "Black Baggy Pants",
-      "price": "₹ 5,100",
+      "price": "₹ 6,700",
       "category": "bottoms",
       "folder": "bottoms",
       "images": [
@@ -224,7 +224,7 @@
     {
       "id": "bfd",
       "name": "Flare Black Denim Pants",
-      "price": "₹ 5,000",
+      "price": "₹ 6,300",
       "category": "bottoms",
       "folder": "bottoms",
       "images": [
@@ -238,7 +238,7 @@
     {
       "id": "dzs",
       "name": "Denim Zipper Skirt",
-      "price": "₹ 4,400",
+      "price": "₹ 5,600",
       "category": "bottoms",
       "folder": "bottoms",
       "images": [
@@ -253,7 +253,7 @@
     {
       "id": "cdj",
       "name": "Cropped Denim Jacket",
-      "price": "₹ 5,100",
+      "price": "₹ 6,000",
       "category": "jackets",
       "folder": "jackets",
       "images": [
@@ -388,7 +388,7 @@
     {
       "id": "pscarf",
       "name": "Multi-Colour Printed Scarf",
-      "price": "₹ 1,100",
+      "price": "₹ 2,000",
       "category": "accessories",
       "folder": "accessories",
       "images": [
@@ -628,7 +628,7 @@
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-26T14:24:16.927Z",
+    "updatedAt": "2026-10-26T14:27:10.737Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
