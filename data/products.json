@@ -13,7 +13,7 @@
     {
       "id": "mbbs",
       "name": "Metallic Blue Balloon Sleeve Top",
-      "price": "₹ 8,800",
+      "price": "₹ 6,700",
       "category": "tops",
       "folder": "tops",
       "images": [
@@ -29,7 +29,7 @@
     {
       "id": "mb-bra",
       "name": "Metallic Blue Bralette",
-      "price": "₹ 6,700",
+      "price": "₹ 5,300",
       "category": "tops",
       "folder": "tops",
       "images": [
@@ -43,7 +43,7 @@
     {
       "id": "cbc",
       "name": "Champagne Back Cowl Sleeveless Top",
-      "price": "₹ 6,000",
+      "price": "₹ 4,800",
       "category": "tops",
       "folder": "tops",
       "images": [
@@ -58,7 +58,7 @@
     {
       "id": "apc",
       "name": "Asymmetrical Peplum Corset",
-      "price": "₹ 7,600",
+      "price": "₹ 6,300",
       "category": "tops",
       "folder": "tops",
       "images": [
@@ -75,7 +75,7 @@
     {
       "id": "mr-bra",
       "name": "Maroon Bralette",
-      "price": "₹ 6.400",
+      "price": "₹ 4,700",
       "category": "tops",
       "folder": "tops",
       "images": [
@@ -90,7 +90,7 @@
     {
       "id": "stu",
       "name": "Silver Tie-up Tshirt Top",
-      "price": "₹ 4,900",
+      "price": "₹ 4,000",
       "category": "tops",
       "folder": "tops",
       "images": [
@@ -105,7 +105,7 @@
     {
       "id": "ibt",
       "name": "Deep Neck Duo-Tone Top",
-      "price": "₹ 5.500",
+      "price": "₹ 4,400",
       "category": "tops",
       "folder": "tops",
       "images": [
@@ -121,7 +121,7 @@
     {
       "id": "cfc",
       "name": "Champagne Front Cowl Top",
-      "price": "₹ 6,400",
+      "price": "₹ 5,200",
       "category": "tops",
       "folder": "tops",
       "images": [
@@ -136,7 +136,7 @@
     {
       "id": "mbw",
       "name": "Metallic Blue Wrap Skirt",
-      "price": "₹ 8,500",
+      "price": "₹ 6,800",
       "category": "bottoms",
       "folder": "bottoms",
       "images": [
@@ -151,7 +151,7 @@
     {
       "id": "chm",
       "name": "Champagne Tailored Trousers",
-      "price": "₹ 6,500",
+      "price": "₹ 5,400",
       "category": "bottoms",
       "folder": "bottoms",
       "images": [
@@ -166,7 +166,7 @@
     {
       "id": "cbj",
       "name": "Cherry Brown Jorts",
-      "price": "₹ 6,600",
+      "price": "₹ 5,600",
       "category": "bottoms",
       "folder": "bottoms",
       "images": [
@@ -179,7 +179,7 @@
     {
       "id": "bbp",
       "name": "Brown Quad Baggy Pants",
-      "price": "₹ 8,600",
+      "price": "₹ 7,300",
       "category": "bottoms",
       "folder": "bottoms",
       "images": [
@@ -194,7 +194,7 @@
     {
       "id": "hrm",
       "name": "Black Harem Pants",
-      "price": "₹ 5,400",
+      "price": "₹ 4,200",
       "category": "bottoms",
       "folder": "bottoms",
       "images": [
@@ -208,7 +208,7 @@
     {
       "id": "bkp",
       "name": "Black Baggy Pants",
-      "price": "₹ 6,700",
+      "price": "₹ 5,100",
       "category": "bottoms",
       "folder": "bottoms",
       "images": [
@@ -224,7 +224,7 @@
     {
       "id": "bfd",
       "name": "Flare Black Denim Pants",
-      "price": "₹ 6,300",
+      "price": "₹ 5,000",
       "category": "bottoms",
       "folder": "bottoms",
       "images": [
@@ -238,7 +238,7 @@
     {
       "id": "dzs",
       "name": "Denim Zipper Skirt",
-      "price": "₹ 5,600",
+      "price": "₹ 4,400",
       "category": "bottoms",
       "folder": "bottoms",
       "images": [
@@ -253,7 +253,7 @@
     {
       "id": "cdj",
       "name": "Cropped Denim Jacket",
-      "price": "₹ 6,000",
+      "price": "₹ 5,100",
       "category": "jackets",
       "folder": "jackets",
       "images": [
@@ -388,7 +388,7 @@
     {
       "id": "pscarf",
       "name": "Multi-Colour Printed Scarf",
-      "price": "₹ 2,000",
+      "price": "₹ 1,100",
       "category": "accessories",
       "folder": "accessories",
       "images": [
@@ -493,6 +493,22 @@
         "denim-tie-up-shorts-6.jpeg"
       ],
       "desc": "High-waisted denim shorts|Rust denim tie-up detailing on the sides|Back pocket detailing|Concealed side pockets",
+      "status": "live"
+    },
+    {
+      "id": "polka-dot-satin-t-back-7eis",
+      "name": "Polka Dot Satin T-Back",
+      "price": "₹ 5,100",
+      "category": "tops",
+      "folder": "tops",
+      "images": [
+        "polka-dot-satin-t-back-1.jpeg",
+        "polka-dot-satin-t-back-2.jpeg",
+        "polka-dot-satin-t-back-3.jpeg",
+        "polka-dot-satin-t-back-4.jpeg",
+        "polka-dot-satin-t-back-5.jpeg"
+      ],
+      "desc": "Satin Polka Dot|Jacket Zipper Back closure",
       "status": "live"
     }
   ],
@@ -612,7 +628,7 @@
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-26T12:39:02.757Z",
+    "updatedAt": "2026-10-26T13:45:42.999Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
