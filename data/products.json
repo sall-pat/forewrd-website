@@ -1,6 +1,6 @@
 {
   "settings": {
-    "showPrices": true,
+    "showPrices": false,
     "currency": "INR"
   },
   "categories": [
@@ -13,7 +13,7 @@
     {
       "id": "mbbs",
       "name": "Metallic Blue Balloon Sleeve Top",
-      "price": "₹ 6,700",
+      "price": "₹ 8,800",
       "category": "tops",
       "folder": "tops",
       "images": [
@@ -29,7 +29,7 @@
     {
       "id": "mb-bra",
       "name": "Metallic Blue Bralette",
-      "price": "₹ 5,300",
+      "price": "₹ 6,700",
       "category": "tops",
       "folder": "tops",
       "images": [
@@ -628,7 +628,7 @@
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-26T14:19:04.649Z",
+    "updatedAt": "2026-10-26T14:24:16.927Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
