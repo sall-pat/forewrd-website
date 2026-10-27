@@ -641,10 +641,19 @@
         "denim-tie-up-shorts-tk5u"
       ],
       "status": "live"
+    },
+    {
+      "name": "Cape & Baggy Pants | Black",
+      "img": "assets/lookbook/look-13-piece.jpeg",
+      "pieces": [
+        "bkp",
+        "black-cape-lxl8"
+      ],
+      "status": "live"
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-27T13:44:43.346Z",
+    "updatedAt": "2026-10-27T13:45:39.214Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
