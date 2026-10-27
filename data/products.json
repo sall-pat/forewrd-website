@@ -518,11 +518,11 @@
       "category": "jackets",
       "folder": "jackets",
       "images": [
-        "black-cape-1.jpeg",
-        "black-cape-2.jpeg",
-        "black-cape-3.jpeg",
-        "black-cape-4.jpeg",
-        "black-cape-5.jpeg"
+        "black-cape-lxl8-1.jpeg",
+        "black-cape-lxl8-2.jpeg",
+        "black-cape-lxl8-3.jpeg",
+        "black-cape-lxl8-4.jpeg",
+        "black-cape-lxl8-5.jpeg"
       ],
       "desc": "Statement cape silhouette|Contrasting black faux leather collar|Zipper detailing at the neckline|Side adjusters with gunmetal buckle hardware",
       "status": "live"
@@ -653,7 +653,7 @@
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-27T13:45:39.214Z",
+    "updatedAt": "2026-10-27T14:25:10.517Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
