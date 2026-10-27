@@ -510,6 +510,22 @@
       ],
       "desc": "Satin Polka Dot|Jacket Zipper Back closure",
       "status": "live"
+    },
+    {
+      "id": "black-cape-lxl8",
+      "name": "Black Cape",
+      "price": "₹ 5,500",
+      "category": "jackets",
+      "folder": "jackets",
+      "images": [
+        "black-cape-1.jpeg",
+        "black-cape-2.jpeg",
+        "black-cape-3.jpeg",
+        "black-cape-4.jpeg",
+        "black-cape-5.jpeg"
+      ],
+      "desc": "Statement cape silhouette|Contrasting black faux leather collar|Zipper detailing at the neckline|Side adjusters with gunmetal buckle hardware",
+      "status": "live"
     }
   ],
   "looks": [
@@ -628,7 +644,7 @@
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-26T14:27:10.737Z",
+    "updatedAt": "2026-10-27T13:44:43.346Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
