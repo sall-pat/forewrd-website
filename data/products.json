@@ -541,6 +541,23 @@
       ],
       "desc": "Adjustable knotted sleeve detailing|Extra long sash at the back",
       "status": "live"
+    },
+    {
+      "id": "bell-bottoms-qiwl",
+      "name": "Bell Bottoms",
+      "price": "₹ 6,300",
+      "category": "bottoms",
+      "folder": "bottoms",
+      "images": [
+        "flare-bell-bottoms-1.jpeg",
+        "flare-bell-bottoms-2.jpeg",
+        "flare-bell-bottoms-3.jpeg",
+        "flare-bell-bottoms-4.jpeg",
+        "flare-bell-bottoms-5.jpeg",
+        "flare-bell-bottoms-6.jpeg"
+      ],
+      "desc": "Blue denim bell-bottoms with an extra-flared silhouette|Adjustable waistband with Celtic knot hardware detailing|Celtic knot hardware detailing on the right bottom",
+      "status": "live"
     }
   ],
   "looks": [
@@ -668,7 +685,7 @@
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-29T14:04:37.265Z",
+    "updatedAt": "2026-10-29T14:19:34.325Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
