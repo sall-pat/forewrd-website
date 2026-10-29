@@ -526,6 +526,21 @@
       ],
       "desc": "Statement cape silhouette|Contrasting black faux leather collar|Zipper detailing at the neckline|Side adjusters with gunmetal buckle hardware",
       "status": "live"
+    },
+    {
+      "id": "fringe-top-black-7as4",
+      "name": "Fringe Top | Black",
+      "price": "₹ 5,500",
+      "category": "tops",
+      "folder": "tops",
+      "images": [
+        "piece-1.jpeg",
+        "piece-2.jpeg",
+        "piece-3.jpeg",
+        "piece-4.jpeg"
+      ],
+      "desc": "Adjustable knotted sleeve detailing|Extra long sash at the back",
+      "status": "live"
     }
   ],
   "looks": [
@@ -653,7 +668,7 @@
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-27T14:25:10.517Z",
+    "updatedAt": "2026-10-29T14:04:37.265Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
