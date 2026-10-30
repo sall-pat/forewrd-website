@@ -682,10 +682,19 @@
         "black-cape-lxl8"
       ],
       "status": "live"
+    },
+    {
+      "name": "Fringe Top & Denim Bell Bottoms",
+      "img": "assets/lookbook/look-14-fringe-top-denim-bell-bo.jpeg",
+      "pieces": [
+        "fringe-top-black-7as4",
+        "bell-bottoms-qiwl"
+      ],
+      "status": "live"
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-29T14:19:34.325Z",
+    "updatedAt": "2026-10-30T06:20:26.723Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
