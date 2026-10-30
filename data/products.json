@@ -537,7 +537,8 @@
         "piece-1.jpeg",
         "piece-2.jpeg",
         "piece-3.jpeg",
-        "piece-4.jpeg"
+        "piece-4.jpeg",
+        "fringe-top-black-7as4-5.jpeg"
       ],
       "desc": "Adjustable knotted sleeve detailing|Extra long sash at the back",
       "status": "live"
@@ -694,7 +695,7 @@
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-30T06:20:26.723Z",
+    "updatedAt": "2026-10-30T06:25:41.191Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
