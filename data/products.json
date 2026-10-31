@@ -508,7 +508,7 @@
         "polka-dot-satin-t-back-4.jpeg",
         "polka-dot-satin-t-back-5.jpeg"
       ],
-      "desc": "Satin Polka Dot|Jacket Zipper Back closure",
+      "desc": "Polka Dot Satin|Jacket Zipper Back closure",
       "status": "live"
     },
     {
@@ -558,6 +558,21 @@
         "flare-bell-bottoms-6.jpeg"
       ],
       "desc": "Blue denim bell-bottoms with an extra-flared silhouette|Adjustable waistband with Celtic knot hardware detailing|Celtic knot hardware detailing on the right bottom",
+      "status": "live"
+    },
+    {
+      "id": "off-white-satin-t-back-vaj2",
+      "name": "Off-White Satin T-Back",
+      "price": "₹ 5,500",
+      "category": "tops",
+      "folder": "tops",
+      "images": [
+        "off-white-satin-t-back-1.jpeg",
+        "off-white-satin-t-back-2.jpeg",
+        "off-white-satin-t-back-3.jpeg",
+        "off-white-satin-t-back-4.jpeg"
+      ],
+      "desc": "Off-White Satin|Jacket Zipper Back closure",
       "status": "live"
     }
   ],
@@ -695,7 +710,7 @@
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-31T06:41:01.765Z",
+    "updatedAt": "2026-10-31T08:23:15.924Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
