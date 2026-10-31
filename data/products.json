@@ -563,7 +563,7 @@
     {
       "id": "off-white-satin-t-back-vaj2",
       "name": "Off-White Satin T-Back",
-      "price": "₹ 5,500",
+      "price": "₹ 5,100",
       "category": "tops",
       "folder": "tops",
       "images": [
@@ -710,7 +710,7 @@
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-31T08:23:15.924Z",
+    "updatedAt": "2026-10-31T09:05:33.831Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
