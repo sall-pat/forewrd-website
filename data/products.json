@@ -574,6 +574,24 @@
       ],
       "desc": "Off-White Satin|Jacket Zipper Back closure",
       "status": "live"
+    },
+    {
+      "id": "black-biker-vest-letk",
+      "name": "Black Biker Vest",
+      "price": "₹ 5,900",
+      "category": "jackets",
+      "folder": "jackets",
+      "images": [
+        "black-1.jpeg",
+        "black-biker-vest-2.jpeg",
+        "black-biker-vest-3.jpeg",
+        "black-biker-vest-4.jpeg",
+        "black-biker-vest-5.jpeg",
+        "black-biker-vest-6.jpeg",
+        "black-biker-vest-7.jpeg"
+      ],
+      "desc": "Black denim|Boxy silhouette|Asymmetrical overlapping collar|Adjustable waist belt with buckle fastening|Shoulder epaulettes with leather loop detailing",
+      "status": "live"
     }
   ],
   "looks": [
@@ -710,7 +728,7 @@
     }
   ],
   "_meta": {
-    "updatedAt": "2026-10-31T09:05:33.831Z",
+    "updatedAt": "2026-11-02T14:22:16.979Z",
     "note": "Source of truth for the FOREWRD collection page. Edited via the admin panel."
   }
 }
