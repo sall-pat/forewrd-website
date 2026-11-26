@@ -1,8 +1,21 @@
 {
   "settings": {
     "showPrices": true,
-    "currency": "INR"
+    "currency": "INR",
+    "homepageLooks": [
+      "metallic-blue-set",
+      "cropped-denim-jacket-denim-zipper-skirt",
+      "flare-black-denim-pants-duo-tone-deep-ne",
+      "brown-quad-baggy-pants-maroon-bralette"
+    ]
   },
+  "collections": [
+    {
+      "id": "the-opening-act-issue-001",
+      "name": "The Opening Act — Issue: 001",
+      "status": "live"
+    }
+  ],
   "categories": [
     "tops",
     "bottoms",
@@ -24,7 +37,10 @@
         "mbbs-5.jpeg"
       ],
       "desc": "Dramatic Balloon sleeves with metal hardware detailing|Corset back panel to adjust and cinch the waist|Jacket zipper opening|Fit: Fitted silhouette with an adjustable corset back",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "mb-bra",
@@ -38,7 +54,10 @@
         "mb-bra-3.jpeg"
       ],
       "desc": "Bralette with adjustable straps and Celtic knot button detailing|Hook and eye back closure with adjustable hooks",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "cbc",
@@ -53,7 +72,10 @@
         "cbc-4.jpeg"
       ],
       "desc": "Champagne back cowl sleeveless top|Concealed back waist adjuster to cinch|Crushed textured fabric",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "apc",
@@ -70,7 +92,10 @@
         "apc-6.jpeg"
       ],
       "desc": "Corset made up of 32 panels|Asymmetrical neckline and hemline|Size invisible jacket zip opener|Baby Pink lace up back adjuster",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "mr-bra",
@@ -85,7 +110,10 @@
         "mr-bra-4.jpeg"
       ],
       "desc": "Bralette with adjustable straps and Celtic button detailing|Hook and eye back closure with adjustable hooks",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "stu",
@@ -100,7 +128,10 @@
         "stu-4.jpeg"
       ],
       "desc": "Silver T-shirt top with a side tie up detail|Half sleeves with fold over|One side off shoulder|Asymmetrical hem",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "ibt",
@@ -116,7 +147,10 @@
         "ibt-5.jpeg"
       ],
       "desc": "Ice blue and light beige duo tone tissue organza fabric|Deep neckline featuring a tie-up closure|Tiered balloon sleeves|Elastic cuff",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "cfc",
@@ -131,7 +165,10 @@
         "cfc-4.jpeg"
       ],
       "desc": "Deep cowl neck tie up top|3/4th length asymmetrical sleeves|Concealed back waist adjuster to cinch|Crushed textured fabric",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "mbw",
@@ -146,7 +183,10 @@
         "mbw-4.jpeg"
       ],
       "desc": "Wrap skirt with a silver buckle adjuster|Pleated detail on side",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "chm",
@@ -161,7 +201,10 @@
         "chm-4.jpeg"
       ],
       "desc": "High waist trouser with front pleat detailing|Side slit pocket|Front zip with hook & eye closure|0.5\" belt loops",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "cbj",
@@ -174,7 +217,10 @@
         "cbj-2.jpeg"
       ],
       "desc": "High waist Faux Leather Jorts|Front zip — hook & eye closure|1\" belt loop",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "bbp",
@@ -189,7 +235,10 @@
         "bbp-4.jpeg"
       ],
       "desc": "High waist — Taffeta fabric (paper like texture)|Centre zip with 2 hook and eyes on waist band|Side slit pockets|3\" waistband and side elastic waist adjuster",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "hrm",
@@ -203,7 +252,10 @@
         "hrm-3.jpeg"
       ],
       "desc": "High waist Harem pants with a bottom cuff tie detail|Side zip opening|Side slit pockets",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "bkp",
@@ -219,7 +271,10 @@
         "bkp-5.jpeg"
       ],
       "desc": "Baggy pants with buckle waist adjuster|Side zip opening|Adjuster bottom hem belt with buckle closure|Side slit pockets",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "bfd",
@@ -233,7 +288,10 @@
         "bfd-3.jpeg"
       ],
       "desc": "High Waist denim pants with 1\" belt loops|Front zip and hook & eye closure|Dark grey topstitch detailing|Side slit pocket with concealed elastic waist adjuster",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "dzs",
@@ -248,7 +306,10 @@
         "dzs-4.jpeg"
       ],
       "desc": "Blue denim wrap skirt with front side jacket zipper opening|3\" waistband — 1\" belt loops — elastic waist adjusters|Back pocket with logo detailing|Red top stitch detailing",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "cdj",
@@ -263,7 +324,10 @@
         "cdj-4.jpeg"
       ],
       "desc": "Blue denim cropped jacket — Rust denim collar and sleeve fold over|Celtic knot button front closure — Back yoke with logo charm|Red top stitch detailing|Shoulder pads",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "fee",
@@ -275,7 +339,10 @@
         "fee.jpeg"
       ],
       "desc": "Earring with Floral enamel Motif|22kt Gold",
-      "status": "hidden"
+      "status": "hidden",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "melb",
@@ -287,7 +354,10 @@
         "melb.jpeg"
       ],
       "desc": "Matte gold & maroon enamel link bracelet|22kt Gold",
-      "status": "hidden"
+      "status": "hidden",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "slb",
@@ -299,7 +369,10 @@
         "slb.jpeg"
       ],
       "desc": "High polish sculptural link bracelet|22kt Gold",
-      "status": "hidden"
+      "status": "hidden",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "eme",
@@ -311,7 +384,10 @@
         "eme.jpeg"
       ],
       "desc": "Matte Gold & Enamel Maze Earrings|22kt Gold",
-      "status": "hidden"
+      "status": "hidden",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "gmee",
@@ -323,7 +399,10 @@
         "gmee.jpeg"
       ],
       "desc": "High Polish Gold & Maroon Enamel Earrings|22kt Gold",
-      "status": "hidden"
+      "status": "hidden",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "trqb",
@@ -335,7 +414,10 @@
         "trqb.jpeg"
       ],
       "desc": "Matte Gold & Turquoise Bracelet|22kt Gold",
-      "status": "hidden"
+      "status": "hidden",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "trs",
@@ -347,7 +429,10 @@
         "trs.jpeg"
       ],
       "desc": "Triangle Studs|22kt Gold",
-      "status": "hidden"
+      "status": "hidden",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "bsr",
@@ -359,7 +444,10 @@
         "bsr.jpeg"
       ],
       "desc": "3 band stack rings|1.8 grams per ring|22kt Gold",
-      "status": "hidden"
+      "status": "hidden",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "frgr",
@@ -371,7 +459,10 @@
         "frgr.jpeg"
       ],
       "desc": "Floral Rose gold ring|22kt Gold",
-      "status": "hidden"
+      "status": "hidden",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "sqrg",
@@ -383,7 +474,10 @@
         "sqrg.jpeg"
       ],
       "desc": "Square Rose gold ring|22kt Gold",
-      "status": "hidden"
+      "status": "hidden",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "pscarf",
@@ -396,7 +490,10 @@
         "pscarf-2.jpeg"
       ],
       "desc": "Triangular|40\" × 40\" × 71\"|Georgette fabric",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "straight-quad-jeans-336z",
@@ -411,7 +508,10 @@
         "straight-quad-jeans-336z-4.jpeg"
       ],
       "desc": "High-waisted|Straight-leg, baggy fit|Hardware detailing at the right hem|Adjustable waistband with metal hardware|Red stitch line detail",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "rust-denim-jacket-z4ro",
@@ -428,7 +528,10 @@
         "rust-denim-jacket-6.jpeg"
       ],
       "desc": "Rust Denim|Black faux leather collar|Black faux leather fold over cuff|Side pockets|Structured padded shoulders",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "green-ombre-tulle-top-rzgw",
@@ -444,7 +547,10 @@
         "green-ombre-tulle-top-5.jpeg"
       ],
       "desc": "Asymmetrical top|Green ombre Tulle|Ruffle collar|Maroon neck tie",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "green-ombre-tulle-skirt-zngw",
@@ -459,7 +565,10 @@
         "green-ombre-tulle-skirt-4.jpeg"
       ],
       "desc": "Green ombre tulle skirt|Side slit detailing|Waterfall pleat detailing",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "balloon-sleeve-denim-jac-spt0",
@@ -477,7 +586,10 @@
         "balloon-sleeve-denim-jac-spt0-7.jpeg"
       ],
       "desc": "Dramatic Balloon sleeves with metal hardware detailing|Corset back panel to adjust and cinch the waist|Jacket zipper opening|Fit: Fitted silhouette with an adjustable corset back",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "denim-tie-up-shorts-tk5u",
@@ -494,7 +606,10 @@
         "denim-tie-up-shorts-tk5u-6.jpeg"
       ],
       "desc": "High-waisted denim shorts|Rust denim tie-up detailing on the sides|Back pocket detailing|Concealed side pockets",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "polka-dot-satin-t-back-7eis",
@@ -510,7 +625,10 @@
         "polka-dot-satin-t-back-5.jpeg"
       ],
       "desc": "Polka Dot Satin|Jacket Zipper Back closure",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "black-cape-lxl8",
@@ -526,7 +644,10 @@
         "black-cape-lxl8-5.jpeg"
       ],
       "desc": "Statement cape silhouette|Contrasting black faux leather collar|Zipper detailing at the neckline|Side adjusters with gunmetal buckle hardware",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "fringe-top-black-7as4",
@@ -542,7 +663,10 @@
         "fringe-top-black-7as4-5.jpeg"
       ],
       "desc": "Adjustable knotted sleeve detailing|Extra long sash at the back",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "bell-bottoms-qiwl",
@@ -559,7 +683,10 @@
         "flare-bell-bottoms-6.jpeg"
       ],
       "desc": "Blue denim bell-bottoms with an extra-flared silhouette|Adjustable waistband with Celtic knot hardware detailing|Celtic knot hardware detailing on the right bottom",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "off-white-satin-t-back-vaj2",
@@ -574,7 +701,10 @@
         "off-white-satin-t-back-4.jpeg"
       ],
       "desc": "Off-White Satin|Jacket Zipper Back closure",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "id": "black-biker-vest-letk",
@@ -592,7 +722,10 @@
         "black-biker-vest-7.jpeg"
       ],
       "desc": "Black denim|Boxy silhouette|Asymmetrical overlapping collar|Adjustable waist belt with buckle fastening|Shoulder epaulettes with leather loop detailing",
-      "status": "live"
+      "status": "live",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     }
   ],
   "looks": [
@@ -604,7 +737,11 @@
         "mb-bra",
         "mbw"
       ],
-      "status": "live"
+      "status": "live",
+      "id": "metallic-blue-set",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "name": "Cropped Denim Jacket & Denim Zipper Skirt",
@@ -614,7 +751,11 @@
         "dzs",
         "mr-bra"
       ],
-      "status": "live"
+      "status": "live",
+      "id": "cropped-denim-jacket-denim-zipper-skirt",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "name": "Flare Black Denim Pants & Duo-Tone Deep Neck Sheer Top",
@@ -624,7 +765,11 @@
         "ibt",
         "mr-bra"
       ],
-      "status": "live"
+      "status": "live",
+      "id": "flare-black-denim-pants-duo-tone-deep-ne",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "name": "Brown Quad Baggy Pants & Maroon Bralette",
@@ -633,7 +778,11 @@
         "bbp",
         "mr-bra"
       ],
-      "status": "live"
+      "status": "live",
+      "id": "brown-quad-baggy-pants-maroon-bralette",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "name": "Champagne Trouser & Back Cowl Top",
@@ -643,7 +792,11 @@
         "chm",
         "pscarf"
       ],
-      "status": "live"
+      "status": "live",
+      "id": "champagne-trouser-back-cowl-top",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "name": "Asymmetrical Peplum Corset & Cherry Brown Jorts",
@@ -652,7 +805,11 @@
         "apc",
         "cbj"
       ],
-      "status": "live"
+      "status": "live",
+      "id": "asymmetrical-peplum-corset-cherry-brown-",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "name": "Asymmetrical Peplum Corset & Black Harem Pants",
@@ -661,7 +818,11 @@
         "apc",
         "hrm"
       ],
-      "status": "live"
+      "status": "live",
+      "id": "asymmetrical-peplum-corset-black-harem-p",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "name": "Black Baggy Pants & Silver Tie Up T-Shirt Top",
@@ -670,7 +831,11 @@
         "bkp",
         "stu"
       ],
-      "status": "live"
+      "status": "live",
+      "id": "black-baggy-pants-silver-tie-up-t-shirt-",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "name": "Champagne Trouser & Front Cowl Top",
@@ -680,7 +845,11 @@
         "cfc",
         "mr-bra"
       ],
-      "status": "live"
+      "status": "live",
+      "id": "champagne-trouser-front-cowl-top",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "name": "Rust Denim Jacket & Straight Quad Jeans",
@@ -689,7 +858,11 @@
         "straight-quad-jeans-336z",
         "rust-denim-jacket-z4ro"
       ],
-      "status": "live"
+      "status": "live",
+      "id": "rust-denim-jacket-straight-quad-jeans",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "name": "Green Ombre Tulle Set",
@@ -698,7 +871,11 @@
         "green-ombre-tulle-top-rzgw",
         "green-ombre-tulle-skirt-zngw"
       ],
-      "status": "live"
+      "status": "live",
+      "id": "green-ombre-tulle-set",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "name": "Balloon Sleeve Denim Jacket & Denim Tie-up Shorts",
@@ -707,7 +884,11 @@
         "balloon-sleeve-denim-jac-spt0",
         "denim-tie-up-shorts-tk5u"
       ],
-      "status": "live"
+      "status": "live",
+      "id": "balloon-sleeve-denim-jacket-denim-tie-up",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "name": "Cape & Baggy Pants | Black",
@@ -716,7 +897,11 @@
         "bkp",
         "black-cape-lxl8"
       ],
-      "status": "live"
+      "status": "live",
+      "id": "cape-baggy-pants-black",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "name": "Fringe Top & Denim Bell Bottoms",
@@ -725,7 +910,11 @@
         "fringe-top-black-7as4",
         "bell-bottoms-qiwl"
       ],
-      "status": "live"
+      "status": "live",
+      "id": "fringe-top-denim-bell-bottoms",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     },
     {
       "name": "Black Biker Vest & Flare Denim Pants",
@@ -734,7 +923,11 @@
         "bfd",
         "black-biker-vest-letk"
       ],
-      "status": "live"
+      "status": "live",
+      "id": "black-biker-vest-flare-denim-pants",
+      "collections": [
+        "the-opening-act-issue-001"
+      ]
     }
   ],
   "_meta": {
