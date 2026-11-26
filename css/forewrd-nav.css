@@ -1,0 +1,150 @@
+/* ============================================================
+   FOREWRD STUDIO — shared navigation (search + Category/Collection)
+   Self-contained .fnav namespace. Brand values fall back to the
+   site tokens so it matches every page exactly.
+   ============================================================ */
+:root{ --fnav-h: 60px; }
+
+.fnav{
+  position: fixed; top: 0; left: 0; right: 0; height: var(--nav-height, 60px);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 clamp(20px, 4vw, 48px); z-index: 1000;
+  background: rgba(244,241,237,0.95);
+  -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+  font-family: 'Josefin Sans','Helvetica Neue',sans-serif;
+}
+.fnav a{ color: inherit; text-decoration: none; }
+.fnav__logo{ display: flex; align-items: center; flex-shrink: 0; }
+.fnav__logo img{ height: 22px; width: auto; display: block; }
+
+.fnav__right{ display: flex; align-items: center; gap: clamp(14px, 2.4vw, 30px); }
+
+/* ---------- search ---------- */
+.fnav__search{ position: relative; display: flex; align-items: center; }
+.fnav__search-input{
+  width: 0; opacity: 0; padding: 0; border: none; background: transparent;
+  border-bottom: 1px solid rgba(0,0,0,0.25);
+  font-family: inherit; font-size: 0.72rem; letter-spacing: 0.08em; color: #000;
+  transition: width 0.32s cubic-bezier(0.16,1,0.3,1), opacity 0.25s, padding 0.25s;
+}
+.fnav__search.open .fnav__search-input{ width: clamp(130px, 18vw, 220px); opacity: 1; padding: 5px 6px; }
+/* open the bar on hover of the whole search area (and keep it open while typing) */
+@media (hover: hover){
+  .fnav__search:hover .fnav__search-input,
+  .fnav__search:focus-within .fnav__search-input{ width: clamp(130px, 18vw, 220px); opacity: 1; padding: 5px 6px; }
+}
+.fnav__search-input:focus{ outline: none; }
+.fnav__search-btn{
+  background: none; border: none; cursor: pointer; padding: 6px; display: flex;
+  align-items: center; justify-content: center; color: #000; -webkit-tap-highlight-color: transparent;
+}
+.fnav__search-btn svg{ width: 16px; height: 16px; display: block; }
+.fnav__search-results{
+  position: absolute; top: calc(100% + 10px); right: 0; width: min(320px, 78vw);
+  background: #F4F1ED; border: 1px solid rgba(0,0,0,0.1);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12); max-height: 60vh; overflow-y: auto;
+  display: none; z-index: 50;
+}
+.fnav__search-results.show{ display: block; }
+.fnav__sr{
+  display: flex; align-items: center; gap: 12px; padding: 9px 12px; cursor: pointer;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.fnav__sr:last-child{ border-bottom: none; }
+.fnav__sr:hover{ background: rgba(0,0,0,0.04); }
+.fnav__sr-img{ width: 36px; height: 46px; object-fit: cover; background: #E8E4DF; flex-shrink: 0; }
+.fnav__sr-txt{ min-width: 0; }
+.fnav__sr-name{ font-size: 0.78rem; letter-spacing: 0.03em; color: #000; line-height: 1.3; }
+.fnav__sr-cat{ font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(0,0,0,0.45); margin-top: 2px; }
+.fnav__sr-empty{ padding: 14px 12px; font-size: 0.72rem; color: rgba(0,0,0,0.45); letter-spacing: 0.04em; }
+
+/* ---------- desktop links ---------- */
+.fnav__links{ display: flex; align-items: center; gap: clamp(16px, 3vw, 36px); list-style: none; margin: 0; padding: 0; }
+.fnav__links > li{ position: relative; }
+.fnav__links a,
+.fnav__dd-trigger{
+  font-family: inherit; font-size: 0.68rem; font-weight: 400; letter-spacing: 0.16em;
+  text-transform: uppercase; color: #000; background: none; border: none; cursor: pointer;
+  padding: 4px 0; display: inline-flex; align-items: center; gap: 7px;
+}
+.fnav__links > li > a{ position: relative; }
+.fnav__links > li > a::after{
+  content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
+  background: #000; transition: width 0.3s;
+}
+.fnav__links > li > a:hover::after, .fnav__links > li > a.active::after{ width: 100%; }
+
+.fnav__arrow{
+  width: 6px; height: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+  display: inline-block; transform: rotate(45deg); transition: transform 0.3s; margin-bottom: 2px; flex-shrink: 0;
+}
+
+/* desktop dropdown panel */
+.fnav__dd-menu{
+  position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%) translateY(6px);
+  background: #F4F1ED; border: 1px solid rgba(0,0,0,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  min-width: 200px; padding: 8px 0; display: flex; flex-direction: column;
+  opacity: 0; pointer-events: none; transition: opacity 0.22s, transform 0.22s; z-index: 50;
+}
+.fnav__dd:hover .fnav__dd-menu,
+.fnav__dd.open .fnav__dd-menu{ opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0); }
+.fnav__dd:hover .fnav__arrow,
+.fnav__dd.open .fnav__arrow{ transform: rotate(-135deg); margin-bottom: 0; }
+.fnav__dd-menu a{
+  font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(0,0,0,0.72);
+  padding: 9px 22px; white-space: nowrap; transition: background 0.2s, color 0.2s;
+}
+.fnav__dd-menu a:hover{ background: rgba(0,0,0,0.04); color: #000; }
+.fnav__dd-empty{ padding: 9px 22px; font-size: 0.64rem; letter-spacing: 0.1em; color: rgba(0,0,0,0.4); }
+
+/* ---------- hamburger ---------- */
+.fnav__ham{ display: none; flex-direction: column; gap: 5px; padding: 8px; background: none; border: none; cursor: pointer; z-index: 1001; }
+.fnav__ham span{ width: 22px; height: 1px; background: #000; transition: all 0.3s; display: block; }
+.fnav__ham.open span:nth-child(1){ transform: rotate(45deg) translate(4px,4px); }
+.fnav__ham.open span:nth-child(2){ opacity: 0; }
+.fnav__ham.open span:nth-child(3){ transform: rotate(-45deg) translate(4px,-4px); }
+
+/* ---------- mobile menu ---------- */
+.fnav__mobile{
+  position: fixed; inset: 0; background: #F4F1ED; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 28px; opacity: 0; pointer-events: none;
+  transition: opacity 0.3s; z-index: 999; overflow-y: auto; padding: 100px 20px;
+  font-family: 'Josefin Sans','Helvetica Neue',sans-serif;
+}
+.fnav__mobile.open{ opacity: 1; pointer-events: all; }
+.fnav__mobile > a, .fnav__mdd-trigger{
+  font-size: 1rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: #000;
+  background: none; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 9px;
+}
+.fnav__msearch{ width: min(320px, 86vw); position: relative; margin-bottom: 4px; }
+.fnav__msearch-input{
+  width: 100%; padding: 10px 2px; border: none; border-bottom: 1px solid rgba(0,0,0,0.25);
+  background: transparent; font-family: inherit; font-size: 0.9rem; letter-spacing: 0.08em; text-align: center; color: #000;
+}
+.fnav__msearch-input:focus{ outline: none; }
+.fnav__msearch .fnav__search-results{ left: 50%; right: auto; transform: translateX(-50%); width: 100%; top: calc(100% + 8px); }
+
+.fnav__mdd{ text-align: center; }
+.fnav__mdd-menu{ display: none; flex-direction: column; gap: 12px; margin-top: 14px; padding: 4px 0 0; }
+.fnav__mdd.open .fnav__mdd-menu{ display: flex; }
+.fnav__mdd.open .fnav__arrow{ transform: rotate(-135deg); margin-bottom: 0; }
+.fnav__mdd-menu a{ font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(0,0,0,0.6); }
+.fnav__mobile-f{ margin-top: 28px; }
+.fnav__mobile-f img{ width: 80px; height: auto; }
+
+/* micro-interactions (match existing site) */
+.fnav__mobile > a, .fnav__mdd-trigger, .fnav__links a, .fnav__dd-trigger, .fnav__ham, .fnav__search-btn{
+  -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none;
+  transition: opacity 0.18s ease, transform 0.18s ease, letter-spacing 0.25s ease;
+}
+.fnav__mobile > a:active, .fnav__mdd-trigger:active, .fnav__dd-trigger:active{ opacity: 0.55; transform: scale(0.96); }
+
+@media (max-width: 768px){
+  .fnav__links{ display: none; }
+  .fnav__search{ display: none; }      /* desktop search hidden; mobile menu has its own */
+  .fnav__ham{ display: flex; }
+}
+
+/* minimal variant (homepage): logo + search + hamburger only, full menu in the drawer */
+.fnav--min .fnav__links{ display: none; }
+.fnav--min .fnav__ham{ display: flex; }
