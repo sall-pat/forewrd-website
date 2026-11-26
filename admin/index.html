@@ -133,6 +133,25 @@
 
   .loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:var(--bg);z-index:90;color:var(--muted);font-size:14px;}
 
+  /* managers: collections / categories / homepage looks */
+  .mlist{display:flex;flex-direction:column;gap:10px;margin-bottom:16px;}
+  .mrow{display:flex;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:11px 14px;}
+  .mrow .mname{flex:1;min-width:0;font-size:14px;font-weight:600;}
+  .mrow .mname small{display:block;font-weight:400;font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:3px;}
+  .mrow .macts{display:flex;gap:6px;align-items:center;}
+  .iconbtn{width:30px;height:30px;border:1px solid var(--line);background:var(--surface);border-radius:8px;cursor:pointer;color:var(--ink);font-size:14px;line-height:1;display:flex;align-items:center;justify-content:center;padding:0;}
+  .iconbtn:hover{border-color:var(--accent);}
+  .iconbtn:disabled{opacity:.3;cursor:default;}
+  .pill{font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:20px;font-weight:600;color:#fff;flex-shrink:0;}
+  .pill.live{background:var(--ok);} .pill.draft{background:var(--muted);}
+  .addline{display:flex;gap:10px;}
+  .addline input{flex:1;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:14px;}
+  .addline input:focus{outline:2px solid var(--accent);outline-offset:-1px;}
+  .hp-look{display:flex;gap:10px;align-items:center;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);}
+  .hp-look .hpi{width:34px;height:44px;border-radius:5px;background:var(--bg) center/cover no-repeat;flex-shrink:0;}
+  .hp-look .hpn{flex:1;font-size:13px;min-width:0;}
+  .hp-look input[type=checkbox]{width:auto;flex-shrink:0;}
+
   @media(max-width:720px){
     .app{flex-direction:column;}
     .side{position:static;width:100%;height:auto;flex-direction:row;overflow-x:auto;align-items:center;padding:12px 8px;border-right:none;border-bottom:1px solid var(--line);}
@@ -165,6 +184,7 @@
     <div class="brand">FOREWRD<small>Studio · Admin</small></div>
     <nav class="nav">
       <div class="nav-item active" data-tab="pieces">Pieces</div>
+      <div class="nav-item" data-tab="collections">Collections</div>
       <div class="nav-item" data-tab="looks">Looks</div>
       <div class="nav-item" data-tab="settings">Settings</div>
     </nav>
@@ -196,6 +216,17 @@
       <div class="empty hidden" id="pieceEmpty">No pieces match.</div>
     </section>
 
+    <!-- COLLECTIONS -->
+    <section id="tab-collections" class="hidden">
+      <div class="topbar"><h1>Collections</h1></div>
+      <p class="sub">Named drops — e.g. The Opening Act — Issue: 001. Assign pieces and looks to a collection from inside each piece or look.</p>
+      <div class="mlist" id="collList"></div>
+      <div class="addline">
+        <input id="newCollName" placeholder="New collection name — e.g. The Opening Act — Issue: 002">
+        <button class="btn" id="addCollBtn">+ Add</button>
+      </div>
+    </section>
+
     <!-- LOOKS -->
     <section id="tab-looks" class="hidden">
       <div class="topbar">
@@ -220,6 +251,22 @@
             <label class="switch"><input type="checkbox" id="priceToggle"><span class="slider"></span></label>
           </div>
           <div class="state-line" id="priceStateLine"></div>
+        </div>
+
+        <div class="setcard">
+          <h3>Categories</h3>
+          <p>The groups pieces are sorted into (Tops, Bottoms…). Add a new one here, then assign pieces to it from each piece. A category can only be removed once no pieces use it.</p>
+          <div class="mlist" id="catList"></div>
+          <div class="addline">
+            <input id="newCatName" placeholder="New category — e.g. Co-ord Sets">
+            <button class="btn" id="addCatBtn">+ Add</button>
+          </div>
+        </div>
+
+        <div class="setcard">
+          <h3>Homepage looks</h3>
+          <p>Tick the looks to feature on the homepage and order them with the arrows. (This is saved now; the live homepage starts using it in the next phase.)</p>
+          <div class="mlist" id="hpLookList"></div>
         </div>
       </div>
     </section>
@@ -253,6 +300,10 @@
     <div class="field"><label>Visibility</label>
       <select id="pStatus"><option value="live">Live — shown on site</option><option value="draft">Draft — saved, not shown</option><option value="hidden">Hidden — temporarily off</option></select>
     </div>
+    <div class="field"><label>Collections</label>
+      <div class="pieces-pick" id="pColls"></div>
+      <div class="hint">Which collection(s) this piece belongs to — it can be in more than one.</div>
+    </div>
     <div class="modal-actions">
       <button class="btn danger sm hidden" id="pDelete">Delete piece</button>
       <div class="right">
@@ -279,6 +330,10 @@
     </div>
     <div class="field"><label>Visibility</label>
       <select id="lStatus"><option value="live">Live — shown on site</option><option value="draft">Draft — saved, not shown</option><option value="hidden">Hidden — temporarily off</option></select>
+    </div>
+    <div class="field"><label>Collections</label>
+      <div class="pieces-pick" id="lColls"></div>
+      <div class="hint">Which collection(s) this look belongs to.</div>
     </div>
     <div class="modal-actions">
       <button class="btn danger sm hidden" id="lDelete">Delete look</button>
@@ -370,10 +425,19 @@ async function startApp(){
   try{
     var r = await authFetch('/api/data', { headers:{'Content-Type':'application/json'} });
     var j = await r.json();
-    DATA = j.data || { settings:{showPrices:true,currency:'INR'}, categories:['tops','bottoms','jackets','accessories'], products:[], looks:[] };
+    DATA = j.data || { settings:{showPrices:true,currency:'INR'}, categories:['tops','bottoms','jackets','accessories'], collections:[], products:[], looks:[] };
     if(!DATA.settings) DATA.settings = { showPrices:true, currency:'INR' };
+    if(!DATA.categories) DATA.categories = ['tops','bottoms','jackets','accessories'];
+    if(!DATA.collections) DATA.collections = [];
     if(!DATA.products) DATA.products = [];
     if(!DATA.looks) DATA.looks = [];
+    if(!DATA.settings.homepageLooks) DATA.settings.homepageLooks = [];
+    // backfill: every look needs a stable id; pieces + looks need a collections array
+    DATA.looks.forEach(function(l){ if(!l.id) l.id = uniqueLookId(l.name); if(!l.collections) l.collections = []; });
+    DATA.products.forEach(function(p){ if(!p.collections) p.collections = []; });
+    // keep homepageLooks pointing only at looks that still exist
+    var _ids = {}; DATA.looks.forEach(function(l){ _ids[l.id] = 1; });
+    DATA.settings.homepageLooks = DATA.settings.homepageLooks.filter(function(id){ return _ids[id]; });
     setDirty(false);
     renderAll();
   }catch(e){
@@ -423,7 +487,164 @@ async function uploadImage(file, folder, idBase, index){
 }
 
 /* ---------------- render ---------------- */
-function renderAll(){ renderPieces(); renderLooks(); renderSettings(); }
+function renderAll(){ fillCatFilter(); renderPieces(); renderCollections(); renderLooks(); renderSettings(); renderCategories(); renderHomepageLooks(); }
+
+/* ---------------- categories helpers ---------------- */
+function catLabel(c){ return (c||'').replace(/-/g,' ').replace(/\b\w/g, function(m){return m.toUpperCase();}); }
+function fillCatSelect(sel, selected){
+  sel.innerHTML='';
+  var cats = DATA.categories.slice();
+  if(selected && cats.indexOf(selected)<0) cats.push(selected); // keep a piece's own category (e.g. jewellery) even if not listed
+  cats.forEach(function(c){
+    var o=document.createElement('option'); o.value=c; o.textContent=catLabel(c);
+    if(c===selected) o.selected=true;
+    sel.appendChild(o);
+  });
+}
+function fillCatFilter(){
+  var sel=document.getElementById('catFilter'); var cur=sel.value||'all';
+  sel.innerHTML='<option value="all">All categories</option>';
+  DATA.categories.forEach(function(c){ var o=document.createElement('option'); o.value=c; o.textContent=catLabel(c); sel.appendChild(o); });
+  sel.value = (cur!=='all' && DATA.categories.indexOf(cur)>=0) ? cur : 'all';
+}
+
+/* ---------------- collection checkboxes (in piece/look modals) ---------------- */
+function renderCheckColls(wrapId, selectedArr){
+  var wrap=document.getElementById(wrapId); wrap.innerHTML='';
+  if(!DATA.collections.length){
+    wrap.innerHTML='<label style="color:var(--muted);">No collections yet — add one in the Collections tab.</label>'; return;
+  }
+  DATA.collections.forEach(function(c){
+    var lab=document.createElement('label');
+    lab.innerHTML='<input type="checkbox" value="'+c.id+'" '+(selectedArr.indexOf(c.id)>=0?'checked':'')+'> '+c.name;
+    wrap.appendChild(lab);
+  });
+}
+function readCheckColls(wrapId){
+  return Array.prototype.map.call(document.querySelectorAll('#'+wrapId+' input:checked'), function(c){return c.value;});
+}
+
+/* ---------------- collections manager ---------------- */
+function uniqueCollId(name){
+  var base = (name||'collection').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,40) || 'collection';
+  var id=base, i=2, taken={}; DATA.collections.forEach(function(c){taken[c.id]=1;});
+  while(taken[id]){ id=base+'-'+i; i++; }
+  return id;
+}
+function renderCollections(){
+  var wrap=document.getElementById('collList'); wrap.innerHTML='';
+  if(!DATA.collections.length){ wrap.innerHTML='<div class="empty">No collections yet. Add your first one below.</div>'; return; }
+  DATA.collections.forEach(function(c,i){
+    var pc=DATA.products.filter(function(p){return (p.collections||[]).indexOf(c.id)>=0;}).length;
+    var lc=DATA.looks.filter(function(l){return (l.collections||[]).indexOf(c.id)>=0;}).length;
+    var row=document.createElement('div'); row.className='mrow';
+    row.innerHTML=
+      '<span class="pill '+(c.status==='draft'?'draft':'live')+'">'+(c.status==='draft'?'Draft':'Live')+'</span>'+
+      '<div class="mname">'+c.name+'<small>'+pc+' piece'+(pc===1?'':'s')+' · '+lc+' look'+(lc===1?'':'s')+'</small></div>'+
+      '<div class="macts">'+
+        '<button class="iconbtn" data-cup="'+i+'" '+(i===0?'disabled':'')+' title="Move up">&#8593;</button>'+
+        '<button class="iconbtn" data-cdown="'+i+'" '+(i===DATA.collections.length-1?'disabled':'')+' title="Move down">&#8595;</button>'+
+        '<button class="iconbtn" data-crename="'+i+'" title="Rename">&#9998;</button>'+
+        '<button class="iconbtn" data-cstatus="'+i+'" title="Toggle Live / Draft">'+(c.status==='draft'?'&#9675;':'&#9679;')+'</button>'+
+        '<button class="iconbtn" data-cdel="'+i+'" title="Delete">&#10005;</button>'+
+      '</div>';
+    wrap.appendChild(row);
+  });
+}
+function addCollection(){
+  var inp=document.getElementById('newCollName'); var name=(inp.value||'').trim();
+  if(!name){ toast('Type a collection name', true); return; }
+  DATA.collections.push({ id: uniqueCollId(name), name: name, status:'live' });
+  inp.value=''; setDirty(true); renderCollections();
+  toast('“'+name+'” added');
+}
+function moveCollection(i, dir){
+  var j=i+dir; if(j<0||j>=DATA.collections.length) return;
+  var t=DATA.collections[i]; DATA.collections[i]=DATA.collections[j]; DATA.collections[j]=t;
+  setDirty(true); renderCollections();
+}
+function renameCollection(i){
+  var c=DATA.collections[i]; var name=prompt('Rename collection:', c.name);
+  if(name===null) return; name=name.trim(); if(!name) return;
+  c.name=name; setDirty(true); renderCollections();
+}
+function toggleCollectionStatus(i){
+  var c=DATA.collections[i]; c.status = (c.status==='draft') ? 'live' : 'draft';
+  setDirty(true); renderCollections();
+}
+function deleteCollection(i){
+  var c=DATA.collections[i];
+  if(!confirm('Delete “'+c.name+'”? Pieces and looks stay, but are removed from this collection.')) return;
+  DATA.collections.splice(i,1);
+  DATA.products.forEach(function(p){ if(p.collections) p.collections=p.collections.filter(function(id){return id!==c.id;}); });
+  DATA.looks.forEach(function(l){ if(l.collections) l.collections=l.collections.filter(function(id){return id!==c.id;}); });
+  setDirty(true); renderCollections();
+  toast('“'+c.name+'” deleted');
+}
+
+/* ---------------- categories manager ---------------- */
+function renderCategories(){
+  var wrap=document.getElementById('catList'); wrap.innerHTML='';
+  if(!DATA.categories.length){ wrap.innerHTML='<div class="empty">No categories yet.</div>'; return; }
+  DATA.categories.forEach(function(c){
+    var count=DATA.products.filter(function(p){return p.category===c;}).length;
+    var row=document.createElement('div'); row.className='mrow';
+    row.innerHTML=
+      '<div class="mname">'+catLabel(c)+'<small>'+count+' piece'+(count===1?'':'s')+'</small></div>'+
+      '<div class="macts"><button class="iconbtn" data-catdel="'+c+'" '+(count>0?'disabled title="Move its pieces to another category first"':'title="Remove"')+'>&#10005;</button></div>';
+    wrap.appendChild(row);
+  });
+}
+function addCategory(){
+  var inp=document.getElementById('newCatName'); var raw=(inp.value||'').trim();
+  if(!raw){ toast('Type a category name', true); return; }
+  var slug=raw.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  if(!slug){ toast('Use letters or numbers', true); return; }
+  if(DATA.categories.indexOf(slug)>=0){ toast('That category already exists', true); return; }
+  DATA.categories.push(slug); inp.value='';
+  setDirty(true); renderCategories(); fillCatFilter();
+  toast('“'+catLabel(slug)+'” added');
+}
+function deleteCategory(c){
+  var count=DATA.products.filter(function(p){return p.category===c;}).length;
+  if(count>0){ toast('Move its pieces to another category first', true); return; }
+  DATA.categories=DATA.categories.filter(function(x){return x!==c;});
+  setDirty(true); renderCategories(); fillCatFilter();
+  toast('“'+catLabel(c)+'” removed');
+}
+
+/* ---------------- homepage looks ---------------- */
+function renderHomepageLooks(){
+  var wrap=document.getElementById('hpLookList'); wrap.innerHTML='';
+  if(!DATA.looks.length){ wrap.innerHTML='<div class="empty">Add looks first, then choose which appear on the homepage.</div>'; return; }
+  var hp=DATA.settings.homepageLooks||[];
+  var byId={}; DATA.looks.forEach(function(l){ byId[l.id]=l; });
+  hp.forEach(function(id,pos){ var l=byId[id]; if(l) wrap.appendChild(hpRow(l,true,pos,hp.length)); });
+  DATA.looks.forEach(function(l){ if(hp.indexOf(l.id)<0) wrap.appendChild(hpRow(l,false,-1,hp.length)); });
+}
+function hpRow(l,on,pos,total){
+  var hero=l.img?('../'+l.img):'';
+  var row=document.createElement('div'); row.className='hp-look';
+  row.innerHTML=
+    '<input type="checkbox" '+(on?'checked':'')+' data-hptoggle="'+l.id+'">'+
+    '<div class="hpi" '+(hero?'style="background-image:url(\''+hero+'\')"':'')+'></div>'+
+    '<div class="hpn">'+l.name+'</div>'+
+    (on?('<button class="iconbtn" data-hpup="'+l.id+'" '+(pos===0?'disabled':'')+' title="Move up">&#8593;</button>'+
+         '<button class="iconbtn" data-hpdown="'+l.id+'" '+(pos===total-1?'disabled':'')+' title="Move down">&#8595;</button>'):'');
+  return row;
+}
+function toggleHomepageLook(id){
+  var hp=DATA.settings.homepageLooks||(DATA.settings.homepageLooks=[]);
+  var at=hp.indexOf(id);
+  if(at>=0) hp.splice(at,1); else hp.push(id);
+  setDirty(true); renderHomepageLooks();
+}
+function moveHomepageLook(id, dir){
+  var hp=DATA.settings.homepageLooks; var i=hp.indexOf(id); var j=i+dir;
+  if(i<0||j<0||j>=hp.length) return;
+  var t=hp[i]; hp[i]=hp[j]; hp[j]=t;
+  setDirty(true); renderHomepageLooks();
+}
 
 function statusBadge(st){
   if(st==='draft') return '<span class="badge draft">Draft</span>';
@@ -489,19 +710,21 @@ function openPiece(id){
     var p = DATA.products.find(function(x){return x.id===id;});
     document.getElementById('pieceModalTitle').textContent = 'Edit piece';
     document.getElementById('pName').value = p.name;
-    document.getElementById('pCat').value = p.category;
+    fillCatSelect(document.getElementById('pCat'), p.category);
     document.getElementById('pPrice').value = p.price||'';
     document.getElementById('pDesc').value = (p.desc||'').split('|').join('\n');
     document.getElementById('pStatus').value = p.status||'live';
     pieceImages = (p.images||[]).slice();
+    renderCheckColls('pColls', p.collections||[]);
     del.classList.remove('hidden');
   }else{
     document.getElementById('pieceModalTitle').textContent = 'Add piece';
     document.getElementById('pName').value='';
-    document.getElementById('pCat').value='tops';
+    fillCatSelect(document.getElementById('pCat'), DATA.categories[0]||'tops');
     document.getElementById('pPrice').value='';
     document.getElementById('pDesc').value='';
     document.getElementById('pStatus').value='live';
+    renderCheckColls('pColls', []);
     del.classList.add('hidden');
   }
   renderPieceThumbs();
@@ -518,6 +741,12 @@ function renderPieceThumbs(){
   });
 }
 function slugify(s){ return (s||'piece').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,24) || 'piece'; }
+function uniqueLookId(name){
+  var base=(name||'look').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,40) || 'look';
+  var id=base, i=2, taken={}; (DATA.looks||[]).forEach(function(l){ if(l.id) taken[l.id]=1; });
+  while(taken[id]){ id=base+'-'+i; i++; }
+  return id;
+}
 
 async function pieceFilesChosen(files){
   if(!files.length) return;
@@ -547,7 +776,8 @@ function savePiece(){
     folder: cat,
     images: pieceImages.slice(),
     desc: document.getElementById('pDesc').value.split('\n').map(function(s){return s.trim();}).filter(Boolean).join('|'),
-    status: document.getElementById('pStatus').value
+    status: document.getElementById('pStatus').value,
+    collections: readCheckColls('pColls')
   };
   if(editingPieceId){
     var i = DATA.products.findIndex(function(x){return x.id===editingPieceId;});
@@ -559,7 +789,7 @@ function savePiece(){
   }
   setDirty(true);
   closePiece();
-  renderPieces();
+  renderPieces(); renderCollections();
 }
 function deletePiece(){
   if(!editingPieceId) return;
@@ -567,7 +797,7 @@ function deletePiece(){
   DATA.products = DATA.products.filter(function(x){return x.id!==editingPieceId;});
   // also drop it from any looks
   DATA.looks.forEach(function(l){ l.pieces = (l.pieces||[]).filter(function(id){return id!==editingPieceId;}); });
-  setDirty(true); closePiece(); renderPieces(); renderLooks();
+  setDirty(true); closePiece(); renderPieces(); renderLooks(); renderCollections();
   toast('“'+(p?p.name:'Piece')+'” removed');
 }
 function closePiece(){ document.getElementById('pieceOverlay').classList.add('hidden'); }
@@ -587,6 +817,7 @@ function openLook(index){
     lookImage = l.img || null;
     del.classList.remove('hidden');
     renderPiecePicker(l.pieces||[]);
+    renderCheckColls('lColls', l.collections||[]);
   }else{
     document.getElementById('lookModalTitle').textContent = 'Add look';
     document.getElementById('lName').value='';
@@ -594,6 +825,7 @@ function openLook(index){
     lookImage = null;
     del.classList.add('hidden');
     renderPiecePicker([]);
+    renderCheckColls('lColls', []);
   }
   renderLookThumb();
   document.getElementById('lookOverlay').classList.remove('hidden');
@@ -637,16 +869,18 @@ function saveLook(){
   if(!name){ toast('Give the look a name', true); return; }
   var picks = Array.prototype.map.call(document.querySelectorAll('#lPieces input:checked'), function(c){return c.value;});
   if(!picks.length){ toast('Pick at least one piece', true); return; }
-  var rec = { name:name, img: lookImage||'', pieces: picks, status: document.getElementById('lStatus').value };
+  var lid = (editingLookIndex!==null && DATA.looks[editingLookIndex].id) ? DATA.looks[editingLookIndex].id : uniqueLookId(name);
+  var rec = { id: lid, name:name, img: lookImage||'', pieces: picks, collections: readCheckColls('lColls'), status: document.getElementById('lStatus').value };
   if(editingLookIndex!==null){ DATA.looks[editingLookIndex] = rec; toast('“'+name+'” updated'); }
   else { DATA.looks.push(rec); toast('“'+name+'” added'); }
-  setDirty(true); closeLook(); renderLooks();
+  setDirty(true); closeLook(); renderLooks(); renderCollections(); renderHomepageLooks();
 }
 function deleteLook(){
   if(editingLookIndex===null) return;
   var l = DATA.looks[editingLookIndex];
   DATA.looks.splice(editingLookIndex,1);
-  setDirty(true); closeLook(); renderLooks();
+  if(l && l.id) DATA.settings.homepageLooks = (DATA.settings.homepageLooks||[]).filter(function(id){return id!==l.id;});
+  setDirty(true); closeLook(); renderLooks(); renderCollections(); renderHomepageLooks();
   toast('“'+(l?l.name:'Look')+'” removed');
 }
 function closeLook(){ document.getElementById('lookOverlay').classList.add('hidden'); }
@@ -662,9 +896,39 @@ document.querySelector('.nav').addEventListener('click', function(e){
   document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});
   it.classList.add('active');
   var tab = it.dataset.tab;
-  ['pieces','looks','settings'].forEach(function(t){
+  ['pieces','collections','looks','settings'].forEach(function(t){
     document.getElementById('tab-'+t).classList.toggle('hidden', t!==tab);
   });
+});
+
+/* collections manager wiring */
+document.getElementById('addCollBtn').onclick = addCollection;
+document.getElementById('newCollName').addEventListener('keydown', function(e){ if(e.key==='Enter') addCollection(); });
+document.getElementById('collList').addEventListener('click', function(e){
+  var b=e.target.closest('button'); if(!b) return;
+  if(b.dataset.cup!==undefined) moveCollection(+b.dataset.cup,-1);
+  else if(b.dataset.cdown!==undefined) moveCollection(+b.dataset.cdown,1);
+  else if(b.dataset.crename!==undefined) renameCollection(+b.dataset.crename);
+  else if(b.dataset.cstatus!==undefined) toggleCollectionStatus(+b.dataset.cstatus);
+  else if(b.dataset.cdel!==undefined) deleteCollection(+b.dataset.cdel);
+});
+
+/* categories manager wiring */
+document.getElementById('addCatBtn').onclick = addCategory;
+document.getElementById('newCatName').addEventListener('keydown', function(e){ if(e.key==='Enter') addCategory(); });
+document.getElementById('catList').addEventListener('click', function(e){
+  var b=e.target.closest('button'); if(!b||b.disabled) return;
+  if(b.dataset.catdel!==undefined) deleteCategory(b.dataset.catdel);
+});
+
+/* homepage looks wiring */
+document.getElementById('hpLookList').addEventListener('click', function(e){
+  var b=e.target.closest('button'); if(!b) return;
+  if(b.dataset.hpup!==undefined) moveHomepageLook(b.dataset.hpup,-1);
+  else if(b.dataset.hpdown!==undefined) moveHomepageLook(b.dataset.hpdown,1);
+});
+document.getElementById('hpLookList').addEventListener('change', function(e){
+  if(e.target.dataset.hptoggle!==undefined) toggleHomepageLook(e.target.dataset.hptoggle);
 });
 
 document.getElementById('addPieceBtn').onclick = function(){ openPiece(null); };
